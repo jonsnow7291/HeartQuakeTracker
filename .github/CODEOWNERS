@@ -1,0 +1,19 @@
+# CODEOWNERS for EarthQuakeTracker
+/src/contracts/        @juan-diego @santiago
+/src/core/             @juan-diego
+/android/              @juan-diego
+/ios/                  @juan-diego
+/server/               @juan-diego
+/__tests__/core/       @juan-diego
+/src/ui/               @santiago
+/content/              @santiago
+/assets/               @santiago
+/design/               @santiago
+/__tests__/ui/         @santiago
+/e2e/                  @santiago
+/package.json          @juan-diego
+/yarn.lock             @juan-diego
+/tsconfig.json         @juan-diego
+/metro.config.js       @juan-diego
+/babel.config.js       @juan-diego
+/docs/adr/             @juan-diego @santiago

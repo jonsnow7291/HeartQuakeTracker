@@ -1,0 +1,68 @@
+{
+  "app": {
+    "name": "EarthQuakeTracker",
+    "tagline": "Protección, prevención y auxilio comunitario ante sismos"
+  },
+  "tabs": {
+    "home": "Inicio",
+    "map": "Mapa Bogotá",
+    "alerts": "Alertas",
+    "profile": "Mi Perfil"
+  },
+  "panic": {
+    "buttonLabel": "PÁNICO",
+    "buttonSubtext": "Pulsa para pedir auxilio",
+    "title": "¿Cuál es tu situación actual?",
+    "subtitle": "Selecciona la opción que describe tu estado para emitir la baliza",
+    "options": {
+      "ileso": {
+        "title": "Estoy Ileso",
+        "desc": "Avisar a mi entorno y registrar mi estado seguro"
+      },
+      "con_lesiones": {
+        "title": "Tengo Lesiones",
+        "desc": "Necesito primeros auxilios o asistencia médica"
+      },
+      "atrapado": {
+        "title": "Estoy Atrapado",
+        "desc": "Prioridad máxima: atrapado bajo escombros o sin salida"
+      }
+    },
+    "cancelingTitle": "Activando señal de auxilio...",
+    "cancelingDesc": "Si pulsaste por error, pulsa cancelar ahora",
+    "cancelButton": "Cancelar pánico accidental",
+    "activeBanner": "EMERGENCIA ACTIVADA - Baliza y Linterna en curso",
+    "stopButton": "Detener Emergencia",
+    "stopConfirmationTitle": "¿Deseas detener la señal de auxilio?",
+    "stopConfirmationDesc": "La baliza de emergencia y el tono acústico se desactivarán.",
+    "confirmStop": "Sí, detener",
+    "keepActive": "Continuar transmitiendo"
+  },
+  "during": {
+    "title": "¿Qué hacer durante el sismo?",
+    "steps": [
+      { "title": "Agáchate", "desc": "Baja al suelo antes de que la fuerza del sismo te derribe." },
+      { "title": "Cúbrete", "desc": "Cubre tu cabeza y cuello bajo un mueble resistente o mesa firme." },
+      { "title": "Agárrate", "desc": "Sujétate del mueble hasta que el movimiento telúrico cese." }
+    ],
+    "markSafe": "Estoy a Salvo",
+    "needHelp": "Necesito Ayuda"
+  },
+  "status": {
+    "online": "Conectado",
+    "offline": "Modo Sin Conexión",
+    "syncing": "Sincronizando...",
+    "beaconActive": "Baliza BLE Activa",
+    "lowPower": "Modo Ahorro de Energía"
+  },
+  "common": {
+    "retry": "Reintentar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "accept": "Aceptar",
+    "settings": "Ajustes",
+    "back": "Atrás",
+    "continue": "Continuar"
+  }
+}

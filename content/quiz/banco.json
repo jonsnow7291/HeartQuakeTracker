@@ -1,0 +1,193 @@
+{
+  "levels": [
+    {
+      "id": "nivel-1-basico",
+      "order": 1,
+      "title": "Nivel 1: Conceptos Básicos y Autoprotección",
+      "questions": [
+        {
+          "id": "q001",
+          "text": "¿Cuál es la acción inmediata recomendada durante un sismo si estás en interiores?",
+          "options": [
+            "Correr rápidamente hacia la calle",
+            "Agacharse, cubrirse bajo un mueble resistente y agarrarse",
+            "Ubicarse debajo del marco de una puerta cualquiera",
+            "Tomar el ascensor para evacuar rápido"
+          ],
+          "correctIndex": 1,
+          "explanation": "El protocolo internacional 'Agáchate, Cúbrete y Agárrate' previene traumatismos por objetos desprendidos. Los marcos de puertas modernos no son estructuralmente resistentes y correr al exterior expone a la caída de fachadas y tejas.",
+          "protocolRef": "UNGRD - Protocolo Nacional de Autoprotección",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q002",
+          "text": "¿Para cuántas horas de autonomía mínima debe estar preparada la mochila de emergencia?",
+          "options": [
+            "12 horas",
+            "24 horas",
+            "72 horas",
+            "1 semana completa"
+          ],
+          "correctIndex": 2,
+          "explanation": "Los organismos de socorro recomiendan provisiones para al menos 72 horas (3 días), tiempo estándar en el que se restablecen los suministros básicos de emergencia.",
+          "protocolRef": "Cruz Roja Colombiana - Cartilla de Preparación Familiar",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q003",
+          "text": "¿Qué elemento de señalización sonora es indispensable en una mochila de emergencia?",
+          "options": [
+            "Una corneta de gas comprimido",
+            "Un silbato de alta frecuencia",
+            "Una campana de bronce",
+            "Un megáfono a pilas"
+          ],
+          "correctIndex": 1,
+          "explanation": "El silbato emite un sonido penetrante que viaja a través de escombros y no agota la voz ni el oxígeno de una persona atrapada.",
+          "protocolRef": "Defensa Civil Colombiana - Guía de Evacuación",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q004",
+          "text": "Si percibes olor a gas tras un sismo, ¿cuál es la primera acción que NO debes realizar?",
+          "options": [
+            "Cerrar la llave de paso de gas",
+            "Abrir ventanas para ventilar",
+            "Encender interruptores de luz, fósforos o velas",
+            "Evacuar con tu familia"
+          ],
+          "correctIndex": 2,
+          "explanation": "Cualquier chispa generada por un interruptor eléctrico o una llama abierta puede provocar una explosión catastrófica si hay fuga de gas acumulada.",
+          "protocolRef": "Cuerpo Oficial de Bomberos de Bogotá",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q005",
+          "text": "¿Dónde deben colocarse los libros y objetos más pesados en estanterías o bibliotecas?",
+          "options": [
+            "En los entrepaños más altos para despejar el suelo",
+            "En los entrepaños inferiores para bajar el centro de gravedad",
+            "En el centro de la estantería",
+            "No tiene relevancia la altura"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ubicar el peso abajo baja el centro de masa del mueble, reduciendo la probabilidad de vuelco violento durante las sacudidas.",
+          "protocolRef": "IDIGER - Medidas de Reducción del Riesgo en Vivienda",
+          "guideId": "aseguramiento-estructural"
+        }
+      ]
+    },
+    {
+      "id": "nivel-2-intermedio",
+      "order": 2,
+      "title": "Nivel 2: Plan Familiar y Mitigación del Riesgo",
+      "questions": [
+        {
+          "id": "q006",
+          "text": "¿Por qué se recomienda designar un contacto de emergencia que resida fuera de tu ciudad?",
+          "options": [
+            "Porque esa persona puede viajar de inmediato a rescatarte",
+            "Porque las líneas telefónicas locales colapsan pero los SMS de larga distancia tienen mayor viabilidad",
+            "Porque la policía exige un contacto fuera del departamento",
+            "Porque no se permite registrar familiares de la misma ciudad"
+          ],
+          "correctIndex": 1,
+          "explanation": "En desastres a gran escala, las centrales telefónicas locales se saturan por llamadas simultáneas. Un contacto foráneo actúa como punto central de retransmisión de mensajes cortos.",
+          "protocolRef": "UNGRD - Formulación de Planes Familiares de Emergencia",
+          "guideId": "plan-familiar"
+        },
+        {
+          "id": "q007",
+          "text": "¿Qué medida de protección se aconseja instalar en ventanales grandes y espejos de una vivienda?",
+          "options": [
+            "Pintura acrílica oscura",
+            "Película de seguridad de poliéster transparente",
+            "Cortinas de plástico pesado",
+            "Cinta aislante negra en forma de equis únicamente"
+          ],
+          "correctIndex": 1,
+          "explanation": "Las láminas de poliéster de seguridad mantienen unidos los fragmentos cortantes del cristal si el vidrio se fractura por la flexión del edificio.",
+          "protocolRef": "Reglamento Colombiano de Construcción Sismo Resistente (NSR-10)",
+          "guideId": "aseguramiento-estructural"
+        },
+        {
+          "id": "q008",
+          "text": "¿Cuánta agua potable se debe presupuestar por persona al día para la mochila de 72 horas?",
+          "options": [
+            "Medio litro",
+            "1 litro",
+            "2 litros al día (mínimo 6 litros por persona en total)",
+            "5 litros al día"
+          ],
+          "correctIndex": 2,
+          "explanation": "Se calculan 2 litros diarios por individuo para cubrir necesidades mínimas de hidratación y salubridad básica durante tres jornadas.",
+          "protocolRef": "Cruz Roja Colombiana - Manual de Abastecimiento de Emergencia",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q009",
+          "text": "Si conduces un vehículo por una autopista y ocurre un sismo violento, ¿qué debes hacer?",
+          "options": [
+            "Acelerar para salir lo antes posible de la vía",
+            "Frenar en seco en el carril izquierdo",
+            "Orillarte con calma lejos de puentes, postes o cables, encender luces de parqueo y permanecer dentro",
+            "Bajar del automóvil inmediatamente y correr al borde de la carretera"
+          ],
+          "correctIndex": 2,
+          "explanation": "El vehículo ofrece una estructura de protección contra escombros menores. Orillarse con precaución evita colisiones en cadena y mantiene despejados los carriles de auxilio.",
+          "protocolRef": "Defensa Civil Colombiana - Seguridad Vial en Emergencias",
+          "guideId": "durante-el-sismo"
+        }
+      ]
+    },
+    {
+      "id": "nivel-3-avanzado",
+      "order": 3,
+      "title": "Nivel 3: Protocolos de Evacuación y Rescate Comunitario",
+      "questions": [
+        {
+          "id": "q010",
+          "text": "¿Qué tipo de calzado es prioritario utilizar antes de iniciar la evacuación de un inmueble tras un temblor?",
+          "options": [
+            "Sandalias livianas para mayor rapidez",
+            "Caminar descalzo para no resbalar",
+            "Zapatos cerrados o botas de suela gruesa",
+            "Cualquier tipo de calzado es igual"
+          ],
+          "correctIndex": 2,
+          "explanation": "El suelo suele quedar cubierto de cristales rotos, clavos y mampostería astillada. Caminar sin calzado de suela gruesa genera laceraciones que incapacitan para evacuar.",
+          "protocolRef": "UNGRD - Evacuación Segura y Autoprotección",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q011",
+          "text": "Si quedas atrapado bajo una estructura y escuchas rescatistas cerca, ¿cuál es la mejor técnica para pedir ayuda?",
+          "options": [
+            "Gritar con todas tus fuerzas continuamente",
+            "Tocar tu silbato o golpear una tubería metálica a intervalos rítmicos",
+            "Mover desesperadamente los escombros a tu alrededor",
+            "Encender un encendedor para hacer señales luminosas"
+          ],
+          "correctIndex": 1,
+          "explanation": "Golpear metal o pitar produce ondas acústicas de alta propagación mecánica que ahorran oxígeno y evitan inhalar polvo tóxico en comparación con gritar.",
+          "protocolRef": "Grupo USAR Colombia - Búsqueda y Rescate Urbano",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q012",
+          "text": "En el sistema EarthQuakeTracker, ¿por qué la baliza de socorro BLE funciona aún sin red de internet ni señal celular?",
+          "options": [
+            "Porque se conecta directamente a satélites geoestacionarios",
+            "Porque emite ondas de radiofrecuencia directa entre antenas Bluetooth de teléfonos cercanos (red ad-hoc)",
+            "Porque utiliza la red de radio AM comercial",
+            "Porque requiere una antena especial conectada al puerto USB"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bluetooth Low Energy emite paquetes en la banda ISM de 2.4 GHz de forma descentralizada de terminal a terminal, permitiendo localización y retransmisión por malla sin depender de antenas celulares caídas.",
+          "protocolRef": "EarthQuakeTracker - Arquitectura de Red Mallada y Balizas",
+          "guideId": "durante-el-sismo"
+        }
+      ]
+    }
+  ]
+}
