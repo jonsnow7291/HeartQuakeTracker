@@ -6,20 +6,26 @@ export interface ColorPalette {
   primaryContainer: string;
   onPrimaryContainer: string;
 
+  secondary: string;
+  onSecondary: string;
+  secondaryContainer: string;
+  onSecondaryContainer: string;
+
+  tertiary: string;
+  onTertiary: string;
+  tertiaryContainer: string;
+  onTertiaryContainer: string;
+
+  auxiliary: string;
+  onAuxiliary: string;
+  auxiliaryContainer: string;
+  onAuxiliaryContainer: string;
+
   panic: string;
   onPanic: string;
   panicContainer: string;
   onPanicContainer: string;
-
-  warning: string;
-  onWarning: string;
-  warningContainer: string;
-  onWarningContainer: string;
-
-  success: string;
-  onSuccess: string;
-  successContainer: string;
-  onSuccessContainer: string;
+  terracottaAlert: string;
 
   background: string;
   onBackground: string;
@@ -50,80 +56,92 @@ export interface AppTheme {
 }
 
 export const lightPalette: ColorPalette = {
-  primary: '#0B57D0',
+  primary: '#2A1D13',
   onPrimary: '#FFFFFF',
-  primaryContainer: '#D3E3FD',
-  onPrimaryContainer: '#041E49',
+  primaryContainer: '#DAC2B2',
+  onPrimaryContainer: '#25190F',
+
+  secondary: '#D47A22',
+  onSecondary: '#FFFFFF',
+  secondaryContainer: '#FE9C43',
+  onSecondaryContainer: '#6C3800',
+
+  tertiary: '#3D7D54',
+  onTertiary: '#FFFFFF',
+  tertiaryContainer: '#AEF2C0',
+  onTertiaryContainer: '#00210E',
+
+  auxiliary: '#3F6F8E',
+  onAuxiliary: '#FFFFFF',
+  auxiliaryContainer: '#C3DCEE',
+  onAuxiliaryContainer: '#0A2538',
 
   panic: '#BA1A1A',
   onPanic: '#FFFFFF',
   panicContainer: '#FFDAD6',
   onPanicContainer: '#410002',
+  terracottaAlert: '#C24726',
 
-  warning: '#B26200',
-  onWarning: '#FFFFFF',
-  warningContainer: '#FFDDB3',
-  onWarningContainer: '#2B1700',
-
-  success: '#146C2E',
-  onSuccess: '#FFFFFF',
-  successContainer: '#C4EED0',
-  onSuccessContainer: '#00210B',
-
-  background: '#FDFBFF',
-  onBackground: '#1A1C1E',
+  background: '#FDF9F2',
+  onBackground: '#1C1C18',
   surface: '#FFFFFF',
-  onSurface: '#1A1C1E',
-  surfaceVariant: '#E1E2EC',
-  onSurfaceVariant: '#44474F',
-  outline: '#74777F',
-  outlineVariant: '#C4C6D0',
+  onSurface: '#1C1C18',
+  surfaceVariant: '#E6E2DB',
+  onSurfaceVariant: '#4E453F',
+  outline: '#80756E',
+  outlineVariant: '#D1C4BC',
 
   status: {
-    offline: '#74777F',
-    online: '#146C2E',
-    syncing: '#0B57D0',
+    offline: '#80756E',
+    online: '#3D7D54',
+    syncing: '#3F6F8E',
     beaconActive: '#BA1A1A',
-    lowPower: '#B26200',
+    lowPower: '#D47A22',
   },
 };
 
 export const darkPalette: ColorPalette = {
-  primary: '#A8C7FA',
-  onPrimary: '#062E6F',
-  primaryContainer: '#0842A0',
-  onPrimaryContainer: '#D3E3FD',
+  primary: '#DAC2B2',
+  onPrimary: '#25190F',
+  primaryContainer: '#4A3525',
+  onPrimaryContainer: '#F7DECE',
+
+  secondary: '#FFB77D',
+  onSecondary: '#462400',
+  secondaryContainer: '#653800',
+  onSecondaryContainer: '#FFDDB3',
+
+  tertiary: '#93D5A5',
+  onTertiary: '#003915',
+  tertiaryContainer: '#1B4D2E',
+  onTertiaryContainer: '#AEF2C0',
+
+  auxiliary: '#86B6D6',
+  onAuxiliary: '#0A2538',
+  auxiliaryContainer: '#234960',
+  onAuxiliaryContainer: '#C3DCEE',
 
   panic: '#FFB4AB',
   onPanic: '#690005',
   panicContainer: '#93000A',
   onPanicContainer: '#FFDAD6',
+  terracottaAlert: '#C24726',
 
-  warning: '#FFB951',
-  onWarning: '#462400',
-  warningContainer: '#653800',
-  onWarningContainer: '#FFDDB3',
-
-  success: '#6CDD8D',
-  onSuccess: '#003915',
-  successContainer: '#005322',
-  onSuccessContainer: '#C4EED0',
-
-  background: '#111318',
-  onBackground: '#E2E2E6',
-  surface: '#1A1C1E',
-  onSurface: '#E2E2E6',
-  surfaceVariant: '#44474F',
-  onSurfaceVariant: '#C4C6D0',
-  outline: '#8E9099',
-  outlineVariant: '#44474F',
+  background: '#1A1815',
+  onBackground: '#F4F0E9',
+  surface: '#23201C',
+  onSurface: '#F4F0E9',
+  surfaceVariant: '#4E453F',
+  onSurfaceVariant: '#D1C4BC',
+  outline: '#9E9087',
+  outlineVariant: '#4E453F',
 
   status: {
-    offline: '#8E9099',
-    online: '#6CDD8D',
-    syncing: '#A8C7FA',
+    offline: '#9E9087',
+    online: '#93D5A5',
+    syncing: '#86B6D6',
     beaconActive: '#FFB4AB',
-    lowPower: '#FFB951',
+    lowPower: '#FFB77D',
   },
 };
 

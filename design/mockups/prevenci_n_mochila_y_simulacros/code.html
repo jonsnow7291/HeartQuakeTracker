@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;font-family:'Plus Jakarta Sans',sans-serif;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "outline": "#80756e", "secondary-fixed-dim": "#ffb77d", "tertiary": "#000b03", "on-background": "#1c1c18", "on-primary": "#ffffff", "on-primary-container": "#988375", "surface-tint": "#6d5b4e", "primary-fixed-dim": "#dac2b2", "inverse-primary": "#dac2b2", "secondary-fixed": "#ffdcc3", "inverse-surface": "#31302c", "surface-container-high": "#ebe8e1", "secondary": "#914d00", "tertiary-fixed": "#aef2c0", "outline-variant": "#d1c4bc", "on-secondary-fixed-variant": "#6e3900", "on-tertiary-container": "#54956a", "on-error-container": "#93000a", "on-secondary-fixed": "#2f1500", "surface-dim": "#dddad3", "on-primary-fixed-variant": "#544438", "on-primary-fixed": "#25190f", "background": "#fdf9f2", "on-tertiary-fixed-variant": "#0a522d", "surface-container-low": "#f7f3ec", "on-tertiary": "#ffffff", "primary": "#0f0601", "on-secondary-container": "#6c3800", "on-tertiary-fixed": "#00210e", "tertiary-container": "#002611", "surface-container": "#f1ede6", "on-error": "#ffffff", "on-secondary": "#ffffff", "surface-variant": "#e6e2db", "error-container": "#ffdad6", "surface-bright": "#fdf9f2", "surface-container-lowest": "#ffffff", "surface": "#fdf9f2", "on-surface": "#1c1c18", "surface-container-highest": "#e6e2db", "primary-container": "#2a1d13", "secondary-container": "#fe9c43", "on-surface-variant": "#4e453f", "tertiary-fixed-dim": "#93d5a5", "primary-fixed": "#f7dece", "error": "#ba1a1a", "inverse-on-surface": "#f4f0e9" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xs": "0.5rem", "header-banner-height": "4rem", "space-md": "1rem", "space-lg": "1.25rem", "space-sm": "0.75rem", "space-2xs": "0.25rem", "space-3xl": "2.5rem", "screen-edge-padding": "1.25rem", "card-inner-padding": "1rem", "space-2xl": "2rem", "space-xl": "1.5rem", "bottom-nav-height": "4.5rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-caps": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "800" }], "headline-lg": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "800" }], "headline-sm": ["16px", { "lineHeight": "22px", "fontWeight": "700" }], "headline-xl": ["32px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }], "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "800" }] } } } }</script></head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="flex items-center justify-between px-screen-edge-padding h-11 text-on-surface"><span class="font-label-md text-label-md tracking-tight">9:41</span><div class="flex items-center gap-space-2xs text-on-surface"><span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span><span class="material-symbols-outlined text-[16px]">wifi</span><span class="material-symbols-outlined text-[18px]">battery_full</span></div></div><div class="flex items-center justify-between px-screen-edge-padding h-14"><div class="flex items-center gap-space-sm"><img alt="Earthquake Tracker Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UeHoEiIqgO0B0P0BVAZK8AuPPN_C8GGCOt3Lty7dJYgsk2YPrE9-iamjwhJDReoFAQlbST1Opa-i5jta__NrXkXdm4kluYqjZFjwkDOdDs3bP9oAac5I0fyWeM7W-DMUXyxQGUkSdUJUcKz_uhPsQ5rntzCSsHKiNDFMkbP0FmGMpps0MYcFfOPOsyiQ_e1iVH5IaHxuBkwlV4V3jxVqm9a1ESsMj60xuxtai-welb8Ntj9f-UXK4eOAM"/><div class="flex flex-col"><span class="font-label-caps text-label-caps uppercase text-secondary tracking-wider">Sismos Tracker</span><h1 class="font-headline-md text-headline-md text-primary tracking-tight leading-tight">Alertas</h1></div></div><div class="flex items-center gap-space-sm"><button aria-label="Notificaciones" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-28 pb-24 bg-surface px-screen-edge-padding"><div class="flex flex-col w-full space-y-space-md">
+<!-- Sub-header con retorno y título contextual de Fase Prevención -->
+<div class="flex items-center justify-between py-space-xs">
+<div class="flex items-center gap-space-sm">
+<button aria-label="Volver atrás" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary active:scale-95 transition-transform shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+</button>
+<div>
+<div class="flex items-center gap-space-2xs">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span class="font-label-caps text-label-caps uppercase text-on-tertiary-fixed-variant tracking-wider">Fase 1 • Antes del sismo</span>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">PREVENCIÓN</h2>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed/40 flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+</div>
+<!-- Lema sereno & inspirador -->
+<div class="bg-surface-container-low px-space-md py-space-sm rounded-xl">
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+<strong class="font-label-lg text-primary">Infórmate. Prepárate. Protege tu vida.</strong><br/>
+      La calma ante un sismo comienza con las decisiones que tomas hoy en tu hogar.
+    </p>
+</div>
+<!-- Indicador del estado de preparación del hogar (70%) -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+</div>
+<div>
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant block">Tu Hogar Seguro</span>
+<span class="font-headline-sm text-headline-sm text-primary">Nivel de preparación</span>
+</div>
+</div>
+<div class="flex items-center gap-space-2xs">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-caps text-label-caps px-space-xs py-1 rounded-full uppercase">
+          Buen progreso
+        </span>
+<span class="font-headline-md text-headline-md text-primary ml-1" id="prep-percentage">70%</span>
+</div>
+</div>
+<!-- Barra de progreso -->
+<div class="w-full bg-surface-container-highest h-2.5 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full transition-all duration-500" id="prep-progress-bar" style="width: 70%; background-color: #2d7a58;"></div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+        Faltan 2 elementos clave en tu kit
+      </span>
+<span class="font-label-md text-label-md text-secondary underline cursor-pointer">Ver detalle</span>
+</div>
+</div>
+<!-- SECCIÓN 1: Mochila de Emergencia (72 Horas) -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-md">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-[28px]">backpack</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-wide">Vital • 72 Horas</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Mochila de Emergencia</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Insumos mínimos para subsistir 3 días.</p>
+</div>
+</div>
+<button aria-label="Información de la mochila" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant" type="button">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+</button>
+</div>
+<!-- Checklist Interactivo -->
+<div class="space-y-space-xs" id="checklist-container">
+<!-- Item 1: Completado -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low transition-colors cursor-pointer select-none">
+<input checked="" class="kit-checkbox mt-0.5 w-5 h-5 rounded text-tertiary-container accent-[#2d7a58] cursor-pointer" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary truncate">Agua y alimentos no perecederos</span>
+<span class="font-label-caps text-label-caps bg-surface-container-high px-1.5 py-0.5 rounded text-on-surface-variant">3 días</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">4L por persona, latas con abre fácil, barras energéticas.</p>
+</div>
+</label>
+<!-- Item 2: Completado -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low transition-colors cursor-pointer select-none">
+<input checked="" class="kit-checkbox mt-0.5 w-5 h-5 rounded text-tertiary-container accent-[#2d7a58] cursor-pointer" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary truncate">Botiquín y medicamentos esenciales</span>
+<span class="font-label-caps text-label-caps bg-surface-container-high px-1.5 py-0.5 rounded text-on-surface-variant">Médico</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Gasas, alcohol, analgésicos y recetas para 7 días continuos.</p>
+</div>
+</label>
+<!-- Item 3: Pendiente -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low transition-colors cursor-pointer select-none">
+<input class="kit-checkbox mt-0.5 w-5 h-5 rounded text-tertiary-container accent-[#2d7a58] cursor-pointer" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary truncate">Linterna dinamo y radio AM/FM</span>
+<span class="font-label-caps text-label-caps bg-secondary-fixed text-on-secondary-fixed-variant px-1.5 py-0.5 rounded font-bold">Prioridad</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Linterna sin pilas o dinamo, pilas extra y radio con alerta.</p>
+</div>
+</label>
+<!-- Item 4: Completado -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low transition-colors cursor-pointer select-none">
+<input checked="" class="kit-checkbox mt-0.5 w-5 h-5 rounded text-tertiary-container accent-[#2d7a58] cursor-pointer" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary truncate">Silbato, llaves y documentos</span>
+<span class="font-label-caps text-label-caps bg-surface-container-high px-1.5 py-0.5 rounded text-on-surface-variant">Legal</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Copia de identificaciones en bolsa impermeable y silbato sin balín.</p>
+</div>
+</label>
+<!-- Item 5: Pendiente -->
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-low transition-colors cursor-pointer select-none">
+<input class="kit-checkbox mt-0.5 w-5 h-5 rounded text-tertiary-container accent-[#2d7a58] cursor-pointer" type="checkbox"/>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-primary truncate">Manta térmica, muda e higiene</span>
+<span class="font-label-caps text-label-caps bg-surface-container-high px-1.5 py-0.5 rounded text-on-surface-variant">Refugio</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Manta de aluminio, muda completa abrigadora y papel higiénico.</p>
+</div>
+</label>
+</div>
+<!-- Botón de acción kit -->
+<button class="w-full h-12 rounded-full bg-primary-container text-on-primary flex items-center justify-center gap-space-xs font-label-lg text-label-lg shadow-sm active:scale-98 transition-transform" type="button">
+<span class="material-symbols-outlined text-[20px]">checklist_rtl</span>
+<span>Personalizar e inventariar kit</span>
+</button>
+</div>
+<!-- SECCIÓN 2: Simulacros y Práctica -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between px-space-2xs">
+<div>
+<span class="font-label-caps text-label-caps uppercase text-secondary">Cultura Preventiva</span>
+<h3 class="font-headline-md text-headline-md text-primary">Simulacros y Ensayo</h3>
+</div>
+<span class="material-symbols-outlined text-secondary text-[24px]">campaign</span>
+</div>
+<!-- Tarjeta Próximo Simulacro -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[22px]">event_upcoming</span>
+</div>
+<div>
+<div class="flex items-center gap-space-2xs">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-caps text-label-caps uppercase text-secondary font-bold">Oficial Programado</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Simulacro Nacional Sísmico</h4>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="space-y-0.5">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant block">Horario</span>
+<p class="font-label-lg text-label-lg text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+            Mañana • 11:00 hrs
+          </p>
+</div>
+<div class="space-y-0.5">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant block">Hipótesis</span>
+<p class="font-label-lg text-label-lg text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-error">vibration</span>
+            Sismo Mag. 7.8
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex-1 h-11 rounded-full bg-surface-container-highest text-primary font-label-lg text-label-lg flex items-center justify-center gap-1.5 active:bg-surface-dim transition-colors" id="btn-reminder" type="button">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+<span id="txt-reminder">Activar recordatorio</span>
+</button>
+<button class="px-space-md h-11 rounded-full bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-1 shadow-sm" type="button">
+<span>Unirme</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Tarjeta Entrenador de Sonido de Alarma (Familiarización sin pánico) -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-11 h-11 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">graphic_eq</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Simulador de Alarma</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Escucha el sonido oficial para familiarizar a niños y mascotas sin pánico.</p>
+</div>
+</div>
+<button aria-label="Reproducir simulador de alarma" class="w-11 h-11 rounded-full bg-primary text-on-primary flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform shadow-sm" id="btn-sound-toggle" type="button">
+<span class="material-symbols-outlined text-[22px]" id="sound-icon">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- SECCIÓN 3: Guías y Planes Preventivos -->
+<div class="space-y-space-sm pb-space-md">
+<div class="px-space-2xs">
+<span class="font-label-caps text-label-caps uppercase text-secondary">Organización Familiar</span>
+<h3 class="font-headline-md text-headline-md text-primary">Planes y Zonas Seguras</h3>
+</div>
+<!-- Guía 1: Plan Familiar de Emergencia -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between gap-space-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">diversity_3</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Plan Familiar de Emergencia</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Asignación de roles, llaves maestras y 2 puntos de reunión fuera del barrio.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[22px] flex-shrink-0">arrow_forward_ios</span>
+</div>
+<!-- Guía 2: Zonas de Menor Riesgo en Casa -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between gap-space-sm cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">foundation</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-primary">Zonas de Menor Riesgo en Casa</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Identifica columnas portantes, muros de carga y aléjate de ventanas y estantes.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant text-[22px] flex-shrink-0">arrow_forward_ios</span>
+</div>
+<!-- Banner informativo sereno -->
+<div class="bg-primary-fixed/40 p-space-md rounded-xl flex items-center gap-space-sm text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-[26px] text-primary flex-shrink-0">nature_people</span>
+<p class="font-body-sm text-body-sm leading-snug">
+        En México y zonas sísmicas, la anticipación salva vidas. Comparte este plan con tus vecinos para coordinar brigadas de apoyo mutuo.
+      </p>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Manejo de actualización dinámica del nivel de preparación según checks de la mochila
+    const checkboxes = document.querySelectorAll('.kit-checkbox');
+    const percentEl = document.getElementById('prep-percentage');
+    const barEl = document.getElementById('prep-progress-bar');
+
+    function updateProgress() {
+      const total = checkboxes.length;
+      let checked = 0;
+      checkboxes.forEach(cb => { if(cb.checked) checked++; });
+      const percent = Math.round((checked / total) * 100);
+      if(percentEl) percentEl.textContent = percent + '%';
+      if(barEl) barEl.style.width = percent + '%';
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', updateProgress);
+    });
+
+    // Recordatorio toggle
+    const btnReminder = document.getElementById('btn-reminder');
+    const txtReminder = document.getElementById('txt-reminder');
+    let reminderActive = false;
+    if(btnReminder && txtReminder) {
+      btnReminder.addEventListener('click', () => {
+        reminderActive = !reminderActive;
+        if(reminderActive) {
+          btnReminder.classList.add('bg-tertiary-fixed', 'text-on-tertiary-fixed-variant');
+          txtReminder.textContent = 'Recordatorio listo';
+        } else {
+          btnReminder.classList.remove('bg-tertiary-fixed', 'text-on-tertiary-fixed-variant');
+          txtReminder.textContent = 'Activar recordatorio';
+        }
+      });
+    }
+
+    // Micro-interacción simulador sonoro de alarma
+    const soundBtn = document.getElementById('btn-sound-toggle');
+    const soundIcon = document.getElementById('sound-icon');
+    let isPlaying = false;
+    let audioCtx = null;
+    let osc = null;
+
+    if(soundBtn && soundIcon) {
+      soundBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        if(isPlaying) {
+          soundIcon.textContent = 'pause';
+          soundBtn.classList.add('bg-secondary');
+          // Pequeño tono acústico no invasivo usando Web Audio API para simulación sonora
+          try {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.2);
+            gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            setTimeout(() => {
+              if(isPlaying) {
+                soundBtn.click();
+              }
+            }, 2500);
+          } catch(e) {}
+        } else {
+          soundIcon.textContent = 'play_arrow';
+          soundBtn.classList.remove('bg-secondary');
+          if(osc) {
+            try { osc.stop(); } catch(e) {}
+          }
+          if(audioCtx) {
+            try { audioCtx.close(); } catch(e) {}
+          }
+        }
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-primary-container/95 backdrop-blur-xl shadow-[0_-4px_16px_rgba(42,29,19,0.08)]" data-active-classes="text-secondary-fixed bg-surface-container-highest/10"><div class="flex justify-around items-center h-bottom-nav-height px-space-xs"><a class="flex flex-col items-center justify-center gap-space-2xs min-w-[56px] min-h-[48px] px-space-xs py-space-2xs rounded-xl text-outline-variant hover:text-on-primary transition-all" data-path="inicio" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="font-label-md text-label-md leading-none">Inicio</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-w-[56px] min-h-[48px] px-space-xs py-space-2xs rounded-xl text-outline-variant hover:text-on-primary transition-all" data-path="mapa" href="#"><span class="material-symbols-outlined text-[24px]">map</span><span class="font-label-md text-label-md leading-none">Mapa</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-space-2xs min-w-[56px] min-h-[48px] px-space-xs py-space-2xs rounded-xl transition-all text-secondary-fixed bg-surface-container-highest/10" data-path="alertas" href="#"><span class="material-symbols-outlined text-[24px]">crisis_alert</span><span class="font-label-md text-label-md leading-none">Alertas</span></a><a class="flex flex-col items-center justify-center gap-space-2xs min-w-[56px] min-h-[48px] px-space-xs py-space-2xs rounded-xl text-outline-variant hover:text-on-primary transition-all" data-path="perfil" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="font-label-md text-label-md leading-none">Perfil</span></a></div></nav></body></html>

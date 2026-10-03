@@ -1,27 +1,29 @@
 /**
  * Design Tokens for EarthQuakeTracker
- * Conforms to WCAG 2.1 AA accessibility guidelines
- * Minimum touch target: 48dp, Panic button: 96dp
+ * "Tactile Warmth & Organic Modernism"
+ * Grounded Espresso, Ochre, Emerald, and Calm Steel Blue
  */
 
 export const spacing = {
   none: 0,
-  xxs: 4,
-  xs: 8,
-  sm: 12,
-  md: 16,
-  lg: 20,
-  xl: 24,
-  xxl: 32,
-  xxxl: 40,
-  huge: 48,
-  giant: 64,
+  space2xs: 4,
+  spaceXs: 8,
+  spaceSm: 12,
+  spaceMd: 16,
+  spaceLg: 20,
+  spaceXl: 24,
+  space2xl: 32,
+  space3xl: 40,
+  screenEdgePadding: 20,
+  cardInnerPadding: 16,
+  bottomNavHeight: 72,
+  headerBannerHeight: 64,
 } as const;
 
 export const borderRadius = {
   none: 0,
-  xs: 4,
-  sm: 8,
+  sm: 4,
+  default: 8,
   md: 12,
   lg: 16,
   xl: 24,
@@ -30,16 +32,21 @@ export const borderRadius = {
 
 export const typography = {
   fontFamily: {
-    sans: 'System',
+    sans: 'Plus Jakarta Sans',
     monospace: 'Courier New',
   },
   scale: {
-    display: { fontSize: 32, lineHeight: 40, fontWeight: '700' as const },
-    headline: { fontSize: 24, lineHeight: 32, fontWeight: '700' as const },
-    title: { fontSize: 20, lineHeight: 26, fontWeight: '600' as const },
-    bodyLarge: { fontSize: 16, lineHeight: 24, fontWeight: '400' as const },
-    bodyMedium: { fontSize: 14, lineHeight: 20, fontWeight: '400' as const },
-    label: { fontSize: 12, lineHeight: 16, fontWeight: '600' as const },
+    headlineXl: { fontSize: 32, lineHeight: 38, fontWeight: '800' as const, letterSpacing: -0.02 },
+    headlineLg: { fontSize: 24, lineHeight: 30, fontWeight: '800' as const, letterSpacing: -0.01 },
+    headlineLgMobile: { fontSize: 22, lineHeight: 28, fontWeight: '800' as const },
+    headlineMd: { fontSize: 18, lineHeight: 24, fontWeight: '700' as const },
+    headlineSm: { fontSize: 16, lineHeight: 22, fontWeight: '700' as const },
+    bodyLg: { fontSize: 16, lineHeight: 24, fontWeight: '400' as const },
+    bodyMd: { fontSize: 14, lineHeight: 20, fontWeight: '400' as const },
+    bodySm: { fontSize: 12, lineHeight: 16, fontWeight: '400' as const },
+    labelLg: { fontSize: 14, lineHeight: 18, fontWeight: '700' as const, letterSpacing: 0.02 },
+    labelMd: { fontSize: 12, lineHeight: 16, fontWeight: '600' as const, letterSpacing: 0.01 },
+    labelCaps: { fontSize: 11, lineHeight: 14, fontWeight: '800' as const, letterSpacing: 0.08 },
     panicCountdown: { fontSize: 56, lineHeight: 64, fontWeight: '900' as const },
   },
 } as const;
