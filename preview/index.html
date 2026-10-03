@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EarthQuakeTracker – Simulador Interactivo de Interfaz (Mocks v0.1)</title>
+  <style>
+    :root {
+      --primary: #0B57D0;
+      --on-primary: #FFFFFF;
+      --primary-container: #D3E3FD;
+      --on-primary-container: #041E49;
+      --panic: #BA1A1A;
+      --on-panic: #FFFFFF;
+      --panic-container: #FFDAD6;
+      --on-panic-container: #410002;
+      --warning: #B26200;
+      --warning-container: #FFDDB3;
+      --on-warning-container: #2B1700;
+      --success: #146C2E;
+      --success-container: #C4EED0;
+      --on-success-container: #00210B;
+      --bg: #F8F9FA;
+      --surface: #FFFFFF;
+      --on-surface: #1A1C1E;
+      --surface-variant: #E1E2EC;
+      --on-surface-variant: #44474F;
+      --outline: #74777F;
+      --outline-variant: #C4C6D0;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #1e232a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+
+    header.simulator-header {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    header.simulator-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #A8C7FA;
+    }
+
+    header.simulator-header p {
+      font-size: 13px;
+      color: #C4C6D0;
+      margin-top: 4px;
+    }
+
+    .simulator-layout {
+      display: flex;
+      gap: 24px;
+      max-width: 1000px;
+      width: 100%;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    /* Device frame */
+    .device-frame {
+      width: 390px;
+      height: 800px;
+      background: #FFFFFF;
+      border-radius: 44px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 10px #2D323B;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Status bar */
+    .status-bar {
+      height: 44px;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1A1C1E;
+      z-index: 10;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .status-indicators {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Screen content */
+    .screen-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      background: #FDFBFF;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Bottom tab bar */
+    .tab-bar {
+      height: 64px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--outline-variant);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: 6px;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--on-surface-variant);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+    }
+
+    .tab-item.active {
+      color: var(--primary);
+    }
+
+    .tab-item .icon {
+      font-size: 18px;
+    }
+
+    /* Pills & Badges */
+    .pill-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .pill-online { background: var(--success-container); color: var(--on-success-container); }
+    .pill-online .pill-dot { background: var(--success); }
+
+    .pill-offline { background: var(--surface-variant); color: var(--on-surface-variant); }
+    .pill-offline .pill-dot { background: var(--outline); }
+
+    .pill-beacon { background: var(--panic-container); color: var(--on-panic-container); }
+    .pill-beacon .pill-dot { background: var(--panic); }
+
+    .pill-power { background: var(--warning-container); color: var(--on-warning-container); }
+    .pill-power .pill-dot { background: var(--warning); }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: var(--panic-container);
+      border-left: 4px solid var(--panic);
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .alert-banner.seismic {
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
+    }
+
+    .alert-banner-text h4 {
+      font-size: 12px;
+      color: var(--panic);
+      font-weight: 700;
+    }
+
+    .alert-banner-text p {
+      font-size: 11px;
+      color: var(--on-panic-container);
+      margin-top: 2px;
+    }
+
+    /* Panic Section */
+    .panic-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 12px 0 20px 0;
+      text-align: center;
+    }
+
+    .panic-btn-wrapper {
+      position: relative;
+      margin: 14px 0;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panic-halo {
+      position: absolute;
+      width: 155px;
+      height: 155px;
+      border-radius: 50%;
+      background: rgba(186, 26, 26, 0.25);
+      animation: ripple 2s infinite ease-out;
+    }
+
+    @keyframes ripple {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      100% { transform: scale(1.25); opacity: 0; }
+    }
+
+    .panic-button {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: var(--panic);
+      border: 4px solid #fff;
+      color: #fff;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(186, 26, 26, 0.45);
+      z-index: 2;
+      transition: transform 0.15s, background-color 0.2s;
+    }
+
+    .panic-button:active {
+      transform: scale(0.95);
+      background: #93000A;
+    }
+
+    .panic-button span {
+      font-size: 9px;
+      letter-spacing: 1px;
+      font-weight: 600;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    /* Quick cards */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    .card-icon {
+      font-size: 26px;
+    }
+
+    .card-body h4 {
+      font-size: 14px;
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+
+    .card-body p {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      margin-top: 2px;
+    }
+
+    /* Modal / Overlay */
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #FFFFFF;
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .severity-card {
+      border: 2px solid var(--outline-variant);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .severity-card:hover {
+      border-color: var(--primary);
+    }
+
+    .severity-card.ileso { border-color: var(--success); background: #f2f9f4; }
+    .severity-card.con_lesiones { border-color: var(--warning); background: #fffcf4; }
+    .severity-card.atrapado { border-color: var(--panic); background: #fff4f3; }
+
+    .severity-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .severity-desc {
+      font-size: 12px;
+      color: var(--on-surface-variant);
+      line-height: 16px;
+    }
+
+    .countdown-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 6px solid var(--panic);
+      margin: 24px auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 44px;
+      font-weight: 900;
+      color: var(--panic);
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-danger { background: var(--panic); color: #fff; }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+
+    /* Side Control Panel (DevScenarios & Manual controls) */
+    .side-panel {
+      width: 360px;
+      background: #252A33;
+      border-radius: 20px;
+      padding: 20px;
+      color: #E2E2E6;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      max-height: 800px;
+      overflow-y: auto;
+    }
+
+    .side-panel h3 {
+      font-size: 16px;
+      color: #A8C7FA;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scenario-toggle {
+      background: #2F3542;
+      border: 1px solid #3F4656;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .scenario-toggle:hover {
+      background: #394050;
+    }
+
+    .scenario-toggle.active {
+      border-color: #6CDD8D;
+      background: #1e3a29;
+    }
+
+    .scenario-toggle h5 {
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .scenario-toggle p {
+      font-size: 11px;
+      color: #9AA0A6;
+      margin-top: 2px;
+    }
+
+    .badge-tag {
+      font-size: 10px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      background: #44474F;
+      color: #fff;
+    }
+
+    .scenario-toggle.active .badge-tag {
+      background: #6CDD8D;
+      color: #003915;
+    }
+
+    /* Strobe flash effect */
+    .strobe-active {
+      animation: strobe 0.25s infinite;
+    }
+
+    @keyframes strobe {
+      0%, 49% { filter: brightness(1); }
+      50%, 100% { filter: brightness(1.7); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="simulator-header">
+    <h1>EarthQuakeTracker – Simulador de Interfaz y Mocks</h1>
+    <p>Prueba en vivo la UI de Santiago conectada a los mocks en memoria de Juan Diego y DevScenarios.</p>
+  </header>
+
+  <div class="simulator-layout">
+    
+    <!-- Mobile Device Simulator -->
+    <div class="device-frame" id="deviceFrame">
+      
+      <!-- Top Status Bar -->
+      <div class="status-bar">
+        <span id="currentTime">10:45</span>
+        <div class="status-indicators">
+          <span id="bleIcon" title="Bluetooth Activo">🔵 BLE</span>
+          <span id="batteryPill">🔋 85%</span>
+        </div>
+      </div>
+
+      <!-- Screen Container -->
+      <div class="screen-container" id="screenContent">
+        <!-- Rendered dynamically by script -->
+      </div>
+
+      <!-- Bottom Tab Bar -->
+      <nav class="tab-bar">
+        <button class="tab-item active" onclick="navigate('home')">
+          <span class="icon">🚨</span>
+          <span>Inicio</span>
+        </button>
+        <button class="tab-item" onclick="navigate('prevention')">
+          <span class="icon">📚</span>
+          <span>Guías</span>
+        </button>
+        <button class="tab-item" onclick="navigate('quiz')">
+          <span class="icon">🎯</span>
+          <span>Quiz</span>
+        </button>
+        <button class="tab-item" onclick="navigate('map')">
+          <span class="icon">🗺️</span>
+          <span>Mapa</span>
+        </button>
+        <button class="tab-item" onclick="navigate('profile')">
+          <span class="icon">👤</span>
+          <span>Perfil</span>
+        </button>
+      </nav>
+
+      <!-- Panic Modal Overlay (2 Touches Flow) -->
+      <div class="modal-overlay" id="panicModal">
+        <div id="panicStep1">
+          <h2 style="font-size: 20px; color: var(--panic); text-align: center; margin-bottom: 6px;">¿Cuál es tu situación?</h2>
+          <p style="font-size: 13px; color: var(--on-surface-variant); text-align: center; margin-bottom: 16px;">
+            Segundo toque para confirmar nivel de auxilio y activar baliza BLE:
+          </p>
+
+          <div class="severity-card ileso" onclick="selectSeverity('ILESO')">
+            <div class="severity-title" style="color: var(--success);">🟢 Estoy Ileso</div>
+            <div class="severity-desc">Sin lesiones. Transmitir estado seguro a la red mallada y contactos.</div>
+          </div>
+
+          <div class="severity-card con_lesiones" onclick="selectSeverity('CON_LESIONES')">
+            <div class="severity-title" style="color: var(--warning);">🟡 Tengo Lesiones</div>
+            <div class="severity-desc">Requiero primeros auxilios o asistencia médica en sitio.</div>
+          </div>
+
+          <div class="severity-card atrapado" onclick="selectSeverity('ATRAPADO')">
+            <div class="severity-title" style="color: var(--panic);">🔴 Estoy Atrapado</div>
+            <div class="severity-desc">PRIORIDAD MÁXIMA: Bloqueado bajo escombros o sin salida. Rescate urgente.</div>
+          </div>
+
+          <button class="btn btn-outline" style="margin-top: 12px;" onclick="closePanicModal()">Cancelar</button>
+        </div>
+
+        <div id="panicStep2" style="display: none; text-align: center;">
+          <h2 style="font-size: 18px; color: var(--panic); font-weight: 800;">ACTIVANDO SEÑAL DE SOCORRO</h2>
+          <p style="font-size: 12px; color: var(--on-surface-variant); margin-top: 4px;">
+            La baliza BLE, linterna y tono acústico comenzarán en:
+          </p>
+
+          <div class="countdown-circle" id="countdownVal">3</div>
+
+          <p style="font-size: 12px; color: #666; margin-bottom: 24px;">Si presionaste por error, puedes cancelar ahora:</p>
+          <button class="btn btn-danger" onclick="cancelPanicCountdown()">Cancelar pánico accidental</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Side Control Panel: DevScenarios (SA-008 & JD-E2) -->
+    <div class="side-panel">
+      <h3>🛠️ DevScenarios (Simulador de Mocks)</h3>
+      <p style="font-size: 12px; color: #9AA0A6; margin-bottom: 14px;">
+        Activa y desactiva condiciones en memoria para verificar cómo responde la UI en tiempo real:
+      </p>
+
+      <div class="scenario-toggle" onclick="toggleScenario('sismo_detectado')" id="sc_sismo_detectado">
+        <div>
+          <h5>Sismo Detectado (>0.03g)</h5>
+          <p>Dispara alerta sísmica por acelerómetro</p>
+        </div>
+        <span class="badge-tag">OFF</span>
+      </div>
+
+      <div class="scenario-toggle" onclick="toggleScenario('mesh_5_nodos')" id="sc_mesh_5_nodos">
+        <div>
+          <h5>Malla con 5 Nodos</h5>
+          <p>Simula 5 dispositivos cercanos en rango BLE</p>
+        </div>
+        <span class="badge-tag">OFF</span>
+      </div>
+
+      <div class="scenario-toggle" onclick="toggleScenario('bluetooth_apagado')" id="sc_bluetooth_apagado">
+        <div>
+          <h5>Bluetooth Apagado</h5>
+          <p>Simula fallo de radiofrecuencia BLE</p>
+        </div>
+        <span class="badge-tag">OFF</span>
+      </div>
+
+      <div class="scenario-toggle" onclick="toggleScenario('bateria_15')" id="sc_bateria_15">
+        <div>
+          <h5>Batería 15% (Ahorro)</h5>
+          <p>Activa ráfagas de auxilio espaciadas</p>
+        </div>
+        <span class="badge-tag">OFF</span>
+      </div>
+
+      <div class="scenario-toggle" onclick="toggleScenario('offline_total')" id="sc_offline_total">
+        <div>
+          <h5>Modo Avión / Offline Total</h5>
+          <p>Desconecta redes celulares y Wi-Fi</p>
+        </div>
+        <span class="badge-tag">OFF</span>
+      </div>
+
+      <div class="scenario-toggle" onclick="toggleScenario('contenido_corrupto')" id="sc_contenido_corrupto">
+        <div>
+          <h5>Contenido Corrupto</h5>
+          <p>Simula error CONTENT_CORRUPT en guías</p>
+        </div>
+        <span class="badge-tag">OFF</span>
+      </div>
+
+      <button class="btn btn-outline" style="margin-top: 14px; border-color: #6CDD8D; color: #6CDD8D;" onclick="resetScenarios()">
+        Restablecer Mocks
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    // State of the application simulator (matches src/contracts)
+    const state = {
+      activeTab: 'home',
+      activeScenarios: new Set(),
+      emergency: {
+        phase: 'IDLE', // IDLE | CONFIRMING | ACTIVE | STOPPED
+        severity: null,
+        beaconActive: false,
+        lowPower: false,
+      },
+      sync: {
+        online: true,
+        pending: 0,
+      },
+      guides: [
+        { id: 'mochila-emergencia', title: 'Mochila de Emergencia (72 Horas)', category: 'MOCHILA', readMin: 4 },
+        { id: 'aseguramiento-estructural', title: 'Aseguramiento No Estructural', category: 'ESTRUCTURAL', readMin: 5 },
+        { id: 'plan-familiar', title: 'Plan Familiar de Emergencia', category: 'PLAN_FAMILIAR', readMin: 4 },
+        { id: 'durante-el-sismo', title: 'Qué Hacer Durante el Sismo', category: 'OTRO', readMin: 3 },
+        { id: 'despues-del-sismo', title: 'Qué Hacer Después del Sismo', category: 'OTRO', readMin: 4 }
+      ],
+      quiz: {
+        questions: [
+          {
+            id: 'q1',
+            text: '¿Cuál es la acción inmediata recomendada durante un sismo si estás en interiores?',
+            options: [
+              'Correr rápidamente hacia la calle',
+              'Agacharse, cubrirse bajo un mueble resistente y agarrarse',
+              'Ubicarse debajo del marco de una puerta',
+              'Tomar el ascensor para evacuar rápido'
+            ],
+            correct: 1,
+            explanation: 'El protocolo Agáchate, Cúbrete y Agárrate previene traumas por caída de objetos.',
+            protocol: 'UNGRD - Autoprotección'
+          },
+          {
+            id: 'q2',
+            text: '¿Para cuántas horas de autonomía mínima debe estar preparada la mochila de emergencia?',
+            options: ['12 horas', '24 horas', '72 horas', '1 semana'],
+            correct: 2,
+            explanation: '72 horas es el estándar internacional para autonomía familiar post-desastre.',
+            protocol: 'Cruz Roja Colombiana'
+          }
+        ],
+        currentQ: 0,
+        score: 0,
+        answered: false,
+        selectedOption: null
+      },
+      audioTone: null,
+      audioCtx: null
+    };
+
+    // Update real clock in status bar
+    function updateClock() {
+      const now = new Date();
+      const hrs = String(now.getHours()).padStart(2, '0');
+      const min = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('currentTime').textContent = `${hrs}:${min}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Navigation
+    function navigate(tab) {
+      state.activeTab = tab;
+      document.querySelectorAll('.tab-item').forEach((el, idx) => {
+        el.classList.remove('active');
+      });
+      const tabMap = { home: 0, prevention: 1, quiz: 2, map: 3, profile: 4 };
+      if (tabMap[tab] !== undefined) {
+        document.querySelectorAll('.tab-item')[tabMap[tab]].classList.add('active');
+      }
+      renderScreen();
+    }
+
+    // DevScenario Toggles
+    function toggleScenario(id) {
+      if (state.activeScenarios.has(id)) {
+        state.activeScenarios.delete(id);
+      } else {
+        state.activeScenarios.add(id);
+      }
+      updateScenarioUI();
+      applyScenariosToState();
+      renderScreen();
+    }
+
+    function resetScenarios() {
+      state.activeScenarios.clear();
+      updateScenarioUI();
+      applyScenariosToState();
+      renderScreen();
+    }
+
+    function updateScenarioUI() {
+      const ids = ['sismo_detectado', 'mesh_5_nodos', 'bluetooth_apagado', 'bateria_15', 'offline_total', 'contenido_corrupto'];
+      ids.forEach(id => {
+        const el = document.getElementById(`sc_${id}`);
+        if (!el) return;
+        const isActive = state.activeScenarios.has(id);
+        el.classList.toggle('active', isActive);
+        el.querySelector('.badge-tag').textContent = isActive ? 'ON' : 'OFF';
+      });
+    }
+
+    function applyScenariosToState() {
+      state.sync.online = !state.activeScenarios.has('offline_total');
+      state.emergency.lowPower = state.activeScenarios.has('bateria_15');
+      
+      const batEl = document.getElementById('batteryPill');
+      batEl.textContent = state.emergency.lowPower ? '🪫 15%' : '🔋 85%';
+
+      const bleEl = document.getElementById('bleIcon');
+      bleEl.textContent = state.activeScenarios.has('bluetooth_apagado') ? '⚪ BLE OFF' : '🔵 BLE';
+      bleEl.style.opacity = state.activeScenarios.has('bluetooth_apagado') ? '0.4' : '1';
+    }
+
+    // Audio & Flash Simulation (RF-06)
+    function startAudioTone() {
+      try {
+        if (!state.audioCtx) {
+          state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        const osc = state.audioCtx.createOscillator();
+        const gain = state.audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(3000, state.audioCtx.currentTime); // 3 kHz rescue frequency
+        gain.gain.setValueAtTime(0.2, state.audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(state.audioCtx.destination);
+        osc.start();
+        state.audioTone = { osc, gain };
+      } catch (e) {
+        console.warn('Audio Tone blocked or unsupported:', e);
+      }
+    }
+
+    function stopAudioTone() {
+      if (state.audioTone) {
+        try {
+          state.audioTone.osc.stop();
+        } catch (e) {}
+        state.audioTone = null;
+      }
+    }
+
+    // Panic Flow (2 Touches)
+    function openPanicModal() {
+      if (state.emergency.phase === 'ACTIVE') {
+        renderScreen();
+        return;
+      }
+      document.getElementById('panicStep1').style.display = 'block';
+      document.getElementById('panicStep2').style.display = 'none';
+      document.getElementById('panicModal').classList.add('active');
+    }
+
+    function closePanicModal() {
+      document.getElementById('panicModal').classList.remove('active');
+    }
+
+    let countdownTimer = null;
+    function selectSeverity(sev) {
+      state.emergency.severity = sev;
+      state.emergency.phase = 'CONFIRMING';
+      
+      document.getElementById('panicStep1').style.display = 'none';
+      document.getElementById('panicStep2').style.display = 'block';
+
+      let count = 3;
+      document.getElementById('countdownVal').textContent = count;
+
+      countdownTimer = setInterval(() => {
+        count--;
+        if (count > 0) {
+          document.getElementById('countdownVal').textContent = count;
+        } else {
+          clearInterval(countdownTimer);
+          activateEmergency();
+        }
+      }, 1000);
+    }
+
+    function cancelPanicCountdown() {
+      if (countdownTimer) clearInterval(countdownTimer);
+      state.emergency.phase = 'IDLE';
+      state.emergency.severity = null;
+      closePanicModal();
+      renderScreen();
+    }
+
+    function activateEmergency() {
+      closePanicModal();
+      state.emergency.phase = 'ACTIVE';
+      state.emergency.beaconActive = true;
+      document.getElementById('deviceFrame').classList.add('strobe-active');
+      startAudioTone();
+      renderScreen();
+    }
+
+    function stopEmergency() {
+      if (confirm('¿Detener señal de auxilio? Se desactivará la baliza BLE, linterna y tono acústico.')) {
+        document.getElementById('deviceFrame').classList.remove('strobe-active');
+        stopAudioTone();
+        state.emergency.phase = 'IDLE';
+        state.emergency.beaconActive = false;
+        renderScreen();
+      }
+    }
+
+    // Render screen according to activeTab
+    function renderScreen() {
+      const container = document.getElementById('screenContent');
+      const isOnline = state.sync.online;
+      const isEmergency = state.emergency.phase === 'ACTIVE';
+      const hasSeismicAlert = state.activeScenarios.has('sismo_detectado');
+
+      if (isEmergency) {
+        // ACTIVE EMERGENCY SCREEN
+        const nodeCount = state.activeScenarios.has('mesh_5_nodos') ? 5 : 2;
+        container.innerHTML = `
+          <div style="background: var(--panic); color: #fff; padding: 6px 12px; border-radius: var(--radius-sm); text-align: center; font-weight: 700; font-size: 13px; margin-bottom: 12px; letter-spacing: 1px;">
+            EMERGENCIA ACTIVADA (${state.emergency.severity})
+          </div>
+
+          <div class="card" style="border: 2px solid var(--panic); background: var(--panic-container);">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="display: inline-block; width: 12px; height: 12px; background: var(--panic); border-radius: 50%;"></span>
+              <h4 style="color: var(--panic);">Baliza BLE Transmitiendo</h4>
+            </div>
+            <p style="font-size: 12px; color: var(--on-panic-container); margin-top: 6px;">
+              Paquetes de radiofrecuencia activos cada 250 ms. Radio estimado de 30 metros.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h4>📡 Red Comunitaria Cercana</h4>
+              <p style="font-size: 20px; font-weight: 800; color: var(--primary); margin: 4px 0;">
+                ${nodeCount} dispositivos detectados
+              </p>
+              <p>Tu baliza está siendo retransmitida de teléfono en teléfono por la malla P2P.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <h4>⚡ Señalización RF-06</h4>
+              <p>Linterna en modo estroboscópico a 4 Hz y tono acústico de rescate a 3 kHz emitiendo.</p>
+            </div>
+          </div>
+
+          <button class="btn btn-danger" style="margin-top: auto; margin-bottom: 10px;" onclick="stopEmergency()">
+            Detener Señal de Emergencia
+          </button>
+        `;
+        return;
+      }
+
+      // NORMAL SCREENS
+      if (state.activeTab === 'home') {
+        container.innerHTML = `
+          <div class="pill-row">
+            <div class="pill ${isOnline ? 'pill-online' : 'pill-offline'}">
+              <span class="pill-dot"></span>
+              ${isOnline ? 'En Línea' : 'Sin Conexión (Offline)'}
+            </div>
+            ${state.emergency.lowPower ? '<div class="pill pill-power"><span class="pill-dot"></span>Ahorro (&lt;20%)</div>' : ''}
+            ${state.emergency.beaconActive ? '<div class="pill pill-beacon"><span class="pill-dot"></span>Baliza Activa</div>' : ''}
+          </div>
+
+          ${hasSeismicAlert ? `
+            <div class="alert-banner seismic">
+              <div class="alert-banner-text">
+                <h4>⚠️ ¡POSIBLE SISMO DETECTADO!</h4>
+                <p>Aceleración brusca registrada. Agáchate, Cúbrete y Agárrate.</p>
+              </div>
+            </div>
+          ` : ''}
+
+          <div class="panic-container">
+            <h3 style="font-size: 22px; font-weight: 800; color: #1A1C1E;">EarthQuakeTracker</h3>
+            <p style="font-size: 13px; color: var(--on-surface-variant); margin-top: 4px;">
+              En caso de sismo violento o atrapamiento, presiona para auxilio:
+            </p>
+
+            <div class="panic-btn-wrapper">
+              <div class="panic-halo"></div>
+              <button class="panic-button" onclick="openPanicModal()">
+                PÁNICO
+                <span>TOCA PARA AUXILIO</span>
+              </button>
+            </div>
+          </div>
+
+          <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 8px;">Módulos del Sistema</h4>
+
+          <div class="card" onclick="navigate('prevention')">
+            <span class="card-icon">📚</span>
+            <div class="card-body">
+              <h4>Antes: Prevención y Guías Offline</h4>
+              <p>Mochila 72h, aseguramiento estructural y plan familiar.</p>
+            </div>
+          </div>
+
+          <div class="card" onclick="navigate('quiz')">
+            <span class="card-icon">🎯</span>
+            <div class="card-body">
+              <h4>Evaluación y Cuestionarios</h4>
+              <p>Pon a prueba tus conocimientos y desbloquea insignias.</p>
+            </div>
+          </div>
+
+          <div class="card" onclick="navigate('map')">
+            <span class="card-icon">🗺️</span>
+            <div class="card-body">
+              <h4>Mapa de Socorro de Bogotá</h4>
+              <p>Albergues, zonas seguras y estaciones de bomberos sin red.</p>
+            </div>
+          </div>
+        `;
+      } else if (state.activeTab === 'prevention') {
+        const isCorrupt = state.activeScenarios.has('contenido_corrupto');
+
+        if (isCorrupt) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 30px 10px;">
+              <span style="font-size: 48px;">⚠️</span>
+              <h3 style="color: var(--panic); margin: 12px 0 6px 0;">Error en paquete educativo</h3>
+              <p style="font-size: 13px; color: var(--on-surface-variant); margin-bottom: 20px;">
+                Los archivos de las guías sufrieron un error de integridad (CONTENT_CORRUPT).
+              </p>
+              <button class="btn btn-primary" onclick="toggleScenario('contenido_corrupto')">Restaurar guías originales</button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 4px;">Guías Educativas Offline</h3>
+          <p style="font-size: 12px; color: var(--on-surface-variant); margin-bottom: 12px;">Protocolos oficiales de la UNGRD y Cruz Roja Colombiana.</p>
+
+          ${state.guides.map(g => `
+            <div class="card" onclick="alert('Abriendo guía: ${g.title}\\n\\nTiempo estimado: ${g.readMin} min\\nCategoría: ${g.category}\\n\\nDisponible 100% offline.')">
+              <span class="card-icon">📖</span>
+              <div class="card-body" style="flex: 1;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--primary); background: var(--primary-container); padding: 2px 6px; border-radius: 4px;">${g.category}</span>
+                  <span style="font-size: 11px; color: #888;">⏱️ ${g.readMin} min</span>
+                </div>
+                <h4 style="margin-top: 4px;">${g.title}</h4>
+              </div>
+            </div>
+          `).join('')}
+        `;
+      } else if (state.activeTab === 'quiz') {
+        const q = state.quiz.questions[state.quiz.currentQ];
+        container.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <h3 style="font-size: 16px; font-weight: 700;">Cuestionario Nivel 1</h3>
+            <span style="font-size: 12px; font-weight: 600; color: var(--primary);">Pregunta ${state.quiz.currentQ + 1} de ${state.quiz.questions.length}</span>
+          </div>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <p style="font-size: 14px; font-weight: 600; color: var(--on-surface); line-height: 20px;">
+              ${q.text}
+            </p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            ${q.options.map((opt, idx) => `
+              <button 
+                class="btn ${state.quiz.answered ? (idx === q.correct ? 'btn-primary' : (idx === state.quiz.selectedOption ? 'btn-danger' : 'btn-outline')) : 'btn-outline'}" 
+                style="justify-content: flex-start; text-align: left; font-size: 13px;"
+                ${state.quiz.answered ? 'disabled' : ''}
+                onclick="answerQuiz(${idx})"
+              >
+                ${String.fromCharCode(65 + idx)}. ${opt}
+              </button>
+            `).join('')}
+          </div>
+
+          ${state.quiz.answered ? `
+            <div class="card" style="margin-top: 16px; border-left: 4px solid ${state.quiz.selectedOption === q.correct ? 'var(--success)' : 'var(--panic)'};">
+              <div class="card-body">
+                <h4>${state.quiz.selectedOption === q.correct ? '✅ ¡Correcto!' : '❌ Respuesta incorrecta'}</h4>
+                <p style="font-size: 12px; margin-top: 4px;">${q.explanation}</p>
+                <p style="font-size: 10px; color: #888; margin-top: 4px; font-style: italic;">Fuente: ${q.protocol}</p>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="margin-top: 12px;" onclick="nextQuizQuestion()">
+              ${state.quiz.currentQ + 1 < state.quiz.questions.length ? 'Siguiente Pregunta →' : 'Finalizar Cuestionario'}
+            </button>
+          ` : ''}
+        `;
+      } else if (state.activeTab === 'map') {
+        const hasNoMap = state.activeScenarios.has('sin_mapa_cacheado');
+
+        if (hasNoMap) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 40px 10px;">
+              <span style="font-size: 48px;">🗺️</span>
+              <h3 style="color: var(--panic); margin: 12px 0 6px 0;">Mapa no descargado</h3>
+              <p style="font-size: 13px; color: var(--on-surface-variant); margin-bottom: 20px;">
+                No tienes guardado el paquete vectorial de Bogotá para navegar sin internet.
+              </p>
+              <button class="btn btn-primary" onclick="toggleScenario('sin_mapa_cacheado')">Descargar Mapa de Bogotá (48 MB)</button>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <h3 style="font-size: 16px; font-weight: 700;">Mapa Offline Bogotá</h3>
+            <span style="font-size: 11px; background: var(--success-container); color: var(--on-success-container); padding: 2px 6px; border-radius: 4px; font-weight: 700;">MBTiles OK</span>
+          </div>
+
+          <div style="width: 100%; height: 220px; background: #e0e8f0; border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; border: 1px solid var(--outline-variant); margin-bottom: 12px;">
+            <div style="position: absolute; top: 10px; left: 10px; font-size: 11px; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; font-weight: 600;">
+              📍 Tu posición: Chapinero (4.648, -74.062)
+            </div>
+            <span style="font-size: 40px;">🗺️</span>
+            <span style="font-size: 12px; color: #555; margin-top: 4px; font-weight: 600;">MapLibre Native (Offline Vector)</span>
+          </div>
+
+          <h4 style="font-size: 13px; font-weight: 700; margin-bottom: 6px;">Puntos de Socorro Cercanos:</h4>
+
+          <div class="card" onclick="alert('Albergue El Salitre\\nCalle 63 # 68-45\\nDistancia: 1.2 km\\nCapacidad estimada: 400 personas.')">
+            <span class="card-icon">⛺</span>
+            <div class="card-body">
+              <h4>Albergue Coliseo El Salitre</h4>
+              <p>A 1.2 km · Capacidad activa · Calle 63 # 68-45</p>
+            </div>
+          </div>
+
+          <div class="card" onclick="alert('Estación Bomberos B-1\\nCalle 22 # 5-68\\nDistancia: 2.1 km\\nLínea directa: 119.')">
+            <span class="card-icon">🚒</span>
+            <div class="card-body">
+              <h4>Bomberos Bogotá Central B-1</h4>
+              <p>A 2.1 km · Búsqueda y rescate · Tel: 119</p>
+            </div>
+          </div>
+        `;
+      } else if (state.activeTab === 'profile') {
+        container.innerHTML = `
+          <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">Mi Perfil y Ficha Médica</h3>
+
+          <div class="card" style="border-left: 4px solid var(--primary);">
+            <div class="card-body">
+              <h4>Santiago Gonzalez</h4>
+              <p>santiagosgg23@gmail.com · Cuenta local segura</p>
+            </div>
+          </div>
+
+          <h4 style="font-size: 14px; font-weight: 700; margin: 12px 0 6px 0;">Ficha Médica Cifrada (SQLCipher)</h4>
+
+          <div class="card">
+            <div class="card-body">
+              <p style="font-size: 13px;">🩸 <strong>Grupo sanguíneo:</strong> O+</p>
+              <p style="font-size: 13px; margin-top: 4px;">⚠️ <strong>Alergias:</strong> Penicilina</p>
+              <p style="font-size: 13px; margin-top: 4px;">💊 <strong>Medicamento:</strong> Losartán 50mg</p>
+              <p style="font-size: 13px; margin-top: 4px;">📞 <strong>Contacto SOS:</strong> Maria Gonzalez (+57 310 1234567)</p>
+            </div>
+          </div>
+
+          <button class="btn btn-outline" style="margin-top: 10px;" onclick="alert('Simulación: Ficha médica protegida con clave derivada en Keystore/Keychain.')">
+            Editar Ficha Médica
+          </button>
+        `;
+      }
+    }
+
+    function answerQuiz(idx) {
+      if (state.quiz.answered) return;
+      state.quiz.answered = true;
+      state.quiz.selectedOption = idx;
+      const q = state.quiz.questions[state.quiz.currentQ];
+      if (idx === q.correct) {
+        state.quiz.score++;
+      }
+      renderScreen();
+    }
+
+    function nextQuizQuestion() {
+      if (state.quiz.currentQ + 1 < state.quiz.questions.length) {
+        state.quiz.currentQ++;
+        state.quiz.answered = false;
+        state.quiz.selectedOption = null;
+        renderScreen();
+      } else {
+        alert(`¡Cuestionario finalizado!\\n\\nPuntuación: ${state.quiz.score} de ${state.quiz.questions.length}\\nInsignia ganada: NIVEL 1 COMPLETADO 🏆`);
+        state.quiz.currentQ = 0;
+        state.quiz.score = 0;
+        state.quiz.answered = false;
+        state.quiz.selectedOption = null;
+        navigate('home');
+      }
+    }
+
+    // Initial render
+    renderScreen();
+  </script>
+</body>
+</html>
