@@ -15,6 +15,7 @@ export class MockDevScenarioController implements DevScenarioController {
     { id: 'sin_sensores', title: 'Sin Acelerómetro', description: 'Simula hardware sin soporte de sensores de movimiento (NO_SENSORS)' },
     { id: 'sin_mapa_cacheado', title: 'Sin Mapa Cacheado', description: 'Simula ausencia de MBTiles locales activando estado MAP_NOT_CACHED' },
     { id: 'offline_total', title: 'Modo Avión / Offline Total', description: 'Desconecta toda interfaz de red simulando zona de catástrofe' },
+    { id: 'sin_puente_2min', title: 'Sin Puente 2 Min (SMS Fallback)', description: 'Simula 2 min sin nodos puente en la malla BLE activando SMS prellenado (D-25)' },
   ];
 
   private activeIds: Set<string> = new Set();

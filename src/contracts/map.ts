@@ -11,6 +11,8 @@ export interface Poi {
   address?: string;
   phone?: string;
   active: boolean;
+  source?: string;
+  verified?: boolean;
 }
 
 export interface NearestPoi extends Poi {

@@ -332,6 +332,34 @@
         <span class="tag-badge">OFF</span>
       </div>
 
+      <div class="scenario-card" id="sc_sin_puente_2min" onclick="triggerScenarioToggle('sin_puente_2min')">
+        <div>
+          <div class="text-xs font-bold text-white">Sin Puente 2 Min (SMS Fallback D-25)</div>
+          <div class="text-[11px] text-[#A89C91]">Habilita envío de SMS de emergencia prellenado</div>
+        </div>
+        <span class="tag-badge">OFF</span>
+      </div>
+
+      <!-- Backend Fastify Live Status Panel -->
+      <div class="mt-3 p-3 bg-[#1C1815] rounded-xl border border-[#3F3730] text-xs">
+        <div class="font-bold text-[#DAC2B2] mb-1.5 flex items-center justify-between">
+          <span class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px] text-[#D47A22]">dns</span>
+            <span>Backend Fastify (JD)</span>
+          </span>
+          <span id="backendStatusBadge" class="text-[10px] bg-amber-950 text-amber-300 border border-amber-800 px-1.5 py-0.5 rounded font-mono">
+            Verificando...
+          </span>
+        </div>
+        <p class="text-[11px] text-[#80756E] leading-relaxed mb-2">
+          Sincronización dual: Consulta <code>:3000/v1/...</code> o conmuta a semillas locales (RF-10, RF-11).
+        </p>
+        <button onclick="checkBackendConnection(true)" class="w-full py-1.5 px-2 bg-[#2F2A26] hover:bg-[#3D3732] text-xs text-[#E2D5C3] font-bold rounded-lg border border-[#4D453E] flex items-center justify-center gap-1.5 active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-[14px]">sync</span>
+          <span>Sincronizar con Backend</span>
+        </button>
+      </div>
+
       <!-- Audio Tone Controller Info -->
       <div class="mt-4 p-3 bg-[#1C1815] rounded-xl border border-[#3F3730] text-xs">
         <div class="font-bold text-[#DAC2B2] mb-1 flex items-center gap-1">
@@ -347,7 +375,7 @@
   </div>
 
   <script>
-    // State store connected to contracts
+    // State store connected to contracts and backend seed catalogs
     const appState = {
       currentTab: 'inicio',
       scenarios: new Set(),
@@ -362,8 +390,136 @@
       quizStep: 0,
       quizScore: 0,
       quizAnswered: false,
-      selectedOption: null
+      selectedOption: null,
+      poiFilter: 'TODOS',
+      backendOnline: false,
+      userLocation: { lat: 4.60971, lon: -74.08175 },
+      officialPois: [
+        { id: 'poi-salud-001', type: 'SALUD', name: 'Hospital Universitario San Ignacio', lat: 4.6295, lon: -74.0655, address: 'Carrera 7 # 40-62, Bogotá', phone: '+57 1 5946161', active: true, source: 'Secretaría Distrital de Salud de Bogotá' },
+        { id: 'poi-salud-002', type: 'SALUD', name: 'Hospital Universitario Fundación Santa Fe de Bogotá', lat: 4.6934, lon: -74.0326, address: 'Calle 119 # 7-75, Bogotá', phone: '+57 1 6030303', active: true, source: 'Secretaría Distrital de Salud de Bogotá' },
+        { id: 'poi-salud-003', type: 'SALUD', name: 'Hospital de San José (Centro)', lat: 4.6045, lon: -74.0845, address: 'Calle 10 # 18-75, Bogotá', phone: '+57 1 3538000', active: true, source: 'Secretaría Distrital de Salud de Bogotá' },
+        { id: 'poi-salud-004', type: 'SALUD', name: 'Hospital Simón Bolívar (Subred Norte)', lat: 4.7439, lon: -74.0328, address: 'Calle 165 # 7-06, Bogotá', phone: '+57 1 6743322', active: true, source: 'Secretaría Distrital de Salud de Bogotá' },
+        { id: 'poi-salud-005', type: 'SALUD', name: 'Hospital El Tunal (Subred Sur)', lat: 4.5772, lon: -74.1378, address: 'Carrera 20 # 47B-35 Sur, Bogotá', phone: '+57 1 7428570', active: true, source: 'Secretaría Distrital de Salud de Bogotá' },
+        { id: 'poi-salud-006', type: 'SALUD', name: 'Hospital Occidente de Kennedy (Subred Sur Occidente)', lat: 4.6278, lon: -74.1528, address: 'Transversal 74F # 40B-54 Sur, Bogotá', phone: '+57 1 4480030', active: true, source: 'Secretaría Distrital de Salud de Bogotá' },
+        { id: 'poi-bomberos-001', type: 'BOMBEROS', name: 'Estación de Bomberos B-1 Chapinero', lat: 4.6483, lon: -74.0622, address: 'Calle 60 # 9-43, Bogotá', phone: '119', active: true, source: 'Cuerpo Oficial de Bomberos de Bogotá' },
+        { id: 'poi-bomberos-002', type: 'BOMBEROS', name: 'Estación de Bomberos B-2 Central (Puente Aranda)', lat: 4.6212, lon: -74.0955, address: 'Calle 22 # 5-68, Bogotá', phone: '119', active: true, source: 'Cuerpo Oficial de Bomberos de Bogotá' },
+        { id: 'poi-bomberos-003', type: 'BOMBEROS', name: 'Estación de Bomberos B-5 Kennedy', lat: 4.6225, lon: -74.1512, address: 'Avenida Primero de Mayo # 41-15 Sur, Bogotá', phone: '119', active: true, source: 'Cuerpo Oficial de Bomberos de Bogotá' },
+        { id: 'poi-bomberos-004', type: 'BOMBEROS', name: 'Estación de Bomberos B-9 Bellavista (Usaquén)', lat: 4.7456, lon: -74.0298, address: 'Carrera 7 # 166-01, Bogotá', phone: '119', active: true, source: 'Cuerpo Oficial de Bomberos de Bogotá' },
+        { id: 'poi-bomberos-005', type: 'BOMBEROS', name: 'Estación de Bomberos B-11 Restrepo (Antonio Nariño)', lat: 4.5826, lon: -74.1035, address: 'Calle 18 Sur # 18-40, Bogotá', phone: '119', active: true, source: 'Cuerpo Oficial de Bomberos de Bogotá' },
+        { id: 'poi-albergue-001', type: 'ALBERGUE', name: 'Coliseo El Salitre (Unidad Deportiva El Salitre)', lat: 4.6611, lon: -74.0898, address: 'Calle 63 # 68-45, Bogotá', phone: '+57 1 6605000', active: true, source: 'Instituto Distrital de Recreación y Deporte (IDRD)' },
+        { id: 'poi-albergue-002', type: 'ALBERGUE', name: 'Movistar Arena Bogotá (Complejo El Campín)', lat: 4.6489, lon: -74.0778, address: 'Diagonal 61C # 26-36, Bogotá', active: true, source: 'Alcaldía Mayor de Bogotá' },
+        { id: 'poi-albergue-003', type: 'ALBERGUE', name: 'Coliseo Cayetano Cañizares (Kennedy)', lat: 4.6186, lon: -74.1611, address: 'Carrera 80 # 40-55 Sur, Bogotá', active: true, source: 'Instituto Distrital de Recreación y Deporte (IDRD)' },
+        { id: 'poi-albergue-004', type: 'ALBERGUE', name: 'Palacio de los Deportes de Bogotá', lat: 4.6565, lon: -74.0855, address: 'Avenida Calle 63 # 59A-06, Bogotá', active: true, source: 'Instituto Distrital de Recreación y Deporte (IDRD)' },
+        { id: 'poi-zona-segura-001', type: 'ZONA_SEGURA', name: 'Parque Metropolitano Simón Bolívar', lat: 4.6582, lon: -74.0935, address: 'Calle 63 y 53 entre carreras 48 y 68, Bogotá', active: true, source: 'IDIGER' },
+        { id: 'poi-zona-segura-002', type: 'ZONA_SEGURA', name: 'Parque Metropolitano El Tunal', lat: 4.5735, lon: -74.1345, address: 'Calle 48B Sur y Avenida Boyacá, Bogotá', active: true, source: 'IDIGER' },
+        { id: 'poi-zona-segura-003', type: 'ZONA_SEGURA', name: 'Parque de la 93', lat: 4.6766, lon: -74.0535, address: 'Carrera 11A # 93A-46, Bogotá', active: true, source: 'IDIGER' },
+        { id: 'poi-zona-segura-004', type: 'ZONA_SEGURA', name: 'Plaza de Bolívar (Centro Histórico)', lat: 4.5981, lon: -74.076, address: 'Carrera 7 # 11-10, Bogotá', active: true, source: 'Alcaldía Mayor de Bogotá' },
+        { id: 'poi-acopio-001', type: 'ACOPIO', name: 'Plaza de los Artesanos (Centro de Acopio)', lat: 4.6628, lon: -74.0825, address: 'Carrera 60 # 63A-52, Bogotá', phone: '+57 1 3693777', active: true, source: 'Secretaría Distrital de Desarrollo Económico' }
+      ],
+      officialEntities: [
+        { id: 'defensa-civil-colombiana', name: 'Defensa Civil Colombiana', kind: 'SOCORRO', description: 'Institución social y humanitaria para la gestión del riesgo de desastres y acción social.', tel: '144', url: 'https://www.defensacivil.gov.co' },
+        { id: 'ungrd', name: 'Unidad Nacional para la Gestión del Riesgo (UNGRD)', kind: 'GOBIERNO', description: 'Coordinador del Sistema Nacional de Gestión del Riesgo de Desastres.', url: 'https://portal.gestiondelriesgo.gov.co' },
+        { id: 'cruz-roja-colombiana', name: 'Cruz Roja Colombiana', kind: 'SOCORRO', description: 'Atención humanitaria de socorro, prehospitalaria y voluntariado nacional.', tel: '132', url: 'https://www.cruzrojacolombiana.org' },
+        { id: 'idiger', name: 'Instituto Distrital de Gestión de Riesgos (IDIGER)', kind: 'GOBIERNO', description: 'Entidad distrital técnica coordinadora de emergencias en Bogotá D.C.', tel: '123', url: 'https://www.idiger.gov.co' }
+      ],
+      officialNeeds: [
+        { id: 'need-agua-potable', category: 'VIVERES', label: 'Agua potable embotellada o en bolsa', urgency: 'ALTA', icon: '💧' },
+        { id: 'need-alimentos-no-perecederos', category: 'VIVERES', label: 'Alimentos no perecederos y enlatados con abrelatas', urgency: 'ALTA', icon: '🥫' },
+        { id: 'need-primeros-auxilios', category: 'SALUD', label: 'Kits de primeros auxilios y material de curación estéril', urgency: 'ALTA', icon: '🩹' },
+        { id: 'need-medicamentos-esenciales', category: 'SALUD', label: 'Medicamentos esenciales (analgésicos, antisépticos y sueros)', urgency: 'ALTA', icon: '💊' },
+        { id: 'need-kit-higiene', category: 'HIGIENE', label: 'Kits de higiene personal (jabón, toallas higiénicas y pañales)', urgency: 'MEDIA', icon: '🧼' },
+        { id: 'need-cobijas-colchonetas', category: 'ABRIGO', label: 'Cobijas térmicas, frazadas y colchonetas livianas', urgency: 'MEDIA', icon: '🛏️' },
+        { id: 'need-linternas-baterias', category: 'EQUIPAMIENTO', label: 'Linternas recargables o LED con baterías AA/AAA', urgency: 'MEDIA', icon: '🔦' },
+        { id: 'need-ropa-impermeable', category: 'ABRIGO', label: 'Ropa impermeable y abrigada en buen estado', urgency: 'BAJA', icon: '🧥' }
+      ]
     };
+
+    // Geographic distance calculation
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371e3;
+      const phi1 = (lat1 * Math.PI) / 180;
+      const phi2 = (lat2 * Math.PI) / 180;
+      const dPhi = ((lat2 - lat1) * Math.PI) / 180;
+      const dLam = ((lon2 - lon1) * Math.PI) / 180;
+      const a = Math.sin(dPhi / 2) * Math.sin(dPhi / 2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(dLam / 2) * Math.sin(dLam / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const d = R * c;
+      return d < 1000 ? Math.round(d) + ' m' : (d / 1000).toFixed(1) + ' km';
+    }
+
+    function getDistanceMeters(lat1, lon1, lat2, lon2) {
+      const dLat = (lat2 - lat1) * 111320;
+      const dLon = (lon2 - lon1) * 40075000 * Math.cos((lat1 * Math.PI) / 180) / 360;
+      return Math.sqrt(dLat * dLat + dLon * dLon);
+    }
+
+    // SMS Prellenado Fallback (D-25)
+    function sendPreloadedSms() {
+      const sev = appState.emergency.severity;
+      const pos = appState.userLocation;
+      const msg = `SOS! Sismo Bogotá. Lat: ${pos.lat.toFixed(5)}, Lon: ${pos.lon.toFixed(5)}. Estado: ${sev}. Sangre: O+. Contactos: Maria G. +573101234567. Reenviar a socorristas.`;
+      
+      const copyPrompt = confirm(`📱 ENVÍO SMS DE EMERGENCIA (D-25 Fallback)\\n\\nDestinatario: 123 (Línea de Emergencias) / Contactos familiares\\n\\nMensaje prellenado:\\n"${msg}"\\n\\n¿Deseas simular el envío y copiar el texto al portapapeles?`);
+      
+      if (copyPrompt) {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(msg).catch(() => {});
+        }
+        alert('✅ SMS enviado al subsistema de telefonía celular. Mensaje copiado al portapapeles para reenvío inmediato.');
+      }
+    }
+
+    // Live connection checker with Fastify backend (:3000)
+    async function checkBackendConnection(manual = false) {
+      const badge = document.getElementById('backendStatusBadge');
+      if (badge) {
+        badge.innerHTML = '<span class="inline-block animate-spin mr-1">↻</span> Conectando...';
+        badge.className = 'text-[10px] bg-[#3F3730] text-[#E2D5C3] border border-[#554B42] px-1.5 py-0.5 rounded font-mono';
+      }
+      try {
+        const res = await fetch('http://localhost:3000/v1/health', { signal: AbortSignal.timeout(2500) });
+        if (res.ok) {
+          appState.backendOnline = true;
+          if (badge) {
+            badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1"></span> Conectado (:3000)';
+            badge.className = 'text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800 px-1.5 py-0.5 rounded font-mono';
+          }
+          try {
+            const poisRes = await fetch('http://localhost:3000/v1/pois');
+            if (poisRes.ok) {
+              const data = await poisRes.json();
+              if (data.items && data.items.length) {
+                appState.officialPois = data.items;
+              }
+            }
+          } catch(e) {}
+          if (manual) alert('✅ Conexión exitosa con el backend Fastify (puerto 3000). Catálogos sincronizados desde el servidor.');
+          renderCurrentScreen();
+          return;
+        }
+      } catch (e) {}
+      appState.backendOnline = false;
+      if (badge) {
+        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block mr-1"></span> Offline / Seed Local';
+        badge.className = 'text-[10px] bg-amber-950 text-amber-300 border border-amber-800 px-1.5 py-0.5 rounded font-mono';
+      }
+      if (manual) alert('ℹ️ Servidor Fastify no detectado en http://localhost:3000.\\n\\nOperando en Modo Offline-first con semillas y catálogos locales completos (20 POIs, 4 Entidades, 8 Necesidades).');
+    }
+
+    function setPoiFilter(filter) {
+      appState.poiFilter = filter;
+      renderCurrentScreen();
+    }
+
+    function reportPoiProblem(poiId) {
+      const poi = appState.officialPois.find(p => p.id === poiId);
+      const name = poi ? poi.name : poiId;
+      const reason = prompt(`Reportar problema sobre "${name}":\\n\\n1: NO_DISPONIBLE (Colapsado o cerrado)\\n2: DIRECCION_ERRONEA\\n3: OTRO\\n\\nEscribe 1, 2 o 3:`, "1");
+      if (reason) {
+        const text = reason === '1' ? 'NO_DISPONIBLE' : (reason === '2' ? 'DIRECCION_ERRONEA' : 'OTRO');
+        alert(`¡Gracias por tu reporte!\\n\\nReporte registrado (${text}) para ${name}. Se guardó en la cola local de sincronización.`);
+      }
+    }
 
     // Update digital clock
     function updateClock() {
@@ -416,7 +572,7 @@
 
     function applyScenarios() {
       // Scenario buttons UI
-      ['sismo_detectado', 'mesh_5_nodos', 'bluetooth_apagado', 'bateria_15', 'offline_total', 'contenido_corrupto'].forEach(id => {
+      ['sismo_detectado', 'mesh_5_nodos', 'bluetooth_apagado', 'bateria_15', 'offline_total', 'contenido_corrupto', 'sin_puente_2min'].forEach(id => {
         const el = document.getElementById(`sc_${id}`);
         if (!el) return;
         const isActive = appState.scenarios.has(id);
@@ -721,6 +877,23 @@
             </div>
           </div>
 
+          <!-- Fallback SMS D-25 Banner (when 2 min without bridge) -->
+          ${appState.scenarios.has('sin_puente_2min') ? `
+            <div class="bg-amber-50 border-2 border-[#D47A22] rounded-2xl p-3 mb-3 text-left shadow-xs">
+              <div class="flex items-center gap-1.5 text-xs font-black text-[#6C3800] uppercase tracking-wide">
+                <span class="material-symbols-outlined text-[18px] text-[#D47A22]">sms_failed</span>
+                <span>2 min sin puente a Internet (D-25)</span>
+              </div>
+              <p class="text-[11px] text-[#2A1D13] mt-1 leading-snug">
+                No se detectan nodos puente con conexión a Internet. El fallback satelital / SMS ha sido habilitado de acuerdo al protocolo D-25.
+              </p>
+              <button onclick="sendPreloadedSms()" class="mt-2.5 w-full py-2.5 px-3 rounded-xl bg-[#D47A22] hover:bg-[#b86416] text-white font-extrabold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-[16px]">send_to_mobile</span>
+                <span>Enviar SMS de Emergencia Prellenado</span>
+              </button>
+            </div>
+          ` : ''}
+
           <!-- Physical Signals Controls (Strobe & Acoustic) -->
           <div class="bg-white p-3.5 rounded-2xl border border-[#E2D5C3] shadow-xs mb-4 space-y-2">
             <div class="flex items-center justify-between">
@@ -900,36 +1073,75 @@
         headerTitle.textContent = 'Después del Sismo';
         container.innerHTML = `
           <div class="w-full bg-[#3F6F8E]/20 border border-[#3F6F8E]/30 rounded-2xl p-3.5 mb-3">
-            <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#0A2538]">Post-Evento</span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-[#0A2538]">Post-Evento • Módulo Comunitario</span>
             <h3 class="text-base font-black text-[#0A2538]">AYUDA & DONACIONES</h3>
-            <p class="text-xs text-[#0A2538]/80 mt-0.5">Canales oficiales de asistencia y reporte de afectación.</p>
+            <p class="text-xs text-[#0A2538]/80 mt-0.5">Catálogo oficial sincronizado con entidades de socorro (RF-11).</p>
           </div>
 
-          <div class="bg-white p-3.5 rounded-2xl border border-[#E2D5C3] shadow-xs mb-3 space-y-2">
-            <div class="text-xs font-bold text-[#2A1D13]">Necesidades Comunitarias Prioritarias:</div>
-            <div class="flex items-center gap-2 text-xs">
-              <span>🥫</span>
-              <span class="text-[#2A1D13] font-medium">Alimentos no perecederos y agua potable</span>
-              <span class="text-[10px] bg-red-100 text-red-800 px-1.5 py-0.5 rounded font-bold ml-auto">URGENTE</span>
+          <!-- Official Needs from seed/necesidades.json -->
+          <div class="bg-white p-3.5 rounded-2xl border border-[#E2D5C3] shadow-xs mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-[#2A1D13]">Necesidades Comunitarias Prioritarias (${appState.officialNeeds.length}):</span>
+              <span class="text-[9px] font-bold text-[#3F6F8E] uppercase bg-[#E0E8F0] px-1.5 py-0.5 rounded">Catálogo RF-11</span>
             </div>
-            <div class="flex items-center gap-2 text-xs">
-              <span>🩹</span>
-              <span class="text-[#2A1D13] font-medium">Gasas, vendas y alcohol antiséptico</span>
-              <span class="text-[10px] bg-red-100 text-red-800 px-1.5 py-0.5 rounded font-bold ml-auto">URGENTE</span>
-            </div>
-            <div class="flex items-center gap-2 text-xs">
-              <span>🛏️</span>
-              <span class="text-[#2A1D13] font-medium">Mantas térmicas y colchonetas</span>
-              <span class="text-[10px] bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded font-bold ml-auto">MEDIA</span>
+            
+            <div class="space-y-2">
+              ${appState.officialNeeds.map(need => {
+                const badgeColor = need.urgency === 'ALTA' 
+                  ? 'bg-red-100 text-red-800 border-red-200' 
+                  : (need.urgency === 'MEDIA' ? 'bg-amber-100 text-amber-800 border-amber-200' : 'bg-gray-100 text-gray-700 border-gray-200');
+                return `
+                  <div class="flex items-start gap-2.5 p-2.5 rounded-xl bg-[#FDF9F2] border border-[#E2D5C3]/60 text-xs">
+                    <span class="text-base shrink-0 mt-0.5">${need.icon || '📦'}</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-bold text-[#2A1D13] leading-snug">${need.label}</div>
+                      <div class="text-[10px] text-[#80756E] uppercase font-bold tracking-wider mt-0.5">${need.category}</div>
+                    </div>
+                    <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded border shrink-0 ${badgeColor}">${need.urgency}</span>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
 
-          <button onclick="alert('Redirigiendo a canal verificado de la Cruz Roja Colombiana (Resolución D-05: Sin pagos dentro de la app).')" class="w-full h-11 rounded-full bg-[#2A1D13] text-white font-bold text-xs mb-3">
-            Hacer Donación (Canal Oficial)
-          </button>
+          <!-- Official Verified Entities from seed/entidades_ayuda.json -->
+          <div class="bg-white p-3.5 rounded-2xl border border-[#E2D5C3] shadow-xs mb-3">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-[#2A1D13]">Entidades de Socorro Verificadas:</span>
+              <span class="text-[9px] font-bold text-[#3D7D54] bg-[#AEF2C0]/60 text-[#00210E] px-1.5 py-0.5 rounded">Resolución D-05</span>
+            </div>
 
-          <button onclick="alert('Formulario de Daños: Categoría ESTRUCTURAL guardada en cola local de sincronización (Store-and-forward RF-12).')" class="w-full h-11 rounded-full border border-[#2A1D13] text-[#2A1D13] font-bold text-xs">
-            Reportar Daños en Vivienda o Vía
+            <div class="space-y-2.5">
+              ${appState.officialEntities.map(ent => `
+                <div class="p-3 rounded-xl border border-[#E2D5C3] bg-[#FDF9F2]">
+                  <div class="flex items-center justify-between">
+                    <h4 class="text-xs font-bold text-[#2A1D13]">${ent.name}</h4>
+                    <span class="text-[9px] font-extrabold px-1.5 py-0.5 rounded ${ent.kind === 'GOBIERNO' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">${ent.kind}</span>
+                  </div>
+                  <p class="text-[10px] text-[#80756E] mt-1 leading-snug">${ent.description}</p>
+                  <div class="flex items-center gap-2 mt-2 pt-2 border-t border-[#F1EDE6]">
+                    ${ent.tel ? `
+                      <a href="tel:${ent.tel}" class="py-1 px-2.5 bg-[#2A1D13] text-white rounded-lg text-[10px] font-bold flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px]">call</span> Línea ${ent.tel}
+                      </a>
+                    ` : ''}
+                    <button onclick="window.open('${ent.url}', '_blank')" class="py-1 px-2.5 border border-[#2A1D13] text-[#2A1D13] rounded-lg text-[10px] font-bold flex items-center gap-1 hover:bg-[#EBE8E1]">
+                      <span class="material-symbols-outlined text-[12px]">open_in_new</span> Sitio Verificado
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Transparency Notice (D-05) -->
+          <div class="p-3 bg-[#F1EDE6] rounded-xl text-[10px] text-[#80756E] leading-relaxed mb-3 border border-[#E2D5C3]">
+            <strong>Resolución D-05:</strong> EarthQuakeTracker no procesa pagos ni transferencias directas dentro de la app para prevenir fraudes. Todas las donaciones se redirigen a cuentas institucionales verificadas de la Cruz Roja, Defensa Civil y UNGRD.
+          </div>
+
+          <button onclick="alert('Formulario de Daños: Categoría ESTRUCTURAL guardada en cola local de sincronización (Store-and-forward RF-12).\\n\\nSe sincronizará automáticamente al detectar cobertura celular o un nodo puente con internet.')" class="w-full h-11 rounded-full bg-[#2A1D13] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98">
+            <span class="material-symbols-outlined text-[16px]">report_problem</span>
+            <span>Reportar Daños en Vivienda o Infraestructura</span>
           </button>
         `;
       }
@@ -937,39 +1149,122 @@
       // 7. MAPA SCREEN (mapa_de_zonas_seguras)
       else if (appState.currentTab === 'mapa') {
         headerTitle.textContent = 'Mapa de Socorro';
+
+        // Filter pois
+        let filteredPois = appState.officialPois;
+        if (appState.poiFilter !== 'TODOS') {
+          filteredPois = filteredPois.filter(p => p.type === appState.poiFilter);
+        }
+
+        // Sort by distance from user location
+        const userLoc = appState.userLocation;
+        filteredPois = [...filteredPois].map(poi => ({
+          ...poi,
+          distM: getDistanceMeters(userLoc.lat, userLoc.lon, poi.lat, poi.lon),
+          distStr: calculateDistance(userLoc.lat, userLoc.lon, poi.lat, poi.lon)
+        })).sort((a, b) => a.distM - b.distM);
+
+        const counts = {
+          TODOS: appState.officialPois.length,
+          SALUD: appState.officialPois.filter(p => p.type === 'SALUD').length,
+          BOMBEROS: appState.officialPois.filter(p => p.type === 'BOMBEROS').length,
+          ALBERGUE: appState.officialPois.filter(p => p.type === 'ALBERGUE').length,
+          ZONA_SEGURA: appState.officialPois.filter(p => p.type === 'ZONA_SEGURA').length,
+          ACOPIO: appState.officialPois.filter(p => p.type === 'ACOPIO').length,
+        };
+
+        const typeIcons = {
+          SALUD: '🏥',
+          BOMBEROS: '🚒',
+          ALBERGUE: '⛺',
+          ZONA_SEGURA: '🌳',
+          ACOPIO: '📦'
+        };
+
+        const typeLabels = {
+          SALUD: 'Salud',
+          BOMBEROS: 'Bomberos',
+          ALBERGUE: 'Albergue',
+          ZONA_SEGURA: 'Zona Segura',
+          ACOPIO: 'Acopio'
+        };
+
         container.innerHTML = `
-          <div class="w-full h-44 bg-[#E0E8F0] rounded-2xl relative border border-[#E2D5C3] flex flex-col items-center justify-center mb-3 overflow-hidden shadow-xs">
-            <div class="absolute top-2 left-2 bg-white/90 px-2 py-0.5 rounded text-[10px] font-bold text-[#2A1D13]">
-              📍 Chapinero, Bogotá (Offline)
+          <!-- Map Vectorial Simulation Banner -->
+          <div class="w-full h-40 bg-[#E0E8F0] rounded-2xl relative border border-[#E2D5C3] flex flex-col items-center justify-center mb-3 overflow-hidden shadow-xs">
+            <div class="absolute top-2 left-2 bg-white/95 px-2.5 py-1 rounded-lg text-[10px] font-bold text-[#2A1D13] shadow-xs flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#3D7D54] animate-pulse"></span>
+              <span>GPS: 4.60971, -74.08175 (Bogotá)</span>
+            </div>
+            <div class="absolute top-2 right-2 bg-black/60 text-white px-2 py-0.5 rounded text-[9px] font-mono">
+              MBTiles 48 MB
             </div>
             <span class="text-4xl">🗺️</span>
-            <span class="text-[11px] font-bold text-[#3F6F8E] mt-1">MapLibre GL Vectorial (MBTiles 48 MB)</span>
+            <span class="text-[11px] font-bold text-[#3F6F8E] mt-1">MapLibre GL Vectorial Offline</span>
+            <span class="text-[9px] text-[#80756E]">Tiles precacheadas en almacenamiento local (RF-10)</span>
           </div>
 
-          <div class="text-xs font-bold text-[#2A1D13] mb-2">Puntos de Socorro Cercanos:</div>
+          <!-- Category Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto pb-2 mb-2 no-scrollbar">
+            <button onclick="setPoiFilter('TODOS')" class="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all ${appState.poiFilter === 'TODOS' ? 'bg-[#2A1D13] text-white shadow-xs' : 'bg-white border border-[#E2D5C3] text-[#80756E]'}">
+              Todos (${counts.TODOS})
+            </button>
+            <button onclick="setPoiFilter('SALUD')" class="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all ${appState.poiFilter === 'SALUD' ? 'bg-[#2A1D13] text-white shadow-xs' : 'bg-white border border-[#E2D5C3] text-[#80756E]'}">
+              🏥 Salud (${counts.SALUD})
+            </button>
+            <button onclick="setPoiFilter('BOMBEROS')" class="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all ${appState.poiFilter === 'BOMBEROS' ? 'bg-[#2A1D13] text-white shadow-xs' : 'bg-white border border-[#E2D5C3] text-[#80756E]'}">
+              🚒 Bomberos (${counts.BOMBEROS})
+            </button>
+            <button onclick="setPoiFilter('ALBERGUE')" class="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all ${appState.poiFilter === 'ALBERGUE' ? 'bg-[#2A1D13] text-white shadow-xs' : 'bg-white border border-[#E2D5C3] text-[#80756E]'}">
+              ⛺ Albergues (${counts.ALBERGUE})
+            </button>
+            <button onclick="setPoiFilter('ZONA_SEGURA')" class="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all ${appState.poiFilter === 'ZONA_SEGURA' ? 'bg-[#2A1D13] text-white shadow-xs' : 'bg-white border border-[#E2D5C3] text-[#80756E]'}">
+              🌳 Zonas Seguras (${counts.ZONA_SEGURA})
+            </button>
+            <button onclick="setPoiFilter('ACOPIO')" class="px-2.5 py-1 rounded-full text-[11px] font-bold shrink-0 transition-all ${appState.poiFilter === 'ACOPIO' ? 'bg-[#2A1D13] text-white shadow-xs' : 'bg-white border border-[#E2D5C3] text-[#80756E]'}">
+              📦 Acopio (${counts.ACOPIO})
+            </button>
+          </div>
 
+          <div class="flex items-center justify-between text-xs text-[#80756E] mb-2 px-0.5">
+            <span class="font-bold text-[#2A1D13]">Puntos de Socorro (${filteredPois.length}):</span>
+            <span class="text-[10px] text-[#D47A22] font-semibold">Ordenados por cercanía</span>
+          </div>
+
+          <!-- POI List -->
           <div class="space-y-2">
-            <div onclick="alert('Coliseo El Salitre\\nCalle 63 # 68-45\\nDistancia: 1.2 km\\nCapacidad: 400 personas.')" class="bg-white p-3 rounded-xl border border-[#E2D5C3] shadow-xs cursor-pointer flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <span class="text-2xl">⛺</span>
-                <div>
-                  <h4 class="text-xs font-bold text-[#2A1D13]">Albergue Coliseo El Salitre</h4>
-                  <p class="text-[10px] text-[#80756E]">A 1.2 km · Calle 63 # 68-45</p>
+            ${filteredPois.map(poi => `
+              <div class="bg-white p-3 rounded-2xl border border-[#E2D5C3] shadow-xs">
+                <div class="flex items-start gap-2.5">
+                  <span class="text-2xl shrink-0 mt-0.5">${typeIcons[poi.type] || '📍'}</span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-1">
+                      <h4 class="text-xs font-bold text-[#2A1D13] leading-snug">${poi.name}</h4>
+                      <span class="text-[10px] font-extrabold text-[#D47A22] shrink-0 bg-[#FE9C43]/20 px-1.5 py-0.5 rounded">${poi.distStr}</span>
+                    </div>
+                    <p class="text-[10px] text-[#80756E] mt-0.5 leading-tight">${poi.address || 'Bogotá D.C.'}</p>
+                    <div class="flex items-center gap-2 mt-1 text-[9px] text-[#A89C91]">
+                      <span class="font-bold text-[#80756E]">${typeLabels[poi.type]}</span>
+                      ${poi.source ? `<span>• ${poi.source}</span>` : ''}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <button class="text-[10px] bg-[#2A1D13] text-white px-2 py-1 rounded font-bold">Cómo llegar</button>
-            </div>
 
-            <div onclick="alert('Estación Bomberos B-1\\nCalle 22 # 5-68\\nDistancia: 2.1 km\\nTel: 119.')" class="bg-white p-3 rounded-xl border border-[#E2D5C3] shadow-xs cursor-pointer flex items-center justify-between">
-              <div class="flex items-center gap-2.5">
-                <span class="text-2xl">🚒</span>
-                <div>
-                  <h4 class="text-xs font-bold text-[#2A1D13]">Bomberos Central B-1</h4>
-                  <p class="text-[10px] text-[#80756E]">A 2.1 km · Búsqueda y rescate</p>
+                <div class="flex items-center justify-end gap-1.5 mt-2.5 pt-2 border-t border-[#F1EDE6]">
+                  ${poi.phone ? `
+                    <a href="tel:${poi.phone}" class="text-[10px] bg-[#F1EDE6] text-[#2A1D13] px-2.5 py-1 rounded-lg font-bold flex items-center gap-1 hover:bg-[#EBE8E1]">
+                      <span class="material-symbols-outlined text-[12px]">call</span> ${poi.phone}
+                    </a>
+                  ` : ''}
+                  <button onclick="reportPoiProblem('${poi.id}')" class="text-[10px] text-[#BA1A1A] hover:bg-red-50 px-2 py-1 rounded-lg font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">flag</span> Reportar
+                  </button>
+                  <button onclick="alert('Ruta hacia:\\n${poi.name}\\n\\nDistancia estimada: ${poi.distStr}\\nCoordenadas: Lat ${poi.lat}, Lon ${poi.lon}\\n\\nNavegación offline: Sigue el vector peatonal hacia el punto de encuentro.')" class="text-[10px] bg-[#2A1D13] text-white px-3 py-1 rounded-lg font-bold flex items-center gap-1 active:scale-95 shadow-xs">
+                    <span class="material-symbols-outlined text-[12px]">navigation</span> Cómo llegar
+                  </button>
                 </div>
               </div>
-              <button class="text-[10px] bg-[#2A1D13] text-white px-2 py-1 rounded font-bold">Cómo llegar</button>
-            </div>
+            `).join('')}
           </div>
         `;
       }
@@ -1077,8 +1372,9 @@
       }
     }
 
-    // Initial render
+    // Initial render and backend status check
     renderCurrentScreen();
+    checkBackendConnection();
   </script>
 </body>
 </html>
