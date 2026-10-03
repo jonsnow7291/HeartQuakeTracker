@@ -492,6 +492,24 @@
                 appState.officialPois = data.items;
               }
             }
+            const aidRes = await fetch('http://localhost:3000/v1/aid/entities');
+            if (aidRes.ok) {
+              const data = await aidRes.json();
+              if (data.items && data.items.length) {
+                appState.officialEntities = data.items.map(e => ({
+                  ...e,
+                  tel: e.channels?.find(c => c.type === 'TEL')?.value,
+                  url: e.channels?.find(c => c.type === 'WEB')?.value
+                }));
+              }
+            }
+            const needsRes = await fetch('http://localhost:3000/v1/aid/needs');
+            if (needsRes.ok) {
+              const data = await needsRes.json();
+              if (data.items && data.items.length) {
+                appState.officialNeeds = data.items;
+              }
+            }
           } catch(e) {}
           if (manual) alert('✅ Conexión exitosa con el backend Fastify (puerto 3000). Catálogos sincronizados desde el servidor.');
           renderCurrentScreen();
@@ -511,14 +529,72 @@
       renderCurrentScreen();
     }
 
-    function reportPoiProblem(poiId) {
+    async function reportPoiProblem(poiId) {
       const poi = appState.officialPois.find(p => p.id === poiId);
       const name = poi ? poi.name : poiId;
-      const reason = prompt(`Reportar problema sobre "${name}":\\n\\n1: NO_DISPONIBLE (Colapsado o cerrado)\\n2: DIRECCION_ERRONEA\\n3: OTRO\\n\\nEscribe 1, 2 o 3:`, "1");
-      if (reason) {
-        const text = reason === '1' ? 'NO_DISPONIBLE' : (reason === '2' ? 'DIRECCION_ERRONEA' : 'OTRO');
-        alert(`¡Gracias por tu reporte!\\n\\nReporte registrado (${text}) para ${name}. Se guardó en la cola local de sincronización.`);
+      const reasonChoice = prompt(`Reportar problema sobre "${name}":\n\n1: NO_DISPONIBLE (Colapsado o cerrado)\n2: DIRECCION_ERRONEA\n3: OTRO\n\nEscribe 1, 2 o 3:`, "1");
+      if (!reasonChoice) return;
+      const text = reasonChoice === '1' ? 'NO_DISPONIBLE' : (reasonChoice === '2' ? 'DIRECCION_ERRONEA' : 'OTRO');
+      const note = prompt("Nota o detalle adicional (opcional):", "Verificado por habitante en terreno");
+
+      const eventPayload = {
+        eventId: `poi_prob_${Date.now()}`,
+        type: 'POI_PROBLEM',
+        ts: new Date().toISOString(),
+        device: 'dev_simulador_santiago',
+        payload: { poiId, reason: text, note: note || '' },
+        geo: appState.userLocation
+      };
+
+      if (appState.backendOnline) {
+        try {
+          const res = await fetch('http://localhost:3000/v1/sync/batch', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ events: [eventPayload] })
+          });
+          if (res.ok) {
+            alert(`✅ ¡Reporte sincronizado con Fastify Backend!\n\nEstado: ACK recibido del servidor (:3000).\nProblema: ${text} sobre ${name}`);
+            return;
+          }
+        } catch(e) {}
       }
+
+      alert(`¡Reporte registrado localmente!\n\nMotivo: ${text} para ${name}.\nEstado: Guardado en la cola local de sincronización (Store-and-forward RF-12).`);
+    }
+
+    async function reportDamagePrompt() {
+      const cat = prompt("Reportar Afectación / Daños Post-Sismo:\n\n1: ESTRUCTURAL (Muros, vigas, colapso parcial)\n2: SERVICIOS (Fuga de gas, rotura de agua, luz)\n3: VIAS (Vía bloqueada, escombros)\n4: OTRO\n\nEscribe 1, 2, 3 o 4:", "1");
+      if (!cat) return;
+      const catMap = { '1': 'ESTRUCTURAL', '2': 'SERVICIOS', '3': 'VIAS', '4': 'OTRO' };
+      const category = catMap[cat] || 'OTRO';
+      const desc = prompt("Describe brevemente el daño:", "Grietas diagonales en muro de fachada primer piso");
+      if (!desc) return;
+
+      const eventPayload = {
+        eventId: `dmg_${Date.now()}`,
+        type: 'REPORT_DAMAGE',
+        ts: new Date().toISOString(),
+        device: 'dev_simulador_santiago',
+        payload: { category, description: desc },
+        geo: appState.userLocation
+      };
+
+      if (appState.backendOnline) {
+        try {
+          const res = await fetch('http://localhost:3000/v1/sync/batch', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ events: [eventPayload] })
+          });
+          if (res.ok) {
+            alert(`✅ ¡Reporte de Daños recibido por el Backend Fastify!\n\nCategoría: ${category}\nDescripción: ${desc}\nCoordenadas: ${appState.userLocation.lat}, ${appState.userLocation.lon}\n\nEl servidor registró el evento para atención de cuadrillas.`);
+            return;
+          }
+        } catch(e) {}
+      }
+
+      alert(`✅ Formulario de Daños guardado:\n\nCategoría: ${category}\nDescripción: ${desc}\n\nGuardado en cola de sincronización store-and-forward (RF-12). Se transmitirá automáticamente.`);
     }
 
     // Update digital clock
@@ -1139,7 +1215,7 @@
             <strong>Resolución D-05:</strong> EarthQuakeTracker no procesa pagos ni transferencias directas dentro de la app para prevenir fraudes. Todas las donaciones se redirigen a cuentas institucionales verificadas de la Cruz Roja, Defensa Civil y UNGRD.
           </div>
 
-          <button onclick="alert('Formulario de Daños: Categoría ESTRUCTURAL guardada en cola local de sincronización (Store-and-forward RF-12).\\n\\nSe sincronizará automáticamente al detectar cobertura celular o un nodo puente con internet.')" class="w-full h-11 rounded-full bg-[#2A1D13] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98">
+          <button onclick="reportDamagePrompt()" class="w-full h-11 rounded-full bg-[#2A1D13] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm active:scale-98">
             <span class="material-symbols-outlined text-[16px]">report_problem</span>
             <span>Reportar Daños en Vivienda o Infraestructura</span>
           </button>
