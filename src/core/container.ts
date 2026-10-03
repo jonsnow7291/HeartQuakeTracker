@@ -65,3 +65,13 @@ class ServiceContainer {
 export function getServices(): Services {
   return ServiceContainer.getServices();
 }
+
+/**
+ * Sustituye servicios del container por implementaciones reales (p. ej. al arrancar la app con los
+ * adaptadores de plataforma). Los que no se pasen siguen siendo mocks. Cambio aditivo de JD.
+ */
+export function registerRealServices(real: Partial<Services>): Services {
+  const services = ServiceContainer.getServices();
+  Object.assign(services, real);
+  return services;
+}
