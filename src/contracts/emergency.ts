@@ -12,6 +12,8 @@ export interface EmergencyState {
   beaconActive: boolean;
   meshActive: boolean;
   medicalCardArmed: boolean;
+  /** Sin nodos puente por 2 min: la UI puede ofrecer SMS prellenado (D-25). Opcional (v0.1.1). */
+  noBridge2Min?: boolean;
   lastPosition?: GeoPoint;
 }
 

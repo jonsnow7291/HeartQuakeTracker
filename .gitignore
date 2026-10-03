@@ -1,0 +1,114 @@
+# ===== Dependencias =====
+node_modules/
+.yarn/cache/
+.yarn/install-state.gz
+.pnpm-store/
+
+# ===== Secretos y entorno (NUNCA subir) =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+google-services.json
+GoogleService-Info.plist
+local.properties
+serviceAccount*.json
+
+# ===== Build, salidas y cobertura =====
+dist/
+build/
+out/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+.expo/
+.next/
+
+# ===== Móvil (React Native) =====
+android/app/build/
+android/build/
+android/.gradle/
+android/.idea/
+.gradle/
+ios/Pods/
+ios/build/
+ios/DerivedData/
+*.xcuserstate
+xcuserdata/
+*.apk
+*.aab
+*.ipa
+
+# ===== Logs y procesos =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.pid
+*.seed
+*.pid.lock
+
+# ===== Temporales y cachés =====
+tmp/
+temp/
+.tmp/
+.cache/
+.eslintcache
+.jest-cache/
+.parcel-cache/
+.turbo/
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# ===== Archivos de Office/LibreOffice a medio editar =====
+~$*
+.~lock.*#
+*.docx#
+
+# ===== Sistema operativo =====
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.directory
+.Trash-*
+
+# ===== Editores / IDE =====
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.iml
+
+# ===== Bases de datos locales y datos de prueba =====
+pgdata/
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.mbtiles
+
+# ===== Agentes de IA (configuración personal / temporales) =====
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scratchpad/
+.antigravity/
+.agy/
+.herdr/
+.gemini/tmp/

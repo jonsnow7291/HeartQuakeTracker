@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": [
+      "ES2020"
+    ],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@contracts/*": [
+        "src/contracts/*"
+      ],
+      "@core/*": [
+        "src/core/*"
+      ]
+    }
+  },
+  "include": [
+    "src/contracts",
+    "src/core",
+    "__tests__/core",
+    "scripts"
+  ],
+  "exclude": [
+    "node_modules",
+    "android",
+    "ios",
+    "server",
+    "src/ui"
+  ]
+}

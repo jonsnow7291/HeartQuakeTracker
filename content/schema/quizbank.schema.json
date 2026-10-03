@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://earthquake-tracker.org/schemas/quizbank.schema.json",
+  "title": "QuizBank",
+  "description": "Esquema JSON Schema (draft-07) para banco de preguntas y niveles del quiz",
+  "type": "object",
+  "required": [
+    "levels"
+  ],
+  "properties": {
+    "levels": {
+      "type": "array",
+      "description": "Lista de niveles del quiz",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "order",
+          "title",
+          "questions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identificador del nivel (ej. n1)"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Orden correlativo del nivel"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Título descriptivo del nivel"
+          },
+          "questions": {
+            "type": "array",
+            "description": "Lista de preguntas del nivel",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "text",
+                "options",
+                "correctIndex",
+                "explanation",
+                "protocolRef"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Identificador de la pregunta (ej. q001)"
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Texto o enunciado de la pregunta"
+                },
+                "options": {
+                  "type": "array",
+                  "minItems": 4,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "description": "Exactamente 4 opciones de respuesta"
+                },
+                "correctIndex": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 3,
+                  "description": "Índice (0 a 3) de la opción correcta en options"
+                },
+                "explanation": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Explicación educativa de la respuesta"
+                },
+                "protocolRef": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Referencia a protocolo o guía oficial (ej. UNGRD). Nota: En el contrato TS (src/contracts/content.ts) se declara opcional, pero por regla estricta de autoría de contenido educativo se exige en cada pregunta."
+                },
+                "guideId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "ID opcional de la guía relacionada para repasar"
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -19,3 +19,15 @@ export interface Page<T> {
   items: T[];
   next?: string;
 }
+
+/** Error lanzable que cumple AppError (los servicios reales lanzan esto). Cambio aditivo de JD (v0.1.1). */
+export class AppException extends Error implements AppError {
+  constructor(
+    public readonly code: import('./errors').ErrorCode,
+    message: string,
+    public readonly recoverable = true,
+  ) {
+    super(message);
+    this.name = 'AppException';
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://earthquake-tracker.org/schemas/manifest.schema.json",
+  "title": "ContentManifest",
+  "description": "Esquema JSON Schema (draft-07) para el manifiesto de paquetes de contenido",
+  "type": "object",
+  "required": [
+    "version",
+    "generatedAt",
+    "files"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Versión del paquete de contenido"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Fecha y hora ISO 8601 de generación"
+    },
+    "files": {
+      "type": "array",
+      "description": "Lista de archivos incluidos con su verificación de integridad",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Ruta relativa del archivo dentro del paquete"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$",
+            "description": "Hash SHA-256 en formato hexadecimal de 64 caracteres"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Tamaño del archivo en bytes"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "defensa-civil-colombiana",
+    "name": "Defensa Civil Colombiana",
+    "kind": "SOCORRO",
+    "description": "Institución social y humanitaria del Estado colombiano para la gestión del riesgo de desastres y acción social.",
+    "active": true,
+    "verifiedAt": "2026-10-03T00:00:00Z",
+    "verified": false,
+    "channels": [
+      {
+        "type": "WEB",
+        "value": "https://www.defensacivil.gov.co",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "ungrd",
+    "name": "Unidad Nacional para la Gestión del Riesgo de Desastres (UNGRD)",
+    "kind": "GOBIERNO",
+    "description": "Entidad coordinadora del Sistema Nacional de Gestión del Riesgo de Desastres en Colombia.",
+    "active": true,
+    "verifiedAt": "2026-10-03T00:00:00Z",
+    "verified": false,
+    "channels": [
+      {
+        "type": "WEB",
+        "value": "https://portal.gestiondelriesgo.gov.co",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "cruz-roja-colombiana",
+    "name": "Cruz Roja Colombiana",
+    "kind": "SOCORRO",
+    "description": "Organización humanitaria de socorro y voluntariado para la atención de emergencias y desastres en el territorio nacional.",
+    "active": true,
+    "verifiedAt": "2026-10-03T00:00:00Z",
+    "verified": false,
+    "channels": [
+      {
+        "type": "WEB",
+        "value": "https://www.cruzrojacolombiana.org",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "idiger",
+    "name": "Instituto Distrital de Gestión de Riesgos y Cambio Climático (IDIGER)",
+    "kind": "GOBIERNO",
+    "description": "Entidad distrital técnica responsable de coordinar el Sistema Distrital de Gestión del Riesgo y Cambio Climático en Bogotá D.C.",
+    "active": true,
+    "verifiedAt": "2026-10-03T00:00:00Z",
+    "verified": false,
+    "channels": [
+      {
+        "type": "WEB",
+        "value": "https://www.idiger.gov.co",
+        "active": true
+      }
+    ]
+  }
+]

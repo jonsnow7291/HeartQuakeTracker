@@ -1,0 +1,22 @@
+name: CI
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: yarn }
+      - run: yarn install --frozen-lockfile
+      - run: yarn typecheck
+      - run: yarn lint
+      - run: yarn test --ci
+      - run: yarn validate-content
+      - name: Ownership (carpetas JD vs SA)
+        if: github.event_name == 'pull_request'
+        run: bash scripts/check-ownership.sh origin/${{ github.base_ref }}...HEAD

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "poi-salud-001",
+    "type": "SALUD",
+    "name": "Hospital Universitario San Ignacio",
+    "lat": 4.6295,
+    "lon": -74.0655,
+    "active": true,
+    "source": "Secretaría Distrital de Salud de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-salud-002",
+    "type": "SALUD",
+    "name": "Hospital Universitario Fundación Santa Fe de Bogotá",
+    "lat": 4.6934,
+    "lon": -74.0326,
+    "active": true,
+    "source": "Secretaría Distrital de Salud de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-salud-003",
+    "type": "SALUD",
+    "name": "Hospital de San José (Centro)",
+    "lat": 4.6045,
+    "lon": -74.0845,
+    "active": true,
+    "source": "Secretaría Distrital de Salud de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-salud-004",
+    "type": "SALUD",
+    "name": "Hospital Simón Bolívar (Subred Norte)",
+    "lat": 4.7439,
+    "lon": -74.0328,
+    "active": true,
+    "source": "Secretaría Distrital de Salud de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-salud-005",
+    "type": "SALUD",
+    "name": "Hospital El Tunal (Subred Sur)",
+    "lat": 4.5772,
+    "lon": -74.1378,
+    "active": true,
+    "source": "Secretaría Distrital de Salud de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-salud-006",
+    "type": "SALUD",
+    "name": "Hospital Occidente de Kennedy (Subred Sur Occidente)",
+    "lat": 4.6278,
+    "lon": -74.1528,
+    "active": true,
+    "source": "Secretaría Distrital de Salud de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-bomberos-001",
+    "type": "BOMBEROS",
+    "name": "Estación de Bomberos B-1 Chapinero",
+    "lat": 4.6483,
+    "lon": -74.0622,
+    "active": true,
+    "source": "Cuerpo Oficial de Bomberos de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-bomberos-002",
+    "type": "BOMBEROS",
+    "name": "Estación de Bomberos B-2 Central (Puente Aranda)",
+    "lat": 4.6212,
+    "lon": -74.0955,
+    "active": true,
+    "source": "Cuerpo Oficial de Bomberos de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-bomberos-003",
+    "type": "BOMBEROS",
+    "name": "Estación de Bomberos B-5 Kennedy",
+    "lat": 4.6225,
+    "lon": -74.1512,
+    "active": true,
+    "source": "Cuerpo Oficial de Bomberos de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-bomberos-004",
+    "type": "BOMBEROS",
+    "name": "Estación de Bomberos B-9 Bellavista (Usaquén)",
+    "lat": 4.7456,
+    "lon": -74.0298,
+    "active": true,
+    "source": "Cuerpo Oficial de Bomberos de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-bomberos-005",
+    "type": "BOMBEROS",
+    "name": "Estación de Bomberos B-11 Restrepo (Antonio Nariño)",
+    "lat": 4.5826,
+    "lon": -74.1035,
+    "active": true,
+    "source": "Cuerpo Oficial de Bomberos de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-albergue-001",
+    "type": "ALBERGUE",
+    "name": "Coliseo El Salitre (Unidad Deportiva El Salitre)",
+    "lat": 4.6611,
+    "lon": -74.0898,
+    "active": true,
+    "source": "Instituto Distrital de Recreación y Deporte (IDRD)",
+    "verified": false
+  },
+  {
+    "id": "poi-albergue-002",
+    "type": "ALBERGUE",
+    "name": "Movistar Arena Bogotá (Complejo El Campín)",
+    "lat": 4.6489,
+    "lon": -74.0778,
+    "active": true,
+    "source": "Alcaldía Mayor de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-albergue-003",
+    "type": "ALBERGUE",
+    "name": "Coliseo Cayetano Cañizares (Kennedy)",
+    "lat": 4.6186,
+    "lon": -74.1611,
+    "active": true,
+    "source": "Instituto Distrital de Recreación y Deporte (IDRD)",
+    "verified": false
+  },
+  {
+    "id": "poi-albergue-004",
+    "type": "ALBERGUE",
+    "name": "Palacio de los Deportes de Bogotá",
+    "lat": 4.6565,
+    "lon": -74.0855,
+    "active": true,
+    "source": "Instituto Distrital de Recreación y Deporte (IDRD)",
+    "verified": false
+  },
+  {
+    "id": "poi-zona-segura-001",
+    "type": "ZONA_SEGURA",
+    "name": "Parque Metropolitano Simón Bolívar",
+    "lat": 4.6582,
+    "lon": -74.0935,
+    "active": true,
+    "source": "IDIGER",
+    "verified": false
+  },
+  {
+    "id": "poi-zona-segura-002",
+    "type": "ZONA_SEGURA",
+    "name": "Parque Metropolitano El Tunal",
+    "lat": 4.5735,
+    "lon": -74.1345,
+    "active": true,
+    "source": "IDIGER",
+    "verified": false
+  },
+  {
+    "id": "poi-zona-segura-003",
+    "type": "ZONA_SEGURA",
+    "name": "Parque de la 93",
+    "lat": 4.6766,
+    "lon": -74.0535,
+    "active": true,
+    "source": "IDIGER",
+    "verified": false
+  },
+  {
+    "id": "poi-zona-segura-004",
+    "type": "ZONA_SEGURA",
+    "name": "Plaza de Bolívar (Centro Histórico)",
+    "lat": 4.5981,
+    "lon": -74.076,
+    "active": true,
+    "source": "Alcaldía Mayor de Bogotá",
+    "verified": false
+  },
+  {
+    "id": "poi-acopio-001",
+    "type": "ACOPIO",
+    "name": "Plaza de los Artesanos (Centro de Acopio y Gestión)",
+    "lat": 4.6628,
+    "lon": -74.0825,
+    "active": true,
+    "source": "Secretaría Distrital de Desarrollo Económico",
+    "verified": false
+  }
+]

@@ -1,19 +1,30 @@
-# CODEOWNERS for EarthQuakeTracker
+# CODEOWNERS - EarthQuakeTracker (MW-2026)
+# Reglas de propiedad según compartido/01_mapa_de_propiedad.md y compartido/02_estructura_repo_y_reglas_git.md
+
+# Contratos y decisiones de arquitectura (ambos aprueban)
 /src/contracts/        @juan-diego @santiago
+/docs/adr/             @juan-diego @santiago
+
+# Carril Juan Diego (backend, core, nativo, scripts, tests core, config raíz)
 /src/core/             @juan-diego
 /android/              @juan-diego
 /ios/                  @juan-diego
 /server/               @juan-diego
+/scripts/              @juan-diego
 /__tests__/core/       @juan-diego
+/package.json          @juan-diego
+/yarn.lock             @juan-diego
+/tsconfig.json         @juan-diego
+/metro.config.js       @juan-diego
+/babel.config.js       @juan-diego
+
+# Carril Santiago (UI, contenido, assets, diseño, tests UI, e2e)
 /src/ui/               @santiago
 /content/              @santiago
 /assets/               @santiago
 /design/               @santiago
 /__tests__/ui/         @santiago
 /e2e/                  @santiago
-/package.json          @juan-diego
-/yarn.lock             @juan-diego
-/tsconfig.json         @juan-diego
-/metro.config.js       @juan-diego
-/babel.config.js       @juan-diego
-/docs/adr/             @juan-diego @santiago
+
+# Excepciones dentro de content/ (esquemas de contenido gestionados por Juan Diego)
+/content/schema/       @juan-diego

@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://earthquake-tracker.org/schemas/guide.schema.json",
+  "title": "GuiaFrontMatter",
+  "description": "Esquema JSON Schema (draft-07) para los metadatos YAML front-matter de guías educativas",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "summary",
+    "category",
+    "version",
+    "readMin",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Identificador único en kebab-case (ej. mochila-emergencia)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Título legible de la guía"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Resumen conciso del contenido"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "MOCHILA",
+        "ESTRUCTURAL",
+        "PLAN_FAMILIAR",
+        "PRIMEROS_AUXILIOS",
+        "OTRO"
+      ],
+      "description": "Categoría temática de la guía según RF-01"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9a-zA-Z.-]+)?(?:\\+[0-9a-zA-Z.-]+)?$",
+      "description": "Versión semántica (ej. 1.0.0)"
+    },
+    "readMin": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Tiempo estimado de lectura en minutos (mínimo 1)"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "description": "Lista de fuentes oficiales citadas (ej. UNGRD, Cruz Roja)"
+    }
+  },
+  "additionalProperties": false
+}

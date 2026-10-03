@@ -8,7 +8,10 @@ import {
 export class MockProgressRepository implements ProgressRepository {
   private attempts: Map<string, QuizAttempt> = new Map();
   private badges: Map<string, Badge> = new Map([
-    { code: 'PRIMERA_GUIA', title: 'Primera Guía Leída', awardedAt: new Date().toISOString() },
+    [
+      'PRIMERA_GUIA',
+      { code: 'PRIMERA_GUIA', title: 'Primera Guía Leída', awardedAt: new Date().toISOString() },
+    ],
   ]);
 
   public async saveAttempt(a: QuizAttempt): Promise<void> {

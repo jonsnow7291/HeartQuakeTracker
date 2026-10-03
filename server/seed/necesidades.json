@@ -1,0 +1,50 @@
+[
+  {
+    "id": "need-agua-potable",
+    "category": "VIVERES",
+    "label": "Agua potable embotellada o en bolsa",
+    "urgency": "ALTA"
+  },
+  {
+    "id": "need-alimentos-no-perecederos",
+    "category": "VIVERES",
+    "label": "Alimentos no perecederos y enlatados con abrelatas",
+    "urgency": "ALTA"
+  },
+  {
+    "id": "need-primeros-auxilios",
+    "category": "SALUD",
+    "label": "Kits de primeros auxilios y material de curación estéril",
+    "urgency": "ALTA"
+  },
+  {
+    "id": "need-medicamentos-esenciales",
+    "category": "SALUD",
+    "label": "Medicamentos esenciales (analgésicos, antisépticos y sueros orales)",
+    "urgency": "ALTA"
+  },
+  {
+    "id": "need-kit-higiene",
+    "category": "HIGIENE",
+    "label": "Kits de higiene personal (jabón, toallas higiénicas, papel y pañales)",
+    "urgency": "MEDIA"
+  },
+  {
+    "id": "need-cobijas-colchonetas",
+    "category": "ABRIGO",
+    "label": "Cobijas térmicas, frazadas y colchonetas livianas",
+    "urgency": "MEDIA"
+  },
+  {
+    "id": "need-linternas-baterias",
+    "category": "EQUIPAMIENTO",
+    "label": "Linternas recargables o LED con baterías AA/AAA",
+    "urgency": "MEDIA"
+  },
+  {
+    "id": "need-ropa-impermeable",
+    "category": "ABRIGO",
+    "label": "Ropa impermeable y abrigada en buen estado (adultos y niños)",
+    "urgency": "BAJA"
+  }
+]

@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: eqt
+      POSTGRES_PASSWORD: eqt_dev
+      POSTGRES_DB: eqt
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  api:
+    build: ./server
+    environment:
+      PORT: 3000
+      DATABASE_URL: postgres://eqt:eqt_dev@db:5432/eqt
+      SEED_ON_START: "true"
+      ADMIN_TOKEN: dev-admin-token
+    ports: ["3000:3000"]
+    depends_on: [db]
+volumes:
+  pgdata:
