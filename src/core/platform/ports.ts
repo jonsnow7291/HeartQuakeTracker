@@ -28,6 +28,10 @@ export interface CryptoPort {
   sha256Hex(data: Uint8Array): Promise<string>;
   /** KDF del PIN → clave de datos de 32 bytes (Argon2id en dispositivo, ADR 0001/0005). */
   deriveKey(pin: string, salt: Uint8Array): Promise<Uint8Array>;
+  /** Cifrado simétrico autenticado (AES-256-GCM o XChaCha20-Poly1305) con clave de 32 bytes. */
+  encrypt?(plaintext: Uint8Array, key: Uint8Array): Promise<Uint8Array>;
+  /** Descifrado autenticado de datos sellados. Lanza error si falla la autenticación o clave. */
+  decrypt?(sealed: Uint8Array, key: Uint8Array): Promise<Uint8Array>;
 }
 
 export interface BiometricPort {

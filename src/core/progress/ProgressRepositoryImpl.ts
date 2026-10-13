@@ -19,6 +19,7 @@ export const BADGE_CATALOG: Record<string, string> = {
   NIVEL_3: 'Nivel 3 completado',
   PERFECTO: 'Puntaje perfecto',
   PLAN_FAMILIAR_LISTO: 'Plan familiar listo',
+  MOCHILA_COMPLETA: 'Mochila de emergencia completa',
 };
 
 interface BestRecord {

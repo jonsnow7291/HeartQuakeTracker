@@ -9,7 +9,8 @@ export class MockAidDirectoryService implements AidDirectoryService {
         kind: 'SOCORRO',
         description: 'Atención prehospitalaria, búsqueda y rescate, y apoyo psicosocial.',
         active: true,
-        verifiedAt: new Date().toISOString(),
+        verifiedAt: '2026-10-03T00:00:00Z',
+        verified: false,
         channels: [
           { type: 'TEL', value: '132', requirements: 'Línea nacional gratuita de auxilio', active: true },
           { type: 'WEB', value: 'https://www.cruzrojacolombiana.org', active: true },
@@ -21,7 +22,8 @@ export class MockAidDirectoryService implements AidDirectoryService {
         kind: 'SOCORRO',
         description: 'Gestión social del riesgo, voluntariado y primeros auxilios comunitarios.',
         active: true,
-        verifiedAt: new Date().toISOString(),
+        verifiedAt: '2026-10-03T00:00:00Z',
+        verified: false,
         channels: [
           { type: 'TEL', value: '144', active: true },
           { type: 'WEB', value: 'https://www.defensacivil.gov.co', active: true },
@@ -33,7 +35,8 @@ export class MockAidDirectoryService implements AidDirectoryService {
         kind: 'GOBIERNO',
         description: 'Control de incendios, fugas de gas, rescate en estructuras colapsadas (USAR).',
         active: true,
-        verifiedAt: new Date().toISOString(),
+        verifiedAt: '2026-10-03T00:00:00Z',
+        verified: false,
         channels: [
           { type: 'TEL', value: '119', active: true },
         ],
