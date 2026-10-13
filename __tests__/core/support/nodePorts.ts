@@ -1,4 +1,4 @@
-import { createHash, randomBytes, scrypt } from 'node:crypto';
+import { createCipheriv, createDecipheriv, createHash, randomBytes, scrypt } from 'node:crypto';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import type { BiometricPort, Clock, ContentManifest, CryptoPort, FileStore, KeyValueStore, PackageData } from '../../../src/core/platform/ports';
@@ -47,6 +47,22 @@ export const nodeCrypto: CryptoPort = {
   sha256Hex: async (d) => createHash('sha256').update(d).digest('hex'),
   deriveKey: (pin, salt) =>
     new Promise((res, rej) => scrypt(pin, salt, 32, { N: 1024, r: 8, p: 1 }, (e, k) => (e ? rej(e) : res(new Uint8Array(k))))),
+  encrypt: async (plaintext: Uint8Array, key: Uint8Array) => {
+    const iv = randomBytes(12);
+    const cipher = createCipheriv('aes-256-gcm', key, iv);
+    const enc = Buffer.concat([cipher.update(plaintext), cipher.final()]);
+    const tag = cipher.getAuthTag();
+    return new Uint8Array(Buffer.concat([iv, enc, tag]));
+  },
+  decrypt: async (sealed: Uint8Array, key: Uint8Array) => {
+    if (sealed.length < 12 + 16) throw new Error('Datos cifrados inválidos');
+    const iv = sealed.subarray(0, 12);
+    const tag = sealed.subarray(sealed.length - 16);
+    const ciphertext = sealed.subarray(12, sealed.length - 16);
+    const decipher = createDecipheriv('aes-256-gcm', key, iv);
+    decipher.setAuthTag(tag);
+    return new Uint8Array(Buffer.concat([decipher.update(ciphertext), decipher.final()]));
+  },
 };
 
 export class FakeClock implements Clock {
