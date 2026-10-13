@@ -1,7 +1,9 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text } from './Text';
+import { useThemedStyles } from '../theme/ThemeProvider';
 import { spacing, borderRadius, typography, touchTargets } from '../theme/tokens';
+import type { AppTheme } from '../theme/theme';
 
 interface Props {
   children: ReactNode;
@@ -40,59 +42,65 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
-      return (
-        <View style={styles.container} accessibilityRole="alert">
-          <Text style={styles.title}>Ocurrió un problema</Text>
-          <Text style={styles.description}>
-            La aplicación encontró un error inesperado. Tus datos locales y la baliza continúan a salvo.
-          </Text>
-          <TouchableOpacity
-            style={styles.retryButton}
-            onPress={this.handleReset}
-            accessibilityRole="button"
-            accessibilityLabel="Reintentar y volver a la pantalla anterior"
-          >
-            <Text style={styles.retryText}>Reintentar</Text>
-          </TouchableOpacity>
-        </View>
-      );
+      return <ErrorFallback onReset={this.handleReset} />;
     }
 
     return this.props.children;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: spacing.xl,
-    backgroundColor: lightPalette.background,
-  },
-  title: {
-    ...typography.scale.headline,
-    color: lightPalette.panic,
-    marginBottom: spacing.sm,
-    textAlign: 'center',
-  },
-  description: {
-    ...typography.scale.bodyMedium,
-    color: lightPalette.onSurfaceVariant,
-    textAlign: 'center',
-    marginBottom: spacing.xxl,
-  },
-  retryButton: {
-    minHeight: touchTargets.min,
-    minWidth: 160,
-    backgroundColor: lightPalette.primary,
-    borderRadius: borderRadius.md,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: spacing.xl,
-  },
-  retryText: {
-    ...typography.scale.label,
-    color: lightPalette.onPrimary,
-  },
-});
+function ErrorFallback({ onReset }: { onReset: () => void }) {
+  const styles = useThemedStyles(makeStyles);
+  return (
+    <View style={styles.container} accessibilityRole="alert" accessibilityLiveRegion="assertive">
+      <Text style={styles.title}>Ocurrió un problema</Text>
+      <Text style={styles.description}>
+        La aplicación encontró un error inesperado. Tus datos locales y la baliza continúan a salvo.
+      </Text>
+      <TouchableOpacity
+        style={styles.retryButton}
+        onPress={onReset}
+        accessibilityRole="button"
+        accessibilityLabel="Reintentar y volver a la pantalla anterior"
+      >
+        <Text style={styles.retryText}>Reintentar</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const makeStyles = ({ colors }: AppTheme) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: spacing.xl,
+      backgroundColor: colors.background,
+    },
+    title: {
+      ...typography.scale.headline,
+      color: colors.panic,
+      marginBottom: spacing.sm,
+      textAlign: 'center',
+    },
+    description: {
+      ...typography.scale.bodyMedium,
+      color: colors.onSurfaceVariant,
+      textAlign: 'center',
+      marginBottom: spacing.xxl,
+    },
+    retryButton: {
+      minHeight: touchTargets.min,
+      minWidth: 160,
+      backgroundColor: colors.primary,
+      borderRadius: borderRadius.md,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: spacing.xl,
+    },
+    retryText: {
+      ...typography.scale.label,
+      color: colors.onPrimary,
+    },
+  });

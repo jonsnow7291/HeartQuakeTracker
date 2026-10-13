@@ -1,7 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ActivityIndicator, ViewStyle, TextStyle } from 'react-native';
-import { lightPalette } from '../theme/theme';
-import { spacing, borderRadius, typography, touchTargets } from '../theme/tokens';
+import { TouchableOpacity, StyleSheet, ActivityIndicator, ViewStyle, TextStyle } from 'react-native';
+import { Text } from './Text';
+import { useTheme } from '../theme/ThemeProvider';
+import { spacing, typography } from '../theme/tokens';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'outline';
 
@@ -28,33 +29,34 @@ export function Button({
   style,
   textStyle,
 }: ButtonProps) {
+  const { colors } = useTheme();
   const getBackgroundColor = () => {
-    if (disabled) return lightPalette.surfaceVariant;
+    if (disabled) return colors.surfaceVariant;
     switch (variant) {
       case 'danger':
-        return lightPalette.panic;
+        return colors.panic;
       case 'secondary':
-        return lightPalette.primaryContainer;
+        return colors.primaryContainer;
       case 'outline':
         return 'transparent';
       case 'primary':
       default:
-        return lightPalette.primary;
+        return colors.primary;
     }
   };
 
   const getTextColor = () => {
-    if (disabled) return lightPalette.outline;
+    if (disabled) return colors.outline;
     switch (variant) {
       case 'danger':
-        return lightPalette.onPanic;
+        return colors.onPanic;
       case 'secondary':
-        return lightPalette.onPrimaryContainer;
+        return colors.onPrimaryContainer;
       case 'outline':
-        return lightPalette.primary;
+        return colors.primary;
       case 'primary':
       default:
-        return lightPalette.onPrimary;
+        return colors.onPrimary;
     }
   };
 
@@ -71,8 +73,8 @@ export function Button({
         styles.base,
         {
           backgroundColor: getBackgroundColor(),
-          borderColor: variant === 'outline' ? lightPalette.primary : 'transparent',
-          borderWidth: variant === 'outline' ? 2 : 0,
+          borderColor: variant === 'outline' ? colors.primary : 'transparent',
+          borderWidth: variant === 'outline' ? 1.5 : 0,
         },
         style,
       ]}
@@ -88,9 +90,9 @@ export function Button({
 
 const styles = StyleSheet.create({
   base: {
-    minHeight: touchTargets.min,
+    minHeight: 52, // DESIGN.md: botones de 52 px para tocar con precisión durante un temblor
     minWidth: 120,
-    borderRadius: borderRadius.md,
+    borderRadius: 9999, // pastilla
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.sm,
     justifyContent: 'center',
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   text: {
-    ...typography.scale.label,
+    ...typography.scale.labelLg,
     textAlign: 'center',
   },
 });

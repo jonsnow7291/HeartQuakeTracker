@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text } from './Text';
+import { Icon } from './Icon';
 import { ErrorCode } from '../../contracts/errors';
 import { Button } from './Button';
-import { lightPalette } from '../theme/theme';
+import { useTheme, useThemedStyles } from '../theme/ThemeProvider';
 import { spacing, typography } from '../theme/tokens';
+import type { AppTheme } from '../theme/theme';
 
 export interface ErrorStateProps {
   code: ErrorCode;
@@ -101,11 +104,13 @@ const ERROR_MAP: Record<ErrorCode, ErrorDetails> = {
 };
 
 export function ErrorState({ code, onRetry, customMessage }: ErrorStateProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const details = ERROR_MAP[code] || ERROR_MAP.UNKNOWN;
 
   return (
     <View style={styles.container} accessible={true} accessibilityRole="alert">
-      <Text style={styles.icon}>⚠️</Text>
+      <Icon name="warning" size={40} color={colors.panic} />
       <Text style={styles.title}>{details.title}</Text>
       <Text style={styles.message}>{customMessage || details.message}</Text>
       {onRetry ? (
@@ -120,30 +125,31 @@ export function ErrorState({ code, onRetry, customMessage }: ErrorStateProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xl,
-    marginVertical: spacing.xl,
-  },
-  icon: {
-    fontSize: 48,
-    marginBottom: spacing.md,
-  },
-  title: {
-    ...typography.scale.title,
-    color: lightPalette.panic,
-    textAlign: 'center',
-    marginBottom: spacing.xs,
-  },
-  message: {
-    ...typography.scale.bodyMedium,
-    color: lightPalette.onSurfaceVariant,
-    textAlign: 'center',
-    marginBottom: spacing.lg,
-  },
-  button: {
-    marginTop: spacing.sm,
-  },
-});
+const makeStyles = ({ colors }: AppTheme) =>
+  StyleSheet.create({
+    container: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: spacing.xl,
+      marginVertical: spacing.xl,
+    },
+    icon: {
+      fontSize: 48,
+      marginBottom: spacing.md,
+    },
+    title: {
+      ...typography.scale.title,
+      color: colors.panic,
+      textAlign: 'center',
+      marginBottom: spacing.xs,
+    },
+    message: {
+      ...typography.scale.bodyMedium,
+      color: colors.onSurfaceVariant,
+      textAlign: 'center',
+      marginBottom: spacing.lg,
+    },
+    button: {
+      marginTop: spacing.sm,
+    },
+  });

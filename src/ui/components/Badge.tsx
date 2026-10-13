@@ -1,32 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import { View, StyleSheet } from 'react-native';
+import { Text } from './Text';
+import { Icon } from './Icon';
+import { useTheme } from '../theme/ThemeProvider';
 import { spacing, borderRadius, typography } from '../theme/tokens';
 
 export interface BadgeProps {
   title: string;
   unlocked?: boolean;
+  /** Nombre de Material Symbols. Sin ícono por defecto: una etiqueta de categoría no es un logro. */
+  icon?: string;
 }
 
-export function Badge({ title, unlocked = true }: BadgeProps) {
+export function Badge({ title, unlocked = true, icon }: BadgeProps) {
+  const { colors } = useTheme();
   return (
     <View
       style={[
         styles.badge,
         {
-          backgroundColor: unlocked ? lightPalette.primaryContainer : lightPalette.surfaceVariant,
-          borderColor: unlocked ? lightPalette.primary : lightPalette.outline,
+          backgroundColor: unlocked ? colors.primaryContainer : colors.surfaceVariant,
+          borderColor: unlocked ? colors.primary : colors.outline,
         },
       ]}
       accessible={true}
       accessibilityRole="text"
       accessibilityLabel={`Insignia: ${title}. ${unlocked ? 'Desbloqueada' : 'Bloqueada'}`}
     >
-      <Text style={styles.icon}>{unlocked ? '🏆' : '🔒'}</Text>
+      {!unlocked ? (
+        <Icon name="lock" size={16} color={colors.outline} style={styles.icon} />
+      ) : icon ? (
+        <Icon name={icon} size={16} color={colors.onPrimaryContainer} style={styles.icon} />
+      ) : null}
       <Text
         style={[
           styles.text,
-          { color: unlocked ? lightPalette.onPrimaryContainer : lightPalette.outline },
+          { color: unlocked ? colors.onPrimaryContainer : colors.outline },
         ]}
       >
         {title}

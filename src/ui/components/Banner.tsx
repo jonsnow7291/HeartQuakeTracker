@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text } from './Text';
+import { useTheme } from '../theme/ThemeProvider';
 import { spacing, borderRadius, typography } from '../theme/tokens';
 
 export type BannerKind = 'info' | 'warning' | 'critical' | 'success';
@@ -14,41 +15,43 @@ export interface BannerProps {
 }
 
 export function Banner({ kind, title, message, actionText, onAction }: BannerProps) {
+  const { colors } = useTheme();
   const getStyles = () => {
     switch (kind) {
       case 'critical':
         return {
-          bg: lightPalette.panicContainer,
-          titleColor: lightPalette.panic,
-          textColor: lightPalette.onPanicContainer,
-          borderColor: lightPalette.panic,
+          bg: colors.panicContainer,
+          titleColor: colors.panic,
+          textColor: colors.onPanicContainer,
+          borderColor: colors.panic,
         };
       case 'warning':
         return {
-          bg: lightPalette.warningContainer,
-          titleColor: lightPalette.warning,
-          textColor: lightPalette.onWarningContainer,
-          borderColor: lightPalette.warning,
+          bg: colors.warningContainer,
+          titleColor: colors.warning,
+          textColor: colors.onWarningContainer,
+          borderColor: colors.warning,
         };
       case 'success':
         return {
-          bg: lightPalette.successContainer,
-          titleColor: lightPalette.success,
-          textColor: lightPalette.onSuccessContainer,
-          borderColor: lightPalette.success,
+          bg: colors.successContainer,
+          titleColor: colors.success,
+          textColor: colors.onSuccessContainer,
+          borderColor: colors.success,
         };
       case 'info':
       default:
         return {
-          bg: lightPalette.primaryContainer,
-          titleColor: lightPalette.primary,
-          textColor: lightPalette.onPrimaryContainer,
-          borderColor: lightPalette.primary,
+          bg: colors.primaryContainer,
+          titleColor: colors.primary,
+          textColor: colors.onPrimaryContainer,
+          borderColor: colors.primary,
         };
     }
   };
 
   const styleConfig = getStyles();
+  const liveRegion = kind === 'critical' || kind === 'warning' ? 'assertive' : 'polite';
 
   return (
     <View
@@ -61,6 +64,8 @@ export function Banner({ kind, title, message, actionText, onAction }: BannerPro
       ]}
       accessible={true}
       accessibilityRole="alert"
+      accessibilityLiveRegion={liveRegion}
+      accessibilityLabel={message ? `${title}. ${message}` : title}
     >
       <View style={styles.textContainer}>
         <Text style={[styles.title, { color: styleConfig.titleColor }]}>{title}</Text>

@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text } from './Text';
+import { Icon } from './Icon';
 import { Button } from './Button';
-import { lightPalette } from '../theme/theme';
+import { useTheme, useThemedStyles } from '../theme/ThemeProvider';
 import { spacing, typography } from '../theme/tokens';
+import type { AppTheme } from '../theme/theme';
 
 export interface EmptyStateProps {
   title: string;
@@ -15,13 +18,15 @@ export interface EmptyStateProps {
 export function EmptyState({
   title,
   description,
-  icon = '📋',
+  icon = 'inbox',
   actionText,
   onAction,
 }: EmptyStateProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   return (
     <View style={styles.container} accessible={true} accessibilityRole="none">
-      <Text style={styles.icon}>{icon}</Text>
+      <Icon name={icon} size={48} color={colors.outline} style={styles.icon} />
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
       {actionText && onAction ? (
@@ -31,30 +36,31 @@ export function EmptyState({
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.xl,
-    marginVertical: spacing.xxl,
-  },
-  icon: {
-    fontSize: 48,
-    marginBottom: spacing.md,
-  },
-  title: {
-    ...typography.scale.headline,
-    color: lightPalette.onSurface,
-    textAlign: 'center',
-    marginBottom: spacing.xs,
-  },
-  description: {
-    ...typography.scale.bodyMedium,
-    color: lightPalette.onSurfaceVariant,
-    textAlign: 'center',
-    marginBottom: spacing.lg,
-  },
-  button: {
-    marginTop: spacing.sm,
-  },
-});
+const makeStyles = ({ colors }: AppTheme) =>
+  StyleSheet.create({
+    container: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: spacing.xl,
+      marginVertical: spacing.xxl,
+    },
+    icon: {
+      fontSize: 48,
+      marginBottom: spacing.md,
+    },
+    title: {
+      ...typography.scale.headline,
+      color: colors.onSurface,
+      textAlign: 'center',
+      marginBottom: spacing.xs,
+    },
+    description: {
+      ...typography.scale.bodyMedium,
+      color: colors.onSurfaceVariant,
+      textAlign: 'center',
+      marginBottom: spacing.lg,
+    },
+    button: {
+      marginTop: spacing.sm,
+    },
+  });

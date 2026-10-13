@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text } from './Text';
+import { useThemedStyles } from '../theme/ThemeProvider';
 import { spacing, typography, borderRadius } from '../theme/tokens';
+import type { AppTheme } from '../theme/theme';
 
 export interface CountdownProps {
   durationSeconds?: number;
@@ -9,27 +11,25 @@ export interface CountdownProps {
 }
 
 export function Countdown({ durationSeconds = 3, onFinish }: CountdownProps) {
+  const styles = useThemedStyles(makeStyles);
   const [secondsLeft, setSecondsLeft] = useState(durationSeconds);
+  // `onFinish` llega como función nueva en cada render del padre: se guarda en una ref para que el
+  // intervalo no se reinicie (antes el contador se quedaba clavado en 3 s).
+  const finishRef = useRef(onFinish);
+  finishRef.current = onFinish;
 
   useEffect(() => {
-    if (secondsLeft <= 0) {
-      if (onFinish) onFinish();
-      return;
-    }
-
+    const endsAt = Date.now() + durationSeconds * 1000;
     const timer = setInterval(() => {
-      setSecondsLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          if (onFinish) onFinish();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
+      const left = Math.max(0, Math.ceil((endsAt - Date.now()) / 1000));
+      setSecondsLeft(left);
+      if (left <= 0) {
+        clearInterval(timer);
+        finishRef.current?.();
+      }
+    }, 200);
     return () => clearInterval(timer);
-  }, [secondsLeft, onFinish]);
+  }, [durationSeconds]);
 
   const progressPercent = ((durationSeconds - secondsLeft) / durationSeconds) * 100;
 
@@ -44,31 +44,32 @@ export function Countdown({ durationSeconds = 3, onFinish }: CountdownProps) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    marginVertical: spacing.lg,
-  },
-  countdownNumber: {
-    ...typography.scale.panicCountdown,
-    color: lightPalette.panic,
-  },
-  label: {
-    ...typography.scale.label,
-    color: lightPalette.onSurfaceVariant,
-    marginTop: spacing.xs,
-    textTransform: 'uppercase',
-  },
-  progressBarTrack: {
-    width: '100%',
-    height: 8,
-    backgroundColor: lightPalette.surfaceVariant,
-    borderRadius: borderRadius.full,
-    marginTop: spacing.md,
-    overflow: 'hidden',
-  },
-  progressBarFill: {
-    height: '100%',
-    backgroundColor: lightPalette.panic,
-  },
-});
+const makeStyles = ({ colors }: AppTheme) =>
+  StyleSheet.create({
+    container: {
+      alignItems: 'center',
+      marginVertical: spacing.lg,
+    },
+    countdownNumber: {
+      ...typography.scale.panicCountdown,
+      color: colors.panic,
+    },
+    label: {
+      ...typography.scale.label,
+      color: colors.onSurfaceVariant,
+      marginTop: spacing.xs,
+      textTransform: 'uppercase',
+    },
+    progressBarTrack: {
+      width: '100%',
+      height: 8,
+      backgroundColor: colors.surfaceVariant,
+      borderRadius: borderRadius.full,
+      marginTop: spacing.md,
+      overflow: 'hidden',
+    },
+    progressBarFill: {
+      height: '100%',
+      backgroundColor: colors.panic,
+    },
+  });

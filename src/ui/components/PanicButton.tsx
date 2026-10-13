@@ -1,15 +1,28 @@
 import React, { useRef, useEffect } from 'react';
-import { TouchableOpacity, Text, StyleSheet, Animated, View } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import { TouchableOpacity, StyleSheet, Animated, View } from 'react-native';
+import { Text } from './Text';
+import { Icon } from './Icon';
+import { useTheme, useThemedStyles } from '../theme/ThemeProvider';
 import { spacing, typography, touchTargets } from '../theme/tokens';
+import type { AppTheme } from '../theme/theme';
 
 export interface PanicButtonProps {
   onPress: () => void;
   active?: boolean;
   disabled?: boolean;
+  variant?: 'circular' | 'pill';
+  label?: string;
 }
 
-export function PanicButton({ onPress, active = false, disabled = false }: PanicButtonProps) {
+export function PanicButton({
+  onPress,
+  active = false,
+  disabled = false,
+  variant = 'circular',
+  label,
+}: PanicButtonProps) {
+  const { colors } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -35,6 +48,34 @@ export function PanicButton({ onPress, active = false, disabled = false }: Panic
     }
   }, [active, pulseAnim]);
 
+  if (variant === 'pill') {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        disabled={disabled}
+        activeOpacity={0.88}
+        accessible={true}
+        accessibilityRole="button"
+        accessibilityLabel="Botón de Pánico de Emergencia"
+        accessibilityHint="Pulsa una vez para seleccionar tu situación y pedir auxilio inmediato"
+        accessibilityState={{ disabled, busy: active }}
+        accessibilityLiveRegion="polite"
+        style={[
+          styles.pillButton,
+          {
+            backgroundColor: colors.panic,
+            opacity: disabled ? 0.6 : 1,
+          },
+        ]}
+      >
+        <Icon name="crisis_alert" size={20} color={colors.onPanic} style={styles.pillIcon} />
+        <Text style={[styles.pillText, { color: colors.onPanic }]}>
+          {label ?? (active ? 'TRANSMITIENDO AUXILIO' : 'Botón SOS / Enviar mi ubicación')}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Animated.View
@@ -42,72 +83,106 @@ export function PanicButton({ onPress, active = false, disabled = false }: Panic
           styles.halo,
           {
             transform: [{ scale: pulseAnim }],
-            opacity: active ? 0.6 : 0.2,
+            opacity: active ? 0.7 : 0.25,
+            backgroundColor: active ? colors.panicContainer : colors.secondaryContainer,
           },
         ]}
       />
       <TouchableOpacity
         onPress={onPress}
         disabled={disabled}
-        activeOpacity={0.8}
+        activeOpacity={0.85}
         accessible={true}
         accessibilityRole="button"
         accessibilityLabel="Botón de Pánico de Emergencia"
         accessibilityHint="Pulsa una vez para seleccionar tu situación y pedir auxilio inmediato"
+        accessibilityState={{ disabled, busy: active }}
+        accessibilityLiveRegion="polite"
         style={[
           styles.button,
           {
-            backgroundColor: active ? '#93000A' : lightPalette.panic,
+            backgroundColor: colors.panic,
+            borderColor: active ? colors.onPanicContainer : colors.onPanic,
           },
         ]}
       >
-        <Text style={styles.buttonText}>PÁNICO</Text>
-        <Text style={styles.subtext}>{active ? 'TRANSMITIENDO' : 'TOCA PARA AUXILIO'}</Text>
+        <Icon
+          name="crisis_alert"
+          size={36}
+          color={colors.onPanic}
+          style={styles.icon}
+        />
+        <Text style={[styles.buttonText, { color: colors.onPanic }]}>PÁNICO</Text>
+        <Text style={[styles.subtext, { color: colors.onPanic }]}>
+          {active ? 'TRANSMITIENDO' : 'TOCA PARA AUXILIO'}
+        </Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginVertical: spacing.xl,
-  },
-  halo: {
-    position: 'absolute',
-    width: 170,
-    height: 170,
-    borderRadius: 85,
-    backgroundColor: lightPalette.panicContainer,
-  },
-  button: {
-    width: 140,
-    height: 140,
-    borderRadius: 70,
-    minHeight: touchTargets.panic,
-    minWidth: touchTargets.panic,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 8,
-    shadowColor: lightPalette.panic,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    borderWidth: 4,
-    borderColor: '#FFFFFF',
-  },
-  buttonText: {
-    ...typography.scale.headline,
-    color: lightPalette.onPanic,
-    fontWeight: '900',
-    letterSpacing: 2,
-  },
-  subtext: {
-    ...typography.scale.label,
-    fontSize: 10,
-    color: lightPalette.onPanic,
-    marginTop: spacing.xxs,
-    textTransform: 'uppercase',
-  },
-});
+const makeStyles = ({ brand }: AppTheme) =>
+  StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginVertical: spacing.xl,
+    },
+    halo: {
+      position: 'absolute',
+      width: 176,
+      height: 176,
+      borderRadius: 88,
+    },
+    button: {
+      width: 140,
+      height: 140,
+      borderRadius: 70,
+      minHeight: touchTargets.panic,
+      minWidth: touchTargets.panic,
+      justifyContent: 'center',
+      alignItems: 'center',
+      elevation: 8,
+      shadowColor: brand.espresso,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.35,
+      shadowRadius: 12,
+      borderWidth: 4,
+    },
+    icon: {
+      marginBottom: spacing.xxs,
+    },
+    buttonText: {
+      ...typography.scale.headlineMd,
+      fontWeight: '800',
+      letterSpacing: 2,
+    },
+    subtext: {
+      ...typography.scale.labelCaps,
+      fontSize: 10,
+      marginTop: 2,
+      letterSpacing: 1.2,
+    },
+    pillButton: {
+      width: '100%',
+      minHeight: 52,
+      borderRadius: 9999,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: spacing.lg,
+      paddingVertical: spacing.sm,
+      elevation: 4,
+      shadowColor: brand.espresso,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.18,
+      shadowRadius: 16,
+    },
+    pillIcon: {
+      marginRight: spacing.xs,
+    },
+    pillText: {
+      ...typography.scale.labelLg,
+      fontWeight: '700',
+    },
+  });

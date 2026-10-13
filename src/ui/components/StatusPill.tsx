@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import { View, StyleSheet } from 'react-native';
+import { Text } from './Text';
+import { useTheme } from '../theme/ThemeProvider';
 import { spacing, borderRadius, typography } from '../theme/tokens';
 
 export type StatusType = 'online' | 'offline' | 'syncing' | 'beacon' | 'lowPower';
@@ -11,41 +12,42 @@ export interface StatusPillProps {
 }
 
 export function StatusPill({ type, label }: StatusPillProps) {
+  const { colors } = useTheme();
   const getConfig = () => {
     switch (type) {
       case 'online':
         return {
-          bg: lightPalette.successContainer,
-          text: lightPalette.onSuccessContainer,
-          dot: lightPalette.success,
+          bg: colors.successContainer,
+          text: colors.onSuccessContainer,
+          dot: colors.success,
           defaultLabel: 'En Línea',
         };
       case 'offline':
         return {
-          bg: lightPalette.surfaceVariant,
-          text: lightPalette.onSurfaceVariant,
-          dot: lightPalette.outline,
+          bg: colors.surfaceVariant,
+          text: colors.onSurfaceVariant,
+          dot: colors.outline,
           defaultLabel: 'Sin Conexión',
         };
       case 'syncing':
         return {
-          bg: lightPalette.primaryContainer,
-          text: lightPalette.onPrimaryContainer,
-          dot: lightPalette.primary,
+          bg: colors.primaryContainer,
+          text: colors.onPrimaryContainer,
+          dot: colors.primary,
           defaultLabel: 'Sincronizando',
         };
       case 'beacon':
         return {
-          bg: lightPalette.panicContainer,
-          text: lightPalette.onPanicContainer,
-          dot: lightPalette.panic,
+          bg: colors.panicContainer,
+          text: colors.onPanicContainer,
+          dot: colors.panic,
           defaultLabel: 'Baliza BLE Activa',
         };
       case 'lowPower':
         return {
-          bg: lightPalette.warningContainer,
-          text: lightPalette.onWarningContainer,
-          dot: lightPalette.warning,
+          bg: colors.warningContainer,
+          text: colors.onWarningContainer,
+          dot: colors.warning,
           defaultLabel: 'Ahorro (<20%)',
         };
     }

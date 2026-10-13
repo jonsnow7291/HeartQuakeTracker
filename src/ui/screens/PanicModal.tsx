@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Modal, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Modal } from 'react-native';
+import { Text } from '../components/Text';
+import { Icon } from '../components/Icon';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Severity } from '../../contracts/types';
 import { SeveritySelector } from '../components/SeveritySelector';
 import { Countdown } from '../components/Countdown';
 import { Button } from '../components/Button';
-import { lightPalette } from '../theme/theme';
-import { spacing, typography } from '../theme/tokens';
+import { useTheme, useThemedStyles } from '../theme/ThemeProvider';
+import { spacing, typography, borderRadius } from '../theme/tokens';
+import type { AppTheme } from '../theme/theme';
 
 export interface PanicModalProps {
   visible: boolean;
@@ -22,6 +26,8 @@ export function PanicModal({
   onCancelCountdown,
   onActivated,
 }: PanicModalProps) {
+  const { colors, brand } = useTheme();
+  const styles = useThemedStyles(makeStyles);
   const [step, setStep] = useState<'SELECT' | 'CONFIRMING'>('SELECT');
   const [selectedSeverity, setSelectedSeverity] = useState<Severity | undefined>();
 
@@ -54,16 +60,23 @@ export function PanicModal({
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
           {step === 'SELECT' ? (
-            <>
+            <View style={styles.selectStepContainer}>
+              <View style={styles.iconCircle}>
+                <Icon name="crisis_alert" size={36} color={colors.panic} />
+              </View>
+
               <Text style={styles.title}>¿Cuál es tu situación?</Text>
               <Text style={styles.subtitle}>
                 Toca una opción para activar tu baliza de socorro.
               </Text>
 
-              <SeveritySelector
-                onSelect={handleSelectSeverity}
-                selected={selectedSeverity}
-              />
+              <View style={styles.selectorWrap}>
+                <SeveritySelector
+                  layout="cards"
+                  onSelect={handleSelectSeverity}
+                  selected={selectedSeverity}
+                />
+              </View>
 
               <Button
                 title="Volver atrás"
@@ -71,22 +84,35 @@ export function PanicModal({
                 onPress={onClose}
                 style={styles.backButton}
               />
-            </>
+            </View>
           ) : (
             <View style={styles.confirmingContainer}>
-              <Text style={styles.confirmingTitle}>EMITIENDO ALERTA DE AUXILIO</Text>
-              <Text style={styles.confirmingSubtitle}>
-                Se activará la linterna estroboscópica, el tono acústico y la baliza BLE.
-              </Text>
+              <View style={styles.warningCard} accessibilityRole="alert" accessibilityLiveRegion="assertive">
+                <View style={styles.activeTag}>
+                  <View style={styles.pingDot} />
+                  <Text style={styles.activeTagText}>MODO CRISIS ACTIVO • RF-05</Text>
+                </View>
 
-              <Countdown durationSeconds={3} onFinish={handleCountdownFinish} />
+                <Text style={styles.confirmingTitle}>EMITIENDO ALERTA DE AUXILIO</Text>
+                <Text style={styles.confirmingSubtitle}>
+                  Se activará la linterna estroboscópica, el tono acústico y la baliza BLE.
+                </Text>
 
-              <Button
-                title="Cancelar pánico accidental"
-                variant="danger"
-                onPress={handleCancel}
-                style={styles.cancelButton}
-              />
+                <View style={styles.countdownBox}>
+                  <Countdown durationSeconds={3} onFinish={handleCountdownFinish} />
+                </View>
+
+                <Text style={styles.cancelHint}>
+                  Si fue involuntario, cancela antes de que venza el contador:
+                </Text>
+
+                <Button
+                  title="Cancelar pánico accidental"
+                  variant="danger"
+                  onPress={handleCancel}
+                  style={styles.cancelButton}
+                />
+              </View>
             </View>
           )}
         </View>
@@ -95,51 +121,120 @@ export function PanicModal({
   );
 }
 
-const styles = StyleSheet.create({
+const makeStyles = ({ colors, brand }: AppTheme) =>
+  StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: lightPalette.background,
+    backgroundColor: colors.background,
   },
   content: {
     flex: 1,
-    padding: spacing.lg,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
     justifyContent: 'center',
   },
+  selectStepContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  iconCircle: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: colors.panicContainer,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.md,
+  },
   title: {
-    ...typography.scale.headline,
-    color: lightPalette.panic,
+    ...typography.scale.headlineLg,
+    color: brand.espresso,
     textAlign: 'center',
+    fontWeight: '800',
   },
   subtitle: {
-    ...typography.scale.bodyMedium,
-    color: lightPalette.onSurfaceVariant,
+    ...typography.scale.bodyMd,
+    color: colors.onSurfaceVariant,
     textAlign: 'center',
     marginTop: spacing.xs,
     marginBottom: spacing.md,
   },
+  selectorWrap: {
+    width: '100%',
+  },
   backButton: {
     marginTop: spacing.lg,
+    width: '100%',
+    minHeight: 52,
   },
   confirmingContainer: {
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  warningCard: {
+    width: '100%',
+    backgroundColor: colors.surface,
+    borderRadius: borderRadius.xl,
+    padding: spacing.xl,
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: brand.border,
+    elevation: 4,
+    shadowColor: brand.espresso,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+  },
+  activeTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.panicContainer,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xxs,
+    borderRadius: borderRadius.full,
+    marginBottom: spacing.md,
+  },
+  pingDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.panic,
+    marginRight: spacing.xs,
+  },
+  activeTagText: {
+    ...typography.scale.labelCaps,
+    color: colors.onPanicContainer,
+    letterSpacing: 0.8,
+  },
   confirmingTitle: {
-    ...typography.scale.title,
-    color: lightPalette.panic,
+    ...typography.scale.headlineMd,
+    color: colors.panic,
     textAlign: 'center',
     fontWeight: '800',
+    letterSpacing: 0.5,
   },
   confirmingSubtitle: {
-    ...typography.scale.bodyMedium,
-    color: lightPalette.onSurfaceVariant,
+    ...typography.scale.bodyMd,
+    color: colors.onSurfaceVariant,
     textAlign: 'center',
-    marginTop: spacing.sm,
+    marginTop: spacing.xs,
     marginBottom: spacing.lg,
-    paddingHorizontal: spacing.md,
+    lineHeight: 20,
+  },
+  countdownBox: {
+    marginVertical: spacing.md,
+    alignItems: 'center',
+  },
+  cancelHint: {
+    ...typography.scale.bodySm,
+    color: colors.onSurfaceVariant,
+    textAlign: 'center',
+    marginTop: spacing.md,
+    marginBottom: spacing.sm,
   },
   cancelButton: {
-    marginTop: spacing.xxl,
     width: '100%',
+    minHeight: 52,
   },
 });

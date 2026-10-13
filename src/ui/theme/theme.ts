@@ -26,6 +26,16 @@ export interface ColorPalette {
   panicContainer: string;
   onPanicContainer: string;
   terracottaAlert: string;
+  error: string;
+  onError: string;
+  errorContainer: string;
+  onErrorContainer: string;
+  success: string;
+  onSuccessContainer: string;
+  successContainer: string;
+  warning: string;
+  onWarningContainer: string;
+  warningContainer: string;
 
   background: string;
   onBackground: string;
@@ -45,9 +55,35 @@ export interface ColorPalette {
   };
 }
 
+/**
+ * Colores de marca y de fase (DESIGN.md). Se exponen en el tema para que las pantallas no usen
+ * hex fijos: en modo oscuro los tonos claros (crema, arena, espresso) se invierten para mantener
+ * el contraste texto/fondo equivalente al del modo claro.
+ */
+export interface BrandPalette {
+  espresso: string;
+  espressoSoft: string;
+  cream: string;
+  sand: string;
+  linen: string;
+  border: string;
+  prevention: string;
+  during: string;
+  after: string;
+  terracotta: string;
+  navActive: string;
+  navInactive: string;
+  onPhase: string;
+  /** Relleno oscuro de botones y barras (no se invierte en modo oscuro). */
+  fill: string;
+  /** Texto/icono sobre `fill`. */
+  onFill: string;
+}
+
 export interface AppTheme {
   isDark: boolean;
   colors: ColorPalette;
+  brand: BrandPalette;
   spacing: typeof spacing;
   borderRadius: typeof borderRadius;
   typography: typeof typography;
@@ -81,6 +117,16 @@ export const lightPalette: ColorPalette = {
   panicContainer: '#FFDAD6',
   onPanicContainer: '#410002',
   terracottaAlert: '#C24726',
+  error: '#BA1A1A',
+  onError: '#FFFFFF',
+  errorContainer: '#FFDAD6',
+  onErrorContainer: '#410002',
+  success: '#2E7D32',
+  successContainer: '#DDF0DD',
+  onSuccessContainer: '#0F3D12',
+  warning: '#B26A00',
+  warningContainer: '#FFEBC7',
+  onWarningContainer: '#4A2C00',
 
   background: '#FDF9F2',
   onBackground: '#1C1C18',
@@ -126,6 +172,16 @@ export const darkPalette: ColorPalette = {
   panicContainer: '#93000A',
   onPanicContainer: '#FFDAD6',
   terracottaAlert: '#C24726',
+  error: '#FFB4AB',
+  onError: '#690005',
+  errorContainer: '#93000A',
+  onErrorContainer: '#FFDAD6',
+  success: '#81C784',
+  successContainer: '#1B4D2E',
+  onSuccessContainer: '#C8E6C9',
+  warning: '#FFB74D',
+  warningContainer: '#5C3A00',
+  onWarningContainer: '#FFE082',
 
   background: '#1A1815',
   onBackground: '#F4F0E9',
@@ -145,9 +201,52 @@ export const darkPalette: ColorPalette = {
   },
 };
 
+/** Marca en modo claro: idéntica a los tokens originales. */
+export const lightBrand: BrandPalette = {
+  espresso: '#2A1D13',
+  espressoSoft: '#988375',
+  cream: '#FDF9F2',
+  sand: '#F4ECE1',
+  linen: '#FAF6F0',
+  border: '#E2D5C3',
+  prevention: '#3D7D54',
+  during: '#D47A22',
+  after: '#3F6F8E',
+  terracotta: '#C24726',
+  navActive: '#FFDCC3',
+  navInactive: '#D1C4BC',
+  onPhase: '#FFFFFF',
+  fill: '#2A1D13',
+  onFill: '#FDF9F2',
+};
+
+/**
+ * Marca en modo oscuro. `espresso`/`cream`/`sand`/`border` se invierten para que los pares
+ * (texto espresso sobre crema) y (fondo espresso con texto crema) sigan teniendo contraste.
+ * Las fases se aclaran lo justo para verse sobre fondo oscuro manteniendo texto blanco legible.
+ */
+export const darkBrand: BrandPalette = {
+  espresso: '#F4F0E9',
+  espressoSoft: '#B7ABA0',
+  cream: '#1A1815',
+  sand: '#23201C',
+  linen: '#23201C',
+  border: '#4E453F',
+  prevention: '#2F6B45',
+  during: '#B25E12',
+  after: '#35617E',
+  terracotta: '#D2694B',
+  navActive: '#E9C9A6',
+  navInactive: '#CDBFB3',
+  onPhase: '#FFFFFF',
+  fill: '#5C4636',
+  onFill: '#F4F0E9',
+};
+
 export const lightTheme: AppTheme = {
   isDark: false,
   colors: lightPalette,
+  brand: lightBrand,
   spacing,
   borderRadius,
   typography,
@@ -158,6 +257,7 @@ export const lightTheme: AppTheme = {
 export const darkTheme: AppTheme = {
   isDark: true,
   colors: darkPalette,
+  brand: darkBrand,
   spacing,
   borderRadius,
   typography,

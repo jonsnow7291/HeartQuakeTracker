@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useServices } from './useServices';
-import { EmergencyState, Severity } from '../../contracts/emergency';
+import { EmergencyState } from '../../contracts/emergency';
+import { Severity } from '../../contracts/types';
 
 const DEFAULT_STATE: EmergencyState = {
   phase: 'IDLE',

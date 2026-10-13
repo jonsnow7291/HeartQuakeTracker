@@ -18,7 +18,7 @@ export interface QuizEngineState {
   score: number;
   isComplete: boolean;
   answers: QuizAnswer[];
-  currentQuestion: QuizQuestion;
+  currentQuestion: QuizQuestion | undefined;
   lastFeedback?: AnswerFeedback;
   recommendedGuides: string[];
 }
@@ -82,7 +82,7 @@ export class QuizEngine {
       throw new Error('El cuestionario ya ha finalizado');
     }
 
-    const question = this.level.questions[this.currentIndex];
+    const question = this.level.questions[this.currentIndex]!;
     const isCorrect = chosenIndex === question.correctIndex;
 
     if (isCorrect) {
@@ -154,11 +154,11 @@ export class QuizEngine {
     if (!this.isPassed()) return badges;
 
     if (this.level.id.includes('1') || this.level.order === 1) {
-      badges.push('NIVEL_1_COMPLETADO');
+      badges.push('NIVEL_1');
     } else if (this.level.id.includes('2') || this.level.order === 2) {
-      badges.push('NIVEL_2_COMPLETADO');
+      badges.push('NIVEL_2');
     } else if (this.level.id.includes('3') || this.level.order === 3) {
-      badges.push('NIVEL_3_COMPLETADO');
+      badges.push('NIVEL_3');
     }
 
     if (this.score === this.level.questions.length) {

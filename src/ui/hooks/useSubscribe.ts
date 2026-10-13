@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Unsubscribe } from '../../contracts/types';
 
 /**
@@ -13,11 +13,17 @@ export function useSubscribe<T>(
   initialValue?: T
 ): T | undefined {
   const [data, setData] = useState<T | undefined>(initialValue);
+  // Los llamadores pasan una flecha nueva en cada render. Si el efecto dependiera de ella se volvería a
+  // suscribir en cada render y, como los servicios reales emiten el estado al suscribirse, entraría en
+  // un bucle ("Maximum update depth exceeded"). Se suscribe una sola vez mientras exista la función.
+  const fnRef = useRef(subscribeFn);
+  fnRef.current = subscribeFn;
+  const enabled = subscribeFn !== undefined;
 
   useEffect(() => {
-    if (!subscribeFn) return;
+    if (!enabled) return;
 
-    const unsubscribe = subscribeFn((newData) => {
+    const unsubscribe = fnRef.current?.((newData) => {
       setData(newData);
     });
 
@@ -26,7 +32,7 @@ export function useSubscribe<T>(
         unsubscribe();
       }
     };
-  }, [subscribeFn]);
+  }, [enabled]);
 
   return data;
 }

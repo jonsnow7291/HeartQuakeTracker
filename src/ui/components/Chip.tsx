@@ -1,6 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { lightPalette } from '../theme/theme';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { Text } from './Text';
+import { useTheme } from '../theme/ThemeProvider';
 import { spacing, borderRadius, typography, touchTargets } from '../theme/tokens';
 
 export interface ChipProps {
@@ -10,6 +11,7 @@ export interface ChipProps {
 }
 
 export function Chip({ label, selected = false, onPress }: ChipProps) {
+  const { colors } = useTheme();
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -20,14 +22,14 @@ export function Chip({ label, selected = false, onPress }: ChipProps) {
       style={[
         styles.chip,
         {
-          backgroundColor: selected ? lightPalette.primary : lightPalette.surfaceVariant,
+          backgroundColor: selected ? colors.primary : colors.surfaceVariant,
         },
       ]}
     >
       <Text
         style={[
           styles.text,
-          { color: selected ? lightPalette.onPrimary : lightPalette.onSurfaceVariant },
+          { color: selected ? colors.onPrimary : colors.onSurfaceVariant },
         ]}
       >
         {label}
