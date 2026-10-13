@@ -1,29 +1,45 @@
-# Contexto compartido para agentes (herdr) – EarthQuakeTracker
+# Contexto para agentes (herdr) – EarthQuakeTracker
 
-**Proyecto:** app móvil offline-first (React Native + TypeScript) para prevención, respuesta y recuperación ante sismos en Colombia. Código MW-2026, UNIMINUTO Ing. de Software, 16 semanas.
+**Proyecto:** app móvil offline-first (React Native 0.87 bare + TypeScript) para prevención, respuesta y recuperación ante sismos en Colombia. Código MW-2026, UNIMINUTO Ing. de Software. Estado a 12-oct-2026: **funciona en Android** (probado en un Motorola edge 50 fusion, Android 15); **iOS sin compilar** (el entorno es Linux).
 
-**Equipo:** Juan Diego (backend/core/servidor) y Santiago (frontend/contenido). Este repo (`~/Downloads/uni/Ing.De Software/earthquake-tracker`) lo está montando Juan Diego con Claude Code (pane w3:p1). Antigravity CLI (agy, pane w3:p2) apoya con tareas pequeñas.
+**Fuentes de verdad (solo lectura):** `BASE_CONOCIMIENTO/` (requisitos RF-01…13, RNF-01…07), `PLAN_DESARROLLO/compartido/06_decisiones_semana_1.md` (decisiones D-01…D-38), `DOCS/` (propuesta, ISO 20000-1), `design/mockups/earthquake_tracker/DESIGN.md` y las capturas de `design/mockups/*/screen.png`.
 
-**Documentación (solo lectura, fuente de verdad):**
-- Requisitos y análisis: `~/Downloads/uni/Ing.De Software/BASE_CONOCIMIENTO/` (empieza por `00_INDICE.md`).
-- Plan en dos carriles: `~/Downloads/uni/Ing.De Software/PLAN_DESARROLLO/` → `00_LEEME_PLAN.md`, `compartido/` (propiedad, contratos TS, decisiones D-01…D-38, alcance MVP), `juan_diego_backend/`, `santiago_frontend/`.
+## Mapa del repositorio
+| Carpeta | Contenido |
+|---|---|
+| `src/contracts/` | Interfaces TS de los 16 servicios (no se cambian sin acuerdo) |
+| `src/core/` | Lógica pura y probada en Node (sesión, contenido, progreso, ficha, emergencia, malla, sensores, sync, poi, aid, rescuer) |
+| `src/platform/` | Adaptadores de React Native y módulos nativos (SQLCipher, Keychain, BLE, ubicación, Argon2 nativo, mapa) |
+| `src/ui/` | Pantallas, componentes del sistema de diseño, navegación |
+| `src/app/bootstrap.ts` | Orden de registro de servicios reales (el orden importa: `emergency` antes de `mesh`) |
+| `android/`, `ios/` | Nativo. Kotlin: señalización, BLE, acelerómetro, Argon2 (`com.earthquaketracker.*`). iOS escrito pero sin verificar |
+| `assets/bundle/` | **Va dentro del APK:** `map/` (bogota.pmtiles 19 MB + fuentes), `poi/pois.json` (697 puntos), `rescuer/list.json` (lista firmada) |
+| `server/` | API Fastify. **Solo corre en local** (`localhost:3000`, en memoria) |
+| `scripts/` | `build-map.sh`, `build-pois.js`, `rescuer-keys.js`, `issue-rescuer-codes.js`, validadores |
+| `docs/` | Esta documentación (índice en `docs/README.md`) |
 
-**Estado actual (Semana 1, carril de Juan Diego):** repo recién creado (`git init`, vacío). Pendiente: estructura del monorepo, scaffold RN, `src/contracts/` (interfaces TS de `compartido/03_contratos_ts.md`), `src/core/container.ts` + mocks, esquemas JSON de contenido, CI, ADRs.
+## Reglas que ya se cumplen (no las rompas)
+1. **Texto con `components/Text`** y **íconos con `components/Icon`**; nunca `Text`/`SafeAreaView` de `react-native` ni emojis. `SafeAreaView` de `react-native-safe-area-context`.
+2. **No mostrar datos inventados como reales.** Sin valores de relleno del mockup: si no hay dato, «—», «sin dato» o un estado explícito.
+3. **Lógica en `src/core`, nunca en la UI.** Lo que dependa de React Native o de nativo va en `src/platform`.
+4. **Cripto:** Ed25519 real con `@noble/curves` (en Node y en Hermes). No uses `node:crypto` con respaldo falso.
+5. **Códigos de socorrista:** solo hashes firmados; ningún código en claro en el código (`docs/SOCORRISTAS.md`). `server/.env` guarda la clave privada y no se versiona.
+6. Hermes **no tiene** `TextDecoder` ni `crypto.getRandomValues` nativos (ya hay polyfill y utilidades propias).
+7. SQLite: escrituras en cola y `busy_timeout`; las alertas se procesan en fila.
+8. Android 15: el `SafeAreaView` de `react-native` rompe Fabric; el servicio en primer plano solo declara tipos con permisos concedidos.
 
-**Decisiones clave:** RN bare (no Expo), TypeScript estricto, Yarn 1.x (en `~/.local/bin/yarn`), Zustand + React Navigation en UI, SQLCipher, BLE (scan con react-native-ble-plx, advertising nativo propio), servidor Node+Fastify+PostgreSQL+pg-boss.
+## Cómo probar
+- `npx tsc --noEmit` y `npx tsc --noEmit -p tsconfig.app.json`; `npx jest --runInBand` (172 pruebas, solo el núcleo).
+- Dispositivo: Metro (`npx react-native start`) + `adb reverse tcp:8081 tcp:8081`; la compilación nativa con `android/gradlew installDebug`. Requiere `JAVA_HOME=/usr/lib/jvm/java-17-openjdk` y SDK en `~/Android/Sdk`.
+- **No ejecutes gradle, yarn ni jest en paralelo** (la máquina se satura) y **cierra los demonios de Gradle al terminar** (`./gradlew --stop`).
+- El teléfono se desconecta de `adb` con frecuencia: `adb kill-server; adb start-server` y reautorizar.
 
-## Reglas para el agente que apoya
-1. **Una carpeta, un dueño.** Juan Diego: `src/contracts`, `src/core`, `android`, `ios`, `server`, config raíz. Santiago: `src/ui`, `content`, `assets`, `design`. No edites carpetas fuera de lo que se te asigne explícitamente.
-2. **No cambies contratos** (`src/contracts`) sin que Juan Diego lo pida.
-3. **No instales dependencias globales ni toques `package.json` raíz** sin pedirlo; no hagas `git commit`/`push`.
-4. Código y comentarios en español donde aplique; TS estricto, sin `any` en contratos.
-5. Ante duda, pregunta; reporta qué archivos tocaste al terminar.
+## Trabajo con agentes
+- `agy` (Gemini) y `opencode` se lanzan por herdr: `herdr pane split` → `herdr agent start <nombre> --kind agy|opencode --pane <id>` → `herdr agent prompt`. Nombres en minúsculas, dígitos, `-` o `_`.
+- `opencode` con su modelo por defecto falla (retirado): usar `-- -m opencode/big-pickle`.
+- Dale a cada agente un documento (`docs/TAREAS_*.md`) y archivos permitidos disjuntos; pide que avise con `herdr agent prompt w4:p1 "…"`.
+- **Revisa su trabajo**: ya cometieron errores (datos de ejemplo del mockup mostrados como reales, usar `lastPosition` que solo existe en emergencia).
 
-## Tareas que se le pueden delegar (pequeñas, aisladas)
-Esquemas JSON de contenido (`content/schema/`), scripts (`scripts/validate-content`, `check-ownership`), plantillas de ADR, `.env.example`, `CODEOWNERS`, README de carpetas, redacción de datos semilla (POIs/entidades de Bogotá en `server/seed/`), tests unitarios de utilidades puras.
-
-**Por ahora no hay tarea asignada: espera instrucciones de Juan Diego.**
-
----
-## ACTUALIZACIÓN: alcance = SOLO BACKEND
-Juan Diego y los agentes (Claude + agy) trabajamos **solo backend/core/servidor**. **No crear ni editar** `src/ui`, `content/guias|quiz|legal|textos`, `assets`, `design`, ni scaffold React Native (eso es de Santiago). Tu zona permitida: `content/schema/`, `scripts/`, `server/`, `docs/adr/`, `docs/jd/`, `.github/`, `.env.example`, `CODEOWNERS`.
+## Estado funcional (resumen)
+Verificado en teléfono: onboarding, guías, quiz y logros (persisten), checklists, ficha médica cifrada, PIN con Argon2 nativo, pánico con flash y cola de sincronización, mapa offline con GPS real y 697 puntos, modo socorrista con lista firmada, compartir estado, modo avión.
+**Sin verificar o pendiente:** BLE/malla/quórum/ficha al socorrista entre teléfonos (A-18), servidor desplegado (A-17), iOS (A-16), puntos no verificados oficialmente (A-19), respaldo por SMS (A-20), avisos de posible sismo (A-21), actualización de contenido (A-23), modo oscuro y accesibilidad (A-24), pruebas de interfaz (A-25). Detalle en `Historial_de_Fallos.docx`.

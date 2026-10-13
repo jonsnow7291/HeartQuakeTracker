@@ -19,7 +19,7 @@ Antes de emitir peticiones a endpoints protegidos por dispositivo, el cliente m�
 
 - **Ruta:** `POST /v1/devices/register`
 - **Autenticación:** Pública con **Prueba de Posesión** (*Proof of Possession*).
-- **Esquema Zod:** [`registerInput`](file:///home/lazarus/Downloads/uni/Ing.De Software/earthquake-tracker/server/src/routes/schemas.ts#L66-L72)
+- **Esquema Zod:** [`registerInput`](file:///home/lazarus/Downloads/uni/Ing.De Software/server/src/routes/schemas.ts#L66-L72)
 
 ### Proceso de Registro:
 1. El cliente genera un par de claves asimétricas **Ed25519** (32 bytes de clave pública cruda).
@@ -76,7 +76,7 @@ Para todos los endpoints que requieren firma de dispositivo (`POST /v1/sync/batc
 | `X-Signature` | String (base64) | Firma digital Ed25519 generada con la clave privada del dispositivo sobre la **cadena canónica**. |
 
 ### Construcción de la Cadena Canónica
-La función [`canonicalRequest()`](file:///home/lazarus/Downloads/uni/Ing.De Software/earthquake-tracker/server/src/security/deviceAuth.ts#L41-L43) define la representación textual exacta que debe firmarse:
+La función [`canonicalRequest()`](file:///home/lazarus/Downloads/uni/Ing.De Software/server/src/security/deviceAuth.ts#L41-L43) define la representación textual exacta que debe firmarse:
 
 $$\text{CanonicalRequest} = \text{METODO} + \texttt{"\\n"} + \text{RUTA+QUERY} + \texttt{"\\n"} + \text{TS} + \texttt{"\\n"} + \text{NONCE} + \texttt{"\\n"} + \text{SHA256HEX(cuerpo)}$$
 
