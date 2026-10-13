@@ -15,6 +15,7 @@ export class MockEmergencyService implements EmergencyService {
     beaconActive: false,
     meshActive: false,
     medicalCardArmed: false,
+    noBridge2Min: false,
   };
 
   private listeners: ((s: EmergencyState) => void)[] = [];
@@ -32,8 +33,17 @@ export class MockEmergencyService implements EmergencyService {
     if (this.devController) {
       this.devController.subscribe((active) => {
         const isLowPower = active.includes('bateria_15');
+        const noBridge2Min = active.includes('sin_puente_2min');
+        let changed = false;
         if (this.state.lowPower !== isLowPower) {
           this.state = { ...this.state, lowPower: isLowPower };
+          changed = true;
+        }
+        if (this.state.noBridge2Min !== noBridge2Min) {
+          this.state = { ...this.state, noBridge2Min };
+          changed = true;
+        }
+        if (changed) {
           this.notify();
         }
       });
@@ -76,12 +86,14 @@ export class MockEmergencyService implements EmergencyService {
 
     this.confirmTimer = setTimeout(() => {
       if (this.state.phase === 'CONFIRMING') {
+        const noBridge = this.devController?.isScenarioActive('sin_puente_2min') ?? false;
         this.state = {
           ...this.state,
           phase: 'ACTIVE',
           beaconActive: true,
           meshActive: true,
           medicalCardArmed: true,
+          noBridge2Min: noBridge,
           lastPosition: {
             lat: 4.60971,
             lon: -74.08175,
@@ -102,6 +114,7 @@ export class MockEmergencyService implements EmergencyService {
     this.state = {
       phase: 'IDLE',
       lowPower: this.devController?.isScenarioActive('bateria_15') ?? false,
+      noBridge2Min: this.devController?.isScenarioActive('sin_puente_2min') ?? false,
       beaconActive: false,
       meshActive: false,
       medicalCardArmed: false,
@@ -127,6 +140,7 @@ export class MockEmergencyService implements EmergencyService {
       this.state = {
         phase: 'IDLE',
         lowPower: this.devController?.isScenarioActive('bateria_15') ?? false,
+        noBridge2Min: this.devController?.isScenarioActive('sin_puente_2min') ?? false,
         beaconActive: false,
         meshActive: false,
         medicalCardArmed: false,
