@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildApp } from '../src/app.js';
 import { MemoryStore } from '../src/store/memoryStore.js';
@@ -15,7 +16,10 @@ describe('POIs (RF-10)', () => {
   it('lista los POIs de la semilla y filtra por bbox y tipo', async () => {
     const { app } = await setup();
     const all = (await app.inject({ method: 'GET', url: '/v1/pois' })).json();
-    expect(all.items.length).toBe(20);
+    // La semilla viene de datos abiertos reales (scripts/build-pois.js), no de un número fijo.
+    const seedCount = JSON.parse(readFileSync(new URL('../seed/pois.json', import.meta.url), 'utf8')).length;
+    expect(all.items.length).toBe(seedCount);
+    expect(seedCount).toBeGreaterThan(100);
     const salud = (await app.inject({ method: 'GET', url: '/v1/pois?types=SALUD' })).json();
     expect(salud.items.every((p: { type: string }) => p.type === 'SALUD')).toBe(true);
     const norte = (await app.inject({ method: 'GET', url: '/v1/pois?bbox=-74.2,4.7,-74.0,4.8' })).json();

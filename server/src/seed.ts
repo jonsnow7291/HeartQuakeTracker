@@ -12,16 +12,25 @@ export const SEED_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'see
 const read = (dir: string, f: string): unknown => JSON.parse(readFileSync(join(dir, f), 'utf8'));
 
 /** Carga server/seed/*.json (POIs, entidades de ayuda, necesidades). Datos NO verificados: ver seed/README.md. */
-export async function seedStore(store: Store, dir = SEED_DIR): Promise<{ pois: number; entities: number; needs: number; tiles: number }> {
+export async function seedStore(store: Store, dir = SEED_DIR): Promise<{ pois: number; entities: number; needs: number; tiles: number; rescuer: number }> {
   const pois = z.array(poiInput).parse(read(dir, 'pois.json'));
   const entities = z.array(aidEntityInput).parse(read(dir, 'entidades_ayuda.json'));
   const needs = z.array(aidNeedInput).parse(read(dir, 'necesidades.json'));
   for (const p of pois) await store.upsertPoi(p);
   for (const e of entities) await store.upsertAidEntity(e);
   for (const n of needs) await store.upsertAidNeed(n);
+  // Hashes de códigos de socorrista (D-06). Nunca los códigos en claro: los emite scripts/issue-rescuer-codes.js.
+  let rescuer = 0;
+  try {
+    const hashes = z.array(z.object({ codeHash: z.string().length(64), organization: z.string(), expiresAt: z.string(), revoked: z.boolean() })).parse(read(dir, 'rescuer_hashes.json'));
+    for (const h of hashes) await store.upsertRescuerCode(h);
+    rescuer = hashes.length;
+  } catch {
+    // sin archivo: el servidor arranca sin códigos de socorrista
+  }
   // Región de mapa inicial (sin URL hasta publicar el MBTiles real: JD-060/061).
   await store.upsertTileRegion({ id: 'bogota', name: 'Bogotá', sizeMB: 180, version: '1' });
-  return { pois: pois.length, entities: entities.length, needs: needs.length, tiles: 1 };
+  return { pois: pois.length, entities: entities.length, needs: needs.length, tiles: 1, rescuer };
 }
 
 if (process.argv[1]?.endsWith('seed.ts')) {

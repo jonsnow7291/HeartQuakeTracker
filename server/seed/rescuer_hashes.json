@@ -1,0 +1,32 @@
+[
+  {
+    "codeHash": "6d4ea7040bb39a3ccf151c616bcb2b3a6913072bf4550f444ae05f4c567b590c",
+    "organization": "Defensa Civil Colombiana",
+    "expiresAt": "2027-10-12T20:23:21.006Z",
+    "revoked": false
+  },
+  {
+    "codeHash": "b9c0827b44548bfb25b1cd1bb3ac5fe5ebf274d29a15618d6db4e1e9a1180b7a",
+    "organization": "Cruz Roja Colombiana",
+    "expiresAt": "2027-10-12T20:23:21.006Z",
+    "revoked": false
+  },
+  {
+    "codeHash": "e086b04376a386e4cfeac1c474272fd9b70a68c01ca2b97402c4f5fc4e14e6a8",
+    "organization": "Cuerpo Oficial de Bomberos de Bogotá",
+    "expiresAt": "2027-10-12T20:23:21.006Z",
+    "revoked": false
+  },
+  {
+    "codeHash": "6408b81535b800a42197ac82d6136450faa1f4aa21d2e180e3cf1dc0b004245e",
+    "organization": "UNGRD",
+    "expiresAt": "2027-10-12T20:23:21.006Z",
+    "revoked": false
+  },
+  {
+    "codeHash": "370ed34680e1eb81852cfcbe6638e6425b18cece91e241a36e94d629c25cd794",
+    "organization": "Prueba interna (Equipo MW-2026)",
+    "expiresAt": "2027-10-12T20:23:21.006Z",
+    "revoked": false
+  }
+]
