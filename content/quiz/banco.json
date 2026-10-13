@@ -74,6 +74,216 @@
           "explanation": "Ubicar el peso abajo baja el centro de masa del mueble, reduciendo la probabilidad de vuelco violento durante las sacudidas.",
           "protocolRef": "IDIGER - Medidas de Reducción del Riesgo en Vivienda",
           "guideId": "aseguramiento-estructural"
+        },
+        {
+          "id": "q006",
+          "text": "¿Por qué se desaconseja ubicarse bajo el marco de una puerta en construcciones modernas?",
+          "options": [
+            "Porque la mayoría de marcos actuales son tabiques livianos sin resistencia de carga adicional",
+            "Porque las puertas siempre se cierran con seguro durante temblores",
+            "Porque el marco atrae descargas eléctricas",
+            "Porque es un lugar reservado únicamente para rescatistas"
+          ],
+          "correctIndex": 0,
+          "explanation": "En construcciones contemporáneas los marcos de puertas no forman parte del sistema estructural principal ni protegen contra objetos proyectados horizontalmente; es mucho más seguro cubrirse bajo una mesa firme.",
+          "protocolRef": "UNGRD - Mitos y Realidades en Sismos",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q007",
+          "text": "¿Qué tipo de alimentos son los más adecuados para incluir en el kit de las 72 horas?",
+          "options": [
+            "Comidas congeladas que requieran microondas",
+            "Alimentos frescos que deban consumirse en 24 horas",
+            "Carnes crudas para preparar al fuego",
+            "Enlatados con sistema abre fácil, barras de cereal y frutos secos"
+          ],
+          "correctIndex": 3,
+          "explanation": "Se deben priorizar alimentos no perecederos listos para consumir que no demanden cocción, refrigeración ni agua adicional para su preparación.",
+          "protocolRef": "Cruz Roja Colombiana - Manual de Abastecimiento de Emergencia",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q008",
+          "text": "¿Con qué frecuencia se recomienda revisar y rotar los suministros de agua y comida de la mochila?",
+          "options": [
+            "Cada 5 años",
+            "Cada mes obligatoriamente",
+            "Cada 6 meses",
+            "Solo después de que ocurra un terremoto"
+          ],
+          "correctIndex": 2,
+          "explanation": "La rotación semestral garantiza que el agua embotellada no acumule contaminantes por degradación del plástico y que los alimentos enlatados no venzan su fecha de caducidad.",
+          "protocolRef": "Defensa Civil Colombiana - Mantenimiento de Kits Familiares",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q009",
+          "text": "Si un sismo fuerte ocurre mientras duermes en tu cama, ¿cuál es la reacción inicial más segura?",
+          "options": [
+            "Saltar de la cama y correr hacia la puerta principal en la oscuridad",
+            "Permanecer en la cama, colocarse boca abajo y proteger cabeza y cuello con una almohada",
+            "Meterse debajo del colchón levantándolo con la espalda",
+            "Correr hacia la ventana para evaluar la situación en la calle"
+          ],
+          "correctIndex": 1,
+          "explanation": "Levantarse a oscuras en medio de sacudidas violentas genera tropiezos con vidrios o muebles volcados. Quedarse en la cama protegiendo la cabeza con la almohada reduce el riesgo de heridas cortantes.",
+          "protocolRef": "FEMA - Guía de Respuesta Sísmica en el Hogar",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q010",
+          "text": "¿Por qué está estrictamente prohibido usar el ascensor durante o después de un temblor?",
+          "options": [
+            "Por riesgo inminente de corte eléctrico o deformación de rieles que deje la cabina atrapada",
+            "Porque los ascensores consumen demasiada batería de los teléfonos",
+            "Porque el ascensor se reserva exclusivamente para bajar mascotas",
+            "Porque la velocidad del ascensor aumenta de forma descontrolada por el sismo"
+          ],
+          "correctIndex": 0,
+          "explanation": "Los sismos cortan el fluido eléctrico y torsionan los huecos de ascensor, atrapando a los ocupantes entre pisos e impidiendo su evacuación o rescate oportuno.",
+          "protocolRef": "Cuerpo Oficial de Bomberos de Bogotá - Seguridad en Edificios Altos",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q011",
+          "text": "¿Cuál es el principal peligro de salir corriendo a la calle en pleno movimiento telúrico?",
+          "options": [
+            "Perder la señal GPS del teléfono celular",
+            "Cerrar la puerta sin las llaves",
+            "El polvo del ambiente exterior",
+            "El desprendimiento y caída de vidrios, tejas, mampostería y cables sobre la acera"
+          ],
+          "correctIndex": 3,
+          "explanation": "Las fachadas de edificios son las primeras en quebrarse y arrojar proyectiles letales de vidrio y ladrillo directamente sobre las aceras y accesos exteriores.",
+          "protocolRef": "UNGRD - Comportamiento Ciudadano ante Sismos",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q012",
+          "text": "¿Qué tipo de linterna es la más recomendable para la mochila de emergencia familiar?",
+          "options": [
+            "Lámparas incandescentes que requieran conexión a toma corriente de pared",
+            "Antorchas de queroseno o gas propano",
+            "Linterna tipo LED con pilas de repuesto o mecanismo de dinamo manual",
+            "Velas aromáticas con caja de fósforos estándar"
+          ],
+          "correctIndex": 2,
+          "explanation": "Las linternas LED ofrecen alta eficiencia lumínica y larga duración de baterías, y los modelos con dinamo no dependen de pilas comerciales. Las velas representan riesgo extremo de incendio.",
+          "protocolRef": "Defensa Civil Colombiana - Equipamiento de Supervivencia",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q013",
+          "text": "¿Qué se debe contemplar en el plan familiar para las mascotas en caso de evacuación?",
+          "options": [
+            "Dejarlas encerradas en una habitación con la puerta trabada",
+            "Llevarlas con collar, placa con teléfono, correa o transportador y ración de alimento",
+            "Soltarlas en la calle para que busquen refugio por su cuenta",
+            "Subirlas al techo de la vivienda hasta que pase la emergencia"
+          ],
+          "correctIndex": 1,
+          "explanation": "Los animales desorientados por el ruido pueden huir o extraviarse. Portar correa, identificación clara y alimento garantiza su bienestar y seguridad comunitaria.",
+          "protocolRef": "Cruz Roja Colombiana - Bienestar Animal en Desastres",
+          "guideId": "plan-familiar"
+        },
+        {
+          "id": "q014",
+          "text": "¿Por qué es importante cerrar la llave general de paso del agua tras un sismo severo?",
+          "options": [
+            "Para evitar inundaciones internas por rotura de tuberías y prevenir el ingreso de aguas contaminadas",
+            "Porque el agua potable conduce ondas sísmicas hacia la casa",
+            "Para que la empresa de acueducto no facture cobros adicionales",
+            "Porque el agua en las tuberías apaga la señal de radio"
+          ],
+          "correctIndex": 0,
+          "explanation": "Las fracturas en la red matriz de acueducto e instalaciones internas provocan anegaciones estructurales y succionan aguas residuales hacia la red potable por pérdida de presión.",
+          "protocolRef": "IDIGER - Manejo de Redes Hidrosanitarias Post-Sismo",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q015",
+          "text": "¿Por qué se incluye un radio portátil a pilas o dinamo en la mochila de 72 horas?",
+          "options": [
+            "Para escuchar música recreativa durante la evacuación",
+            "Para interferir las comunicaciones de los organismos de socorro",
+            "Para recargar la batería de los teléfonos móviles exclusivamente",
+            "Para recibir boletines oficiales de las autoridades cuando las redes celulares e internet colapsen"
+          ],
+          "correctIndex": 3,
+          "explanation": "La radiofrecuencia AM y FM es el medio de difusión de mayor alcance y resiliencia ante desastres catastróficos, transmitiendo avisos de la UNGRD y Defensa Civil.",
+          "protocolRef": "UNGRD - Telecomunicaciones de Emergencia",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q016",
+          "text": "¿Cuál es la recomendación sobre el calzado que debes usar al evacuar tras un sismo?",
+          "options": [
+            "Usar chancletas abiertas para evacuar más ligero",
+            "Evacuar completamente descalzo para sentir el piso",
+            "Usar calzado cerrado con suela gruesa o botas resistentes",
+            "Utilizar tacones altos para mantener mejor postura"
+          ],
+          "correctIndex": 2,
+          "explanation": "Los pisos y aceras quedan alfombrados de cristales rotos, cables astillados y clavos. El calzado de suela gruesa evita heridas punzantes que impidan caminar.",
+          "protocolRef": "Cruz Roja Colombiana - Normas de Evacuación Segura",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q017",
+          "text": "Si te encuentras dentro de un centro comercial durante el sismo, ¿qué debes hacer de inmediato?",
+          "options": [
+            "Correr a empujones hacia las puertas de salida de la fachada",
+            "Alejarte de vitrinas de vidrio y cubrirte junto a columnas o bajo mobiliario resistente",
+            "Subir a la última planta en busca de una salida al helipuerto",
+            "Refugiarte dentro de un probador cerrado con llave"
+          ],
+          "correctIndex": 1,
+          "explanation": "En recintos comerciales las vitrinas y cielorrasos decorativos colapsan con facilidad. Mantener la calma y protegerse lejos de cristales previene heridas graves.",
+          "protocolRef": "IDIGER - Autoprotección en Lugares de Alta Afluencia",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q018",
+          "text": "¿Cuántos litros de agua potable por persona al día se deben almacenar en el kit de emergencia?",
+          "options": [
+            "Al menos 2 litros al día por persona (mínimo 6 litros para 72 horas)",
+            "Medio litro en total para los 3 días",
+            "10 litros diarios por persona únicamente para lavar ropa",
+            "No se necesita almacenar agua si hay bebidas gaseosas"
+          ],
+          "correctIndex": 0,
+          "explanation": "El estándar de supervivencia establece 2 litros diarios por individuo para mantener hidratación básica y preparar alimentos en condiciones de emergencia.",
+          "protocolRef": "UNGRD - Estándares de Agua y Saneamiento",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q019",
+          "text": "¿Qué documento médico personal es indispensable tener registrado en la app y en copia física?",
+          "options": [
+            "Facturas de servicios públicos de los últimos 6 meses",
+            "Certificados de estudio escolares y universitarios",
+            "Ficha médica con tipo de sangre, alergias, enfermedades y contactos",
+            "Pólizas de seguro vencidas"
+          ],
+          "correctIndex": 2,
+          "explanation": "La información de grupo sanguíneo, alergias a medicamentos y afecciones crónicas permite a los médicos y paramédicos aplicar tratamientos vitales sin demora ni riesgos fatales.",
+          "protocolRef": "EarthQuakeTracker - Protocolo de Rescate y Ficha Médica",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q020",
+          "text": "¿Qué significan las siglas del protocolo de primeros auxilios PAS?",
+          "options": [
+            "Preparar, Actuar y Salvar",
+            "Prevenir, Ayudar y Salir",
+            "Parar, Atender y Señalizar",
+            "Proteger, Avisar y Socorrer"
+          ],
+          "correctIndex": 3,
+          "explanation": "El protocolo PAS establece la secuencia universal: 1) Proteger el lugar del accidente, 2) Avisar a los servicios de auxilio y 3) Socorrer a las víctimas.",
+          "protocolRef": "Cruz Roja Colombiana - Manual Básico de Primeros Auxilios",
+          "guideId": "primeros-auxilios"
         }
       ]
     },
@@ -83,11 +293,11 @@
       "title": "Nivel 2: Plan Familiar y Mitigación del Riesgo",
       "questions": [
         {
-          "id": "q006",
+          "id": "q021",
           "text": "¿Por qué se recomienda designar un contacto de emergencia que resida fuera de tu ciudad?",
           "options": [
             "Porque esa persona puede viajar de inmediato a rescatarte",
-            "Porque las líneas telefónicas locales colapsan pero los SMS de larga distancia tienen mayor viabilidad",
+            "Porque las redes telefónicas locales se congestionan pero los mensajes a otras regiones suelen fluir mejor",
             "Porque la policía exige un contacto fuera del departamento",
             "Porque no se permite registrar familiares de la misma ciudad"
           ],
@@ -97,11 +307,11 @@
           "guideId": "plan-familiar"
         },
         {
-          "id": "q007",
+          "id": "q022",
           "text": "¿Qué medida de protección se aconseja instalar en ventanales grandes y espejos de una vivienda?",
           "options": [
             "Pintura acrílica oscura",
-            "Película de seguridad de poliéster transparente",
+            "Película de seguridad de poliéster transparente para retener astillas de vidrio",
             "Cortinas de plástico pesado",
             "Cinta aislante negra en forma de equis únicamente"
           ],
@@ -111,21 +321,21 @@
           "guideId": "aseguramiento-estructural"
         },
         {
-          "id": "q008",
-          "text": "¿Cuánta agua potable se debe presupuestar por persona al día para la mochila de 72 horas?",
+          "id": "q023",
+          "text": "¿Cómo debe asegurarse un calentador de agua o cilindro de gas en el hogar?",
           "options": [
-            "Medio litro",
-            "1 litro",
-            "2 litros al día (mínimo 6 litros por persona en total)",
-            "5 litros al día"
+            "Apoyándolo libremente sobre una repisa de madera sin amarres",
+            "Envolviéndolo con cinta adhesiva de papel",
+            "Mediante abrazaderas metálicas o cadenas ancladas a muros estructurales de concreto",
+            "Colocándolo directamente en el centro de la cocina sobre el piso"
           ],
           "correctIndex": 2,
-          "explanation": "Se calculan 2 litros diarios por individuo para cubrir necesidades mínimas de hidratación y salubridad básica durante tres jornadas.",
-          "protocolRef": "Cruz Roja Colombiana - Manual de Abastecimiento de Emergencia",
-          "guideId": "mochila-emergencia"
+          "explanation": "El volcamiento de cilindros de gas y calentadores provoca fugas con alto riesgo de explosión o corte de suministro de agua; deben asegurarse mecánicamente a muros firmes.",
+          "protocolRef": "IDIGER - Mitigación del Riesgo en Instalaciones de Gas",
+          "guideId": "aseguramiento-estructural"
         },
         {
-          "id": "q009",
+          "id": "q024",
           "text": "Si conduces un vehículo por una autopista y ocurre un sismo violento, ¿qué debes hacer?",
           "options": [
             "Acelerar para salir lo antes posible de la vía",
@@ -137,6 +347,230 @@
           "explanation": "El vehículo ofrece una estructura de protección contra escombros menores. Orillarse con precaución evita colisiones en cadena y mantiene despejados los carriles de auxilio.",
           "protocolRef": "Defensa Civil Colombiana - Seguridad Vial en Emergencias",
           "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q025",
+          "text": "¿Cuál es la primera acción de primeros auxilios ante una hemorragia externa profusa?",
+          "options": [
+            "Aplicar presión directa continua sobre la herida con una gasa o paño limpio",
+            "Lavar la herida con alcohol antiséptico y jabón de inmediato",
+            "Aplicar ungüentos y cremas cicatrizantes sobre la sangre activa",
+            "Retirar rápidamente cualquier objeto incrustado en el cuerpo"
+          ],
+          "correctIndex": 0,
+          "explanation": "La presión directa y constante sobre el vaso sanguíneo lesionado es la maniobra más efectiva para cohibir el sangrado y evitar el choque hipovolémico.",
+          "protocolRef": "Cruz Roja Colombiana - Soporte Básico de Trauma",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q026",
+          "text": "En el protocolo PAS de primeros auxilios, ¿qué implica prioritariamente la fase 'Proteger'?",
+          "options": [
+            "Guardar los objetos de valor de la víctima en una bolsa",
+            "Cubrir a la víctima con una cobija térmica únicamente",
+            "Administrar analgésicos a la persona antes de que sienta dolor",
+            "Asegurar que el entorno sea seguro tanto para el auxiliador como para la persona lesionada"
+          ],
+          "correctIndex": 3,
+          "explanation": "Nunca se debe intervenir si la escena no es segura (fuga de gas, cables caídos, muros agrietados). Convertirse en una segunda víctima entorpece las labores de rescate.",
+          "protocolRef": "Defensa Civil Colombiana - Evaluación de la Escena",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q027",
+          "text": "¿En qué situación médica extrema está indicado el uso de un torniquete?",
+          "options": [
+            "En raspaduras leves en las rodillas o codos",
+            "Únicamente en extremidades ante hemorragias masivas exanguinantes que no ceden a la presión directa",
+            "En heridas punzantes en el tórax o abdomen",
+            "En fracturas de clavícula o cuello"
+          ],
+          "correctIndex": 1,
+          "explanation": "El torniquete es un recurso salvavidas reservado para sangrados arteriales masivos en brazos o piernas cuando la compresión directa resulta insuficiente para detener la pérdida de sangre.",
+          "protocolRef": "Cruz Roja Colombiana - Control de Hemorragias Severas",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q028",
+          "text": "¿Qué distancia mínima de seguridad se debe mantener respecto a cables de alta tensión caídos en el suelo?",
+          "options": [
+            "1 metro de distancia",
+            "3 metros si el piso está seco",
+            "Al menos 8 a 10 metros de distancia para evitar choque por gradiente de tensión en el suelo",
+            "No hay peligro si los cables no echan chispas visibles"
+          ],
+          "correctIndex": 2,
+          "explanation": "El suelo circundante a un cable energizado transmite electricidad radialmente ('tensión de paso'). Caminar cerca puede generar una descarga mortal aun sin tocar el cable directamente.",
+          "protocolRef": "Cuerpo Oficial de Bomberos de Bogotá - Riesgo Eléctrico",
+          "guideId": "zonas-seguras-evacuacion"
+        },
+        {
+          "id": "q029",
+          "text": "Ante la sospecha de una fractura en una extremidad, ¿cómo se debe proceder para inmovilizarla?",
+          "options": [
+            "Inmovilizar la extremidad tal como está, abarcando la articulación superior e inferior sin intentar enderezarla",
+            "Tirar con fuerza del hueso para encajarlo antes de que se inflame",
+            "Obligar a la víctima a ponerse de pie y caminar para probar movilidad",
+            "Aplicar calor intenso con compresas calientes sobre la zona fracturada"
+          ],
+          "correctIndex": 0,
+          "explanation": "Manipular una fractura puede desgarrar arterias o nervios vitales. Se debe estabilizar la zona en la posición encontrada inmovilizando la articulación anterior y posterior.",
+          "protocolRef": "UNGRD - Manual Comunitario de Primeros Auxilios",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q030",
+          "text": "¿Cuál es el objetivo principal de colocar a una víctima en Posición Lateral de Seguridad (PLS)?",
+          "options": [
+            "Hacer que la persona se despierte más rápidamente del desmayo",
+            "Aliviar dolores musculares en la espalda",
+            "Facilitar que la persona pueda tomar agua acostada",
+            "Evitar que la lengua obstruya la vía aérea o que el paciente broncoaspire secreciones o vómito"
+          ],
+          "correctIndex": 3,
+          "explanation": "En una persona inconsciente que respira, la relajación muscular puede causar que la lengua caiga hacia atrás tapando la tráquea; la posición de costado mantiene la vía aérea permeable.",
+          "protocolRef": "Cruz Roja Colombiana - Soporte Básico de Vida",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q031",
+          "text": "¿Por qué está contraindicado reingresar de inmediato a una vivienda para buscar pertenencias u objetos de valor?",
+          "options": [
+            "Porque la policía clausura automáticamente las viviendas",
+            "Porque las réplicas sísmicas pueden ocurrir en cualquier momento y colapsar estructuras debilitadas",
+            "Porque los vecinos pueden confundir al propietario con un intruso",
+            "Porque la ley prohíbe entrar a una casa durante las primeras 48 horas"
+          ],
+          "correctIndex": 1,
+          "explanation": "Las réplicas posteriores a un sismo son habituales y pueden tener magnitud similar a la principal, provocando el desplome de techos o muros previamente agrietados.",
+          "protocolRef": "IDIGER - Protocolos Post-Desastre",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q032",
+          "text": "¿Cuáles son los dos tipos de puntos de encuentro que toda familia debe acordar en su plan de emergencia?",
+          "options": [
+            "Un punto inmediato cercano (ej. parque barrial) y un punto secundario distante (ej. polideportivo o casa de pariente)",
+            "Un centro comercial cerrado y una estación de metro subterránea",
+            "La azotea de la casa y el sótano del edificio",
+            "La oficina de trabajo de los padres únicamente"
+          ],
+          "correctIndex": 0,
+          "explanation": "Se requiere un punto cercano para evacuación inmediata del hogar y uno alejado por si el barrio queda acordonado por fugas o colapsos estructurales.",
+          "protocolRef": "UNGRD - Guía Metodológica para el Plan Familiar",
+          "guideId": "plan-familiar"
+        },
+        {
+          "id": "q033",
+          "text": "¿Qué medida de seguridad preventiva se debe aplicar en las alacenas y gabinetes superiores de la cocina?",
+          "options": [
+            "Retirar completamente las puertas para que no se tranque el paso",
+            "Llenar los estantes superiores con ollas de hierro pesado",
+            "Instalar pestillos o seguros para evitar que vajilla y objetos cortantes salgan proyectados",
+            "Pegar los platos a las repisas con silicona líquida"
+          ],
+          "correctIndex": 2,
+          "explanation": "La vibración abre las puertas de muebles aéreos, arrojando platos y vasos pesados que causan traumas craneales a quienes se encuentren cerca.",
+          "protocolRef": "IDIGER - Prevención No Estructural",
+          "guideId": "aseguramiento-estructural"
+        },
+        {
+          "id": "q034",
+          "text": "Si te encuentras en un salón de clases u oficina durante un sismo, ¿cuál es la mejor protección?",
+          "options": [
+            "Correr hacia la puerta y empujar para salir primero",
+            "Protegerse debajo de los pupitres o escritorios sujetándose firmemente de las patas de los mismos",
+            "Subirse encima de las mesas para quedar más cerca del techo",
+            "Pegarse a los ventanales para pedir auxilio con las manos"
+          ],
+          "correctIndex": 1,
+          "explanation": "Los escritorios amortiguan el impacto de luminarias, ductos de aire y cielorrasos falsos que se desprenden frecuentemente en oficinas y colegios.",
+          "protocolRef": "Defensa Civil Colombiana - Simulacros en Instituciones Educativas",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q035",
+          "text": "¿Cuál es el medio de comunicación más eficiente para no saturar las redes celulares en un desastre?",
+          "options": [
+            "Llamar repetidamente a todos los familiares por teléfono celular",
+            "Hacer transmisiones de video en vivo por redes sociales de alta resolución",
+            "Descargar películas para pasar el tiempo",
+            "Enviar mensajes de texto cortos (SMS) con información concisa sobre tu estado y ubicación"
+          ],
+          "correctIndex": 3,
+          "explanation": "Los SMS consumen un ancho de banda mínimo y viajan a través de los canales de señalización de la red móvil, logrando entregarse aun con antenas muy congestionadas.",
+          "protocolRef": "Ministerio de las TIC / UNGRD - Comunicaciones en Emergencia",
+          "guideId": "plan-familiar"
+        },
+        {
+          "id": "q036",
+          "text": "¿Por qué no se debe administrar líquidos ni alimentos a una persona inconsciente o con traumatismo severo?",
+          "options": [
+            "Porque puede causar asfixia por broncoaspiración o complicar una cirugía de urgencia bajo anestesia",
+            "Porque el agua reduce la efectividad del vendaje compresivo",
+            "Porque la comida atrae animales a la zona de desastre",
+            "Porque el estómago digiere más lento durante un sismo"
+          ],
+          "correctIndex": 0,
+          "explanation": "Las personas inconscientes o en choque pierden los reflejos de deglución; administrar líquidos puede desviar el contenido a los pulmones provocando paro respiratorio.",
+          "protocolRef": "Cruz Roja Colombiana - Atención Prehospitalaria",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q037",
+          "text": "¿Por qué la mochila de emergencia debe ser preferiblemente de tipo morral o espaldar?",
+          "options": [
+            "Porque luce mejor en fotografías de evacuación",
+            "Porque ocupa menos espacio dentro del vehículo",
+            "Porque deja libres ambas manos para sostenerse, asistir a niños o superar obstáculos al evacuar",
+            "Porque los morrales no se mojan nunca bajo la lluvia"
+          ],
+          "correctIndex": 2,
+          "explanation": "Llevar maletas de mano o cajas imposibilita el uso de pasamanos y reduce la capacidad de reacción ante caídas de escombros o rescate de dependientes.",
+          "protocolRef": "Defensa Civil Colombiana - Ergonomía y Evacuación",
+          "guideId": "mochila-emergencia"
+        },
+        {
+          "id": "q038",
+          "text": "¿Cómo se comprueba que una llave de paso de gas en tubería ha quedado totalmente cerrada?",
+          "options": [
+            "Cuando la manija o perilla queda en posición paralela a la tubería",
+            "Cuando la manija queda en posición perpendicular (en cruz de 90 grados) respecto al tubo",
+            "Cuando se escucha un silbido continuo salir de la válvula",
+            "Cuando se enciende un fósforo y no prende la hornilla"
+          ],
+          "correctIndex": 1,
+          "explanation": "En las válvulas de gas de cuarto de vuelta, la posición perpendicular al sentido de la tubería indica que la compuerta interna está totalmente cerrada.",
+          "protocolRef": "Cuerpo Oficial de Bomberos de Bogotá - Control de Riesgos Tecnológicos",
+          "guideId": "despues-del-sismo"
+        },
+        {
+          "id": "q039",
+          "text": "¿Por qué las escaleras son una de las partes más vulnerables de un edificio durante el sismo?",
+          "options": [
+            "Porque están hechas únicamente de yeso y plástico",
+            "Porque en las escaleras no hay señal de telefonía celular",
+            "Porque las escaleras se calientan excesivamente con el temblor",
+            "Porque están sometidas a esfuerzos diferenciales de torsión entre pisos y propensas a tropiezos masivos"
+          ],
+          "correctIndex": 3,
+          "explanation": "Al conectar diferentes niveles que oscilan a distintas frecuencias, las escaleras sufren fuerzas de corte muy elevadas. Intentar bajar por ellas en plena sacudida causa caídas fatales.",
+          "protocolRef": "NSR-10 - Vulnerabilidad Sísmica de Componentes No Estructurales",
+          "guideId": "durante-el-sismo"
+        },
+        {
+          "id": "q040",
+          "text": "¿Para cuántos días como mínimo debe incluirse reserva de medicación permanente para pacientes crónicos en el kit?",
+          "options": [
+            "1 día únicamente",
+            "No se debe incluir medicación porque se daña sin nevera",
+            "Mínimo 7 días de reserva con copia de fórmulas médicas",
+            "1 mes completo de todos los medicamentos de la farmacia"
+          ],
+          "correctIndex": 2,
+          "explanation": "La reposición de fármacos especializados (insulina, antihipertensivos, anticonvulsivantes) puede tardar más de una semana en restablecerse en farmacias locales tras un desastre.",
+          "protocolRef": "Cruz Roja Colombiana - Salud y Enfermedades Crónicas en Desastres",
+          "guideId": "mochila-emergencia"
         }
       ]
     },
@@ -146,7 +580,7 @@
       "title": "Nivel 3: Protocolos de Evacuación y Rescate Comunitario",
       "questions": [
         {
-          "id": "q010",
+          "id": "q041",
           "text": "¿Qué tipo de calzado es prioritario utilizar antes de iniciar la evacuación de un inmueble tras un temblor?",
           "options": [
             "Sandalias livianas para mayor rapidez",
@@ -160,7 +594,7 @@
           "guideId": "despues-del-sismo"
         },
         {
-          "id": "q011",
+          "id": "q042",
           "text": "Si quedas atrapado bajo una estructura y escuchas rescatistas cerca, ¿cuál es la mejor técnica para pedir ayuda?",
           "options": [
             "Gritar con todas tus fuerzas continuamente",
@@ -174,7 +608,7 @@
           "guideId": "despues-del-sismo"
         },
         {
-          "id": "q012",
+          "id": "q043",
           "text": "En el sistema EarthQuakeTracker, ¿por qué la baliza de socorro BLE funciona aún sin red de internet ni señal celular?",
           "options": [
             "Porque se conecta directamente a satélites geoestacionarios",
@@ -185,7 +619,245 @@
           "correctIndex": 1,
           "explanation": "Bluetooth Low Energy emite paquetes en la banda ISM de 2.4 GHz de forma descentralizada de terminal a terminal, permitiendo localización y retransmisión por malla sin depender de antenas celulares caídas.",
           "protocolRef": "EarthQuakeTracker - Arquitectura de Red Mallada y Balizas",
-          "guideId": "durante-el-sismo"
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q044",
+          "text": "¿Qué alcance por salto y límite de retransmisión (TTL) implementa la red en malla de EarthQuakeTracker?",
+          "options": [
+            "Hasta 4 saltos de retransmisión (TTL=4) con alcance típico de 10 a 30 metros por salto",
+            "100 saltos de retransmisión con alcance ilimitado de kilómetros",
+            "Solo 1 salto directo sin permitir retransmisión entre teléfonos",
+            "20 saltos de retransmisión con enlace por satélite obligatorio"
+          ],
+          "correctIndex": 0,
+          "explanation": "El protocolo de malla limita el tiempo de vida del paquete a 4 saltos para evitar la saturación de los canales de radio (broadcast storm) mientras cubre distancias comunitarias efectivas.",
+          "protocolRef": "EarthQuakeTracker - Especificación del Protocolo de Red Mallada (ADR 0003)",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q045",
+          "text": "¿De cuánto tiempo dispone el usuario para cancelar una pulsación involuntaria del botón de pánico en la app?",
+          "options": [
+            "30 segundos completos",
+            "No hay opción de cancelar una vez presionado",
+            "10 segundos con confirmación por correo electrónico",
+            "3 segundos con cuenta regresiva interactiva antes de activar la baliza"
+          ],
+          "correctIndex": 3,
+          "explanation": "La ventana de 3 segundos cancelable evita falsas alarmas accidentales sin retrasar innecesariamente el despliegue de auxilio real en una situación de peligro inminente.",
+          "protocolRef": "EarthQuakeTracker - Requerimiento Funcional RF-05",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q046",
+          "text": "¿A qué frecuencia parpadea la linterna estroboscópica y qué tono acústico emite el modo pánico de EarthQuakeTracker?",
+          "options": [
+            "Flash a 1 Hz y tono de 500 Hz",
+            "Flash estroboscópico a 4 Hz y tono acústico continuo calibrado a 3 kHz",
+            "Flash fijo sin parpadeo y melodía musical polifónica",
+            "Flash a 20 Hz y sonido de sirena policial a 10 kHz"
+          ],
+          "correctIndex": 1,
+          "explanation": "La frecuencia de 4 Hz maximiza la visibilidad óptica sin sobrecalentar el hardware del flash, y el tono de 3 kHz corresponde a la zona de máxima resonancia del canal auditivo humano.",
+          "protocolRef": "EarthQuakeTracker - Módulo de Señalización Acústica y Óptica (RF-06)",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q047",
+          "text": "¿Cómo asegura EarthQuakeTracker la confidencialidad de la ficha médica del usuario en su teléfono?",
+          "options": [
+            "Subiendo los datos a una nube pública sin contraseña",
+            "Guardando los datos en un archivo de texto plano en la tarjeta SD",
+            "Almacenándola con cifrado local AES-256 / XChaCha y requiriendo autenticación para su apertura",
+            "Eliminando la ficha médica cada vez que se cierra la app"
+          ],
+          "correctIndex": 2,
+          "explanation": "El perfil médico se cifra en el almacenamiento seguro local mediante algoritmos criptográficos robustos, asegurando cumplimiento de la Ley de Habeas Data y protección de datos sensibles.",
+          "protocolRef": "EarthQuakeTracker - Arquitectura de Seguridad y Cifrado (RNF-04)",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q048",
+          "text": "¿Qué comportamiento adopta EarthQuakeTracker cuando el nivel de batería del dispositivo cae por debajo del 20 %?",
+          "options": [
+            "Activa el modo de bajo consumo, espaciando los intervalos de publicidad BLE para prolongar la señal",
+            "Apaga inmediatamente el teléfono para proteger el circuito",
+            "Aumenta la potencia del flash y el volumen al máximo",
+            "Borra todas las guías de emergencia para liberar memoria"
+          ],
+          "correctIndex": 0,
+          "explanation": "Al detectar batería menor al 20 %, la app optimiza el ciclo de trabajo del Bluetooth para que el teléfono permanezca transmitiendo la señal de auxilio durante más horas críticas.",
+          "protocolRef": "EarthQuakeTracker - Gestión de Energía y Consumo (RNF-02)",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q049",
+          "text": "¿Cuál de las siguientes fallas visibles en un edificio indica un daño estructural crítico post-sismo?",
+          "options": [
+            "Pintura descascarada en la pared de la sala",
+            "Rotura de una baldosa en el piso de la cocina",
+            "Desprendimiento de molduras de yeso decorativas en el techo",
+            "Grietas diagonales en forma de 'X' en columnas o muros de concreto reforzado"
+          ],
+          "correctIndex": 3,
+          "explanation": "Las grietas en 'X' o a 45 grados en columnas y muros de carga evidencian esfuerzos de cortante severos que han comprometido la capacidad portante de la estructura; el edificio debe evacuarse de inmediato.",
+          "protocolRef": "IDIGER - Guía de Evaluación Rápida de Daños en Edificaciones",
+          "guideId": "aseguramiento-estructural"
+        },
+        {
+          "id": "q050",
+          "text": "¿Cómo se distingue un agrietamiento no estructural de una falla grave en muros y columnas?",
+          "options": [
+            "Por el color de la pared agrietada",
+            "Las fisuras graves nunca se ven a simple vista",
+            "El daño grave atraviesa todo el espesor del elemento y muestra deformación o desprendimiento de concreto",
+            "No hay ninguna diferencia técnica entre fisuras y fracturas"
+          ],
+          "correctIndex": 2,
+          "explanation": "Las fisuras estéticas afectan solo el enlucido superficial, mientras que las fallas estructurales comprometen el núcleo de hormigón armado o mampostería confinada con exposición de varillas de acero.",
+          "protocolRef": "Asociación Colombiana de Ingeniería Sísmica (AIS) / NSR-10",
+          "guideId": "aseguramiento-estructural"
+        },
+        {
+          "id": "q051",
+          "text": "Al evacuar por una escalera de emergencia en una edificación, ¿por qué se debe descender por el costado derecho?",
+          "options": [
+            "Porque en el lado derecho hay mayor iluminación natural siempre",
+            "Para dejar el carril izquierdo libre para que el personal de rescate y bomberos suba con equipo pesado",
+            "Para no rayar las paredes del edificio con las mochilas",
+            "Por una superstición tradicional de los rescatistas"
+          ],
+          "correctIndex": 1,
+          "explanation": "El flujo ordenado por la derecha facilita el descenso fluido de civiles y reserva el pasillo opuesto para el ascenso expedito de brigadas de extinción de incendios y rescate.",
+          "protocolRef": "Cuerpo Oficial de Bomberos de Bogotá - Tácticas de Evacuación Vertical",
+          "guideId": "zonas-seguras-evacuacion"
+        },
+        {
+          "id": "q052",
+          "text": "¿Por qué no se debe establecer un punto de encuentro comunitario al pie de taludes o laderas de montaña?",
+          "options": [
+            "Porque las réplicas sísmicas o lluvias pueden desencadenar deslizamientos de tierra y flujos de lodo",
+            "Porque el viento en la montaña dificulta escuchar las órdenes",
+            "Porque las laderas tienen mala cobertura de radio FM comercial",
+            "Porque los terrenos inclinados gastan la batería del teléfono más rápido"
+          ],
+          "correctIndex": 0,
+          "explanation": "Los sismos desestabilizan taludes y causan fallas geológicas secundarias por remoción en masa, sepultando áreas situadas en la corona o base de las laderas.",
+          "protocolRef": "Servicio Geológico Colombiano - Amenaza por Movimientos en Masa",
+          "guideId": "zonas-seguras-evacuacion"
+        },
+        {
+          "id": "q053",
+          "text": "En una situación con múltiples heridos, ¿cuál es el principio básico del triaje comunitario inicial?",
+          "options": [
+            "Atender primero a los conocidos o familiares sin importar la gravedad",
+            "Trasladar a todas las personas al mismo tiempo sin clasificarlas",
+            "Clasificar rápidamente a los lesionados priorizando a quienes presentan hemorragias exanguinantes o asfixia tratable",
+            "Esperar pasivamente a que lleguen ambulancias sin tocar a nadie"
+          ],
+          "correctIndex": 2,
+          "explanation": "El triaje (método START o similar) prioriza la atención de víctimas con riesgo vital inminente recuperable mediante maniobras inmediatas sencillas como control de hemorragia o apertura de vía aérea.",
+          "protocolRef": "Cruz Roja Colombiana - Triaje START en Desastres",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q054",
+          "text": "¿Qué precaución médica fundamental se debe tener ante una víctima con compresión prolongada por escombros (síndrome de aplastamiento)?",
+          "options": [
+            "Darle bebidas alcohólicas para calmar el dolor",
+            "Jalar a la persona bruscamente para sacarla rápido sin importar el peso encima",
+            "Hacerla caminar de inmediato para reactivar su circulación sanguínea",
+            "Coordinar soporte médico antes de liberar el peso debido al riesgo de liberación masiva de toxinas y potasio"
+          ],
+          "correctIndex": 3,
+          "explanation": "La descompresión repentina tras horas de isquemia libera mioglobina y potasio tóxicos acumulados al torrente sanguíneo, pudiendo ocasionar arritmias fatales o insuficiencia renal aguda ('síndrome de aplastamiento').",
+          "protocolRef": "Grupo USAR Colombia - Manejo Médico de Víctimas Atrapadas",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q055",
+          "text": "En EarthQuakeTracker, ¿qué gravedad debe seleccionar un usuario que no tiene heridas para apoyar la red comunitaria?",
+          "options": [
+            "No debe abrir la aplicación bajo ninguna circunstancia",
+            "'Estoy Ileso', lo cual informa a los vecinos y permite actuar como nodo repetidor sin desviar rescatistas",
+            "'Estoy Atrapado' para que los bomberos vengan más rápido a revisar la cuadra",
+            "'Tengo Lesiones' para recibir comida gratuita de los albergues"
+          ],
+          "correctIndex": 1,
+          "explanation": "El estado 'Estoy Ileso' tranquiliza a la red vecinal, evita saturar a los grupos de socorro con falsas prioridades de búsqueda y mantiene el dispositivo enrutando mensajes de otros afectados.",
+          "protocolRef": "EarthQuakeTracker - Manual Operativo de Emergencia",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q056",
+          "text": "¿En cuánto tiempo máximo puede un socorrista acreditado descargar y leer la ficha médica de una víctima por BLE?",
+          "options": [
+            "Menos de 3 segundos mediante conexión GATT autorizada",
+            "Aproximadamente 45 minutos si el teléfono tiene internet",
+            "24 horas mientras se verifica la identidad en el servidor central",
+            "No es posible leer fichas médicas fuera de un hospital"
+          ],
+          "correctIndex": 0,
+          "explanation": "El canal GATT local de EarthQuakeTracker transfiere los datos clínicos esenciales en menos de 3 segundos directamente de terminal a terminal para facilitar el triaje prehospitalario.",
+          "protocolRef": "EarthQuakeTracker - Requerimiento Funcional RF-13 (Modo Socorrista)",
+          "guideId": "uso-earthquaketracker"
+        },
+        {
+          "id": "q057",
+          "text": "Según la norma de señalización técnica, ¿qué colores identifican las rutas y puertas de evacuación de emergencia?",
+          "options": [
+            "Fondo rojo con letras amarillas reflectivas",
+            "Fondo azul con bordes negros",
+            "Fondo verde con pictogramas y flechas en color blanco",
+            "Fondo naranja fluorescente con líneas moradas"
+          ],
+          "correctIndex": 2,
+          "explanation": "La norma técnica (NTC 1461 e ISO 7010) asigna el color verde de seguridad con contraste blanco para indicar condiciones seguras, primeros auxilios y rutas de evacuación.",
+          "protocolRef": "ICONTEC NTC 1461 / IDIGER - Código de Colores y Señales de Seguridad",
+          "guideId": "zonas-seguras-evacuacion"
+        },
+        {
+          "id": "q058",
+          "text": "Ante una quemadura superficial producida por vapor o metales calientes durante la emergencia, ¿cuál es el manejo inicial?",
+          "options": [
+            "Untar pasta de dientes, mantequilla o aceite de cocina sobre la quemadura",
+            "Reventar las ampollas con una aguja para drenar el líquido",
+            "Frotar hielo directamente sobre la piel quemada",
+            "Enfriar la zona con agua limpia a temperatura ambiente durante 10 a 20 minutos y cubrir con gasa estéril limpia"
+          ],
+          "correctIndex": 3,
+          "explanation": "El agua fresca a temperatura ambiente disipa el calor residual de los tejidos y frena la profundización de la lesión. Aplicar ungüentos caseros o reventar ampollas incrementa el riesgo de infección severa.",
+          "protocolRef": "Cruz Roja Colombiana - Atención Inicial de Quemaduras",
+          "guideId": "primeros-auxilios"
+        },
+        {
+          "id": "q059",
+          "text": "¿Por qué se desaconseja transitar o estacionarse sobre puentes peatonales o vehiculares tras un sismo mayor?",
+          "options": [
+            "Porque la policía cobra peajes más caros durante emergencias",
+            "Porque los puentes pueden tener daños en juntas de dilatación o apoyos y colapsar ante réplicas o sobrecargas",
+            "Porque los puentes absorben el calor del sol con mayor intensidad",
+            "Porque en los puentes el viento descalibra los sensores del acelerómetro"
+          ],
+          "correctIndex": 1,
+          "explanation": "Las estructuras elevadas y puentes son altamente sensibles a esfuerzos cortantes en estribos y pilas. Transitar o agruparse sobre ellos después de un sismo implica un riesgo extremo de caída.",
+          "protocolRef": "IDIGER - Seguridad en Infraestructura Vial",
+          "guideId": "zonas-seguras-evacuacion"
+        },
+        {
+          "id": "q060",
+          "text": "Si se detecta una fuga masiva de gas en una manzana urbana evacuada, ¿cómo debe posicionarse la población respecto al viento?",
+          "options": [
+            "A más de 50 metros de distancia y siempre en posición contraria al viento (con el viento soplando a la espalda de espaldas a la fuga)",
+            "Directamente hacia donde sopla el viento para oler cuándo se disipa el gas",
+            "En el sótano más profundo del edificio más cercano",
+            "En un círculo cerrado alrededor del punto de escape del tubo"
+          ],
+          "correctIndex": 0,
+          "explanation": "Ubicarse contra el viento ('a favor del viento', de espaldas al origen del gas) evita respirar vapores tóxicos e impide quedar envuelto en la nube inflamable en caso de ignición súbita.",
+          "protocolRef": "Cuerpo Oficial de Bomberos de Bogotá - Procedimientos con Materiales Peligrosos",
+          "guideId": "despues-del-sismo"
         }
       ]
     }
