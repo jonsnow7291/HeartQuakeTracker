@@ -112,3 +112,9 @@ pgdata/
 .agy/
 .herdr/
 .gemini/tmp/
+
+# Compilación nativa de CMake (Android)
+android/app/.cxx/
+
+# Copia antigua anidada del proyecto (no se usa)
+earthquake-tracker/
