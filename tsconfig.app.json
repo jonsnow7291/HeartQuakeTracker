@@ -1,0 +1,11 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@contracts/*": ["src/contracts/*"], "@core/*": ["src/core/*"], "@ui/*": ["src/ui/*"] },
+    "noUncheckedIndexedAccess": true,
+    "types": ["react-native", "jest", "node"]
+  },
+  "include": ["index.js", "src", "App.tsx", "__tests__/ui"],
+  "exclude": ["**/node_modules", "**/Pods", "server"]
+}
