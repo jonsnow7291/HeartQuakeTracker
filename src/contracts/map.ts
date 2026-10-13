@@ -11,6 +11,12 @@ export interface Poi {
   address?: string;
   phone?: string;
   active: boolean;
+  /** De dónde sale el dato (p. ej. «OpenStreetMap (estación de bomberos)»). */
+  source?: string;
+  /** true solo si una entidad oficial publicó o confirmó el registro. */
+  verified?: boolean;
+  /** Aclaración para el usuario (p. ej. «Espacio abierto (parque); no es un punto de encuentro oficial»). */
+  note?: string;
 }
 
 export interface NearestPoi extends Poi {
