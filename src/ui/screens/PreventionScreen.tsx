@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Text } from '../components/Text';
 import { Icon } from '../components/Icon';
@@ -10,6 +10,7 @@ import { useChecklists } from '../features/checklists/useChecklists';
 import { spacing, typography, borderRadius, touchTargets } from '../theme/tokens';
 import { useTheme, useThemedStyles } from '../theme/ThemeProvider';
 import type { AppTheme } from '../theme/theme';
+import { SignalingHardwareDriverImpl } from '../../platform/emergency/SignalingHardwareDriverImpl';
 
 export function PreventionScreen() {
   const { colors, brand } = useTheme();
@@ -66,15 +67,35 @@ export function PreventionScreen() {
     },
   ];
 
+  // Simulador de alarma: pitidos de 3 kHz (el mismo tono de la señalización de emergencia) durante
+  // unos 3,5 s, por el canal de alarmas y a volumen moderado. Antes solo cambiaba el estado visual.
+  const alarmDriver = useRef(new SignalingHardwareDriverImpl()).current;
+  const alarmTimers = useRef<{ beep?: ReturnType<typeof setInterval>; stop?: ReturnType<typeof setTimeout> }>({});
+
+  const stopAlarmSimulator = useCallback(() => {
+    if (alarmTimers.current.beep) clearInterval(alarmTimers.current.beep);
+    if (alarmTimers.current.stop) clearTimeout(alarmTimers.current.stop);
+    alarmTimers.current = {};
+    alarmDriver.stopTone().catch(() => {});
+    setAlarmPlaying(false);
+  }, [alarmDriver]);
+
+  useEffect(() => stopAlarmSimulator, [stopAlarmSimulator]);
+
   const toggleAlarmSimulator = () => {
     if (alarmPlaying) {
-      setAlarmPlaying(false);
-    } else {
-      setAlarmPlaying(true);
-      setTimeout(() => {
-        setAlarmPlaying(false);
-      }, 3500);
+      stopAlarmSimulator();
+      return;
     }
+    setAlarmPlaying(true);
+    let sounding = false;
+    const beep = () => {
+      sounding = !sounding;
+      (sounding ? alarmDriver.playTone(3000, 0.6) : alarmDriver.stopTone()).catch(() => {});
+    };
+    beep();
+    alarmTimers.current.beep = setInterval(beep, 450);
+    alarmTimers.current.stop = setTimeout(stopAlarmSimulator, 3600);
   };
 
   return (

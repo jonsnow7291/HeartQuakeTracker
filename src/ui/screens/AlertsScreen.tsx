@@ -229,7 +229,7 @@ export function AlertsScreen() {
               <Text style={styles.sensorsTitle}>Red de monitoreo activa</Text>
               <Text style={styles.sensorsSubtitle}>
                 {sensorsAvailable
-                  ? 'Acelerómetro local activo • Malla BLE sincronizada'
+                  ? 'Acelerómetro local activo • Buscando dispositivos cercanos por BLE'
                   : 'Modo sin acelerómetro • Red comunitaria ciudadana'}
               </Text>
             </View>
@@ -383,7 +383,7 @@ export function AlertsScreen() {
 
                     <View style={styles.alertContent}>
                       <View style={styles.alertTopRow}>
-                        <Text style={styles.alertItemTitle} numberOfLines={1}>
+                        <Text style={styles.alertItemTitle} numberOfLines={2}>
                           {item.title}
                         </Text>
                         <View style={[styles.alertTagPill, { backgroundColor: tagBg }]}>

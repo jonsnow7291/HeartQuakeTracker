@@ -855,7 +855,7 @@ const makeStyles = ({ colors, brand }: AppTheme) =>
   },
   meshCardDesc: {
     ...typography.scale.bodySm,
-    color: colors.onSurfaceVariant,
+    color: brand.navInactive,
     marginTop: 4,
     lineHeight: 16,
   },
